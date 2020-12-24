@@ -1,5 +1,12 @@
 package com.ponomar.shoper.di
 
+import com.ponomar.shoper.model.entities.Address
+import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.network.AddressService
+import com.ponomar.shoper.network.Client
+import com.ponomar.shoper.network.ProductService
+import com.ponomar.shoper.network.UserService
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,9 +36,30 @@ object NetworkModule{
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory()
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .client(okHttpClient)
             .baseUrl("BASE")
             .build()
     }
+
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit):UserService = retrofit.create(UserService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProductService(retrofit: Retrofit):ProductService = retrofit.create(ProductService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAddressService(retrofit: Retrofit):AddressService = retrofit.create(AddressService::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideClient(userService: UserService,
+                      addressService: AddressService,
+                      productService: ProductService):Client = Client(userService,addressService, productService)
+
 }
