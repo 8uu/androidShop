@@ -24,8 +24,5 @@ class UserInfoFragment : Fragment() {
         return inflater.inflate(R.layout.user_info_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 
 }
