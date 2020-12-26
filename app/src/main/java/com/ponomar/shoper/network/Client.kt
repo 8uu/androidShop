@@ -9,4 +9,7 @@ class Client @Inject constructor(
     private val productService: ProductService
 ) {
 
+
+    suspend fun fetchProductsList() = productService.fetchProducts()
+
 }

@@ -25,10 +25,8 @@ class ProfileViewModel @ViewModelInject constructor(
     val userData: LiveData<User>
 
         init {
-
             userData = launchOnViewModelScope {
                 isLoading.set(true)
-                Log.e("LAUNCH", "1")
                 repository.fetchUserInfo(
                         onSuccess = { isLoading.set(false)},
                         onError = { mutableToastLiveData.value = "ERROR" }

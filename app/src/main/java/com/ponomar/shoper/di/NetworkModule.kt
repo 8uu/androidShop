@@ -26,9 +26,9 @@ object NetworkModule{
     @Provides
     @Singleton
     fun provideOkHttpClass():OkHttpClient{
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
-            .build()
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
     @Provides
@@ -38,7 +38,7 @@ object NetworkModule{
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .client(okHttpClient)
-            .baseUrl("https://apiforlearning.heroku.com")
+            .baseUrl("https://apiforandroidshop.herokuapp.com")
             .build()
     }
 

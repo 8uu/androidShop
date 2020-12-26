@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="product"
+            type="com.ponomar.shoper.model.entities.Product" />
+    </data>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardCornerRadius="30dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent" android:layout_height="170dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+     <androidx.cardview.widget.CardView
+         app:cardCornerRadius="20dp"
+         android:elevation="20dp"
+         android:layout_centerVertical="true"
+         android:layout_margin="15dp"
+         android:layout_width="135dp"
+         android:layout_height="135dp">
+    <ImageView
+        android:background="@color/white"
+        android:src="@drawable/example_cake"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+     </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
+</layout>

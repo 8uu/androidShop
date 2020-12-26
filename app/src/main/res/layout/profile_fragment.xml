@@ -42,13 +42,13 @@
         app:setGone="@{vm.isLoading()}"
         android:layout_below="@id/user_profile_imageViewWithPicUser"
         android:orientation="vertical"
+        android:theme="@style/Theme.Shoper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:padding="10dp"
             android:text="Информация"
-            android:textColor="@color/black"
             android:textSize="28sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -60,7 +60,6 @@
             <TextView
                 android:layout_weight="0.5"
                 android:textSize="21sp"
-                android:textColor="@color/black"
                 android:gravity="center|bottom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -69,7 +68,6 @@
                 android:layout_weight="1"
                 android:textSize="24sp"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@{vm.userData.firstName}"/>
@@ -83,7 +81,6 @@
             <TextView
                 android:layout_weight="0.5"
                 android:textSize="21sp"
-                android:textColor="@color/black"
                 android:gravity="center|bottom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -92,7 +89,6 @@
                 android:layout_weight="1"
                 android:textSize="24sp"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@{vm.userData.phone}"/>
