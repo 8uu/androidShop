@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.ponomar.shoper.R
 import com.ponomar.shoper.base.DataBindingActivity
 import com.ponomar.shoper.databinding.ProfileFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private val profileViewModel:ProfileViewModel by viewModels()
@@ -31,6 +33,7 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.apply {
+            lifecycleOwner = this@ProfileFragment
             vm = profileViewModel
         }
     }

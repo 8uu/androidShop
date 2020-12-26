@@ -38,7 +38,7 @@ object NetworkModule{
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .client(okHttpClient)
-            .baseUrl("BASE")
+            .baseUrl("https://apiforlearning.heroku.com")
             .build()
     }
 

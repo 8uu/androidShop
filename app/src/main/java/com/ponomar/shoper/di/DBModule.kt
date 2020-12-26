@@ -20,6 +20,7 @@ object DBModule {
     @Singleton
     fun provideAppDatabase(application: Application):AppDB{
         return Room.databaseBuilder(application,AppDB::class.java,"Shop.db")
+            .fallbackToDestructiveMigration()
             .build()
     }
 

@@ -1,5 +1,6 @@
 package com.ponomar.shoper.repository
 
+import android.util.Log
 import com.ponomar.shoper.db.AppDB
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.network.Client
@@ -13,12 +14,12 @@ class MainRepository @Inject constructor(
 ){
 
 
-    init{
 
-    }
 
-    suspend fun initF(){
-
+    suspend fun initF():User {
+        val user = User(8,"Test 4122","1337",null)
+        appDB.getUserDao().insert(user)
+        return user
     }
 
     suspend fun fetchUserInfo(

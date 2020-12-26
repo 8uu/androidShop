@@ -11,5 +11,5 @@ data class Product(
     val title:String,
     val desc:String,
     val cost:Float,
-    @TypeConverters(ImageConverters::class) val images:List<String>
+    val images:List<String>
 )

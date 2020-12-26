@@ -8,28 +8,33 @@ import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.repository.MainRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 
 class ProfileViewModel @ViewModelInject constructor(
     private val repository: MainRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ):LiveCoroutinesViewModel() {
 
-    private val mutableUserData:MutableLiveData<User> = MutableLiveData()
     private val mutableToastLiveData:MutableLiveData<String> = MutableLiveData()
 
     val isLoading: ObservableBoolean = ObservableBoolean(false)
     val toastLiveData:LiveData<String> = mutableToastLiveData
-    val userData: LiveData<User> = mutableUserData
+    val userData: LiveData<User>
 
         init {
-            mutableUserData.switchMap {
+
+            userData = launchOnViewModelScope {
                 isLoading.set(true)
-                launchOnViewModelScope {
-                    repository.fetchUserInfo(
-                        onSuccess = { isLoading.set(false) },
+                Log.e("LAUNCH", "1")
+                repository.fetchUserInfo(
+                        onSuccess = { isLoading.set(false)},
                         onError = { mutableToastLiveData.value = "ERROR" }
-                    ).asLiveData()
-                }
+                ).asLiveData()
             }
+
         }
+
 }
