@@ -29,6 +29,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
         val item = items[position]
         holder.binding.apply {
             product = item
+            executePendingBindings()
         }
 
     }

@@ -28,10 +28,8 @@ class MenuViewModel @ViewModelInject constructor(
         listOfProducts = _mutableFetchingPageOfProducts.switchMap {
             launchOnViewModelScope {
                 isLoading.set(true)
-                Log.e("Launch","1")
                 repository.fetchListOfProducts(
-                        onSuccess = {isLoading.set(false)
-                                    Log.e("Success","1")},
+                        onSuccess = {isLoading.set(false) },
                         onError = {_mutableToast.value=it
                         Log.e("ERROR",it)}
                 ).asLiveData()

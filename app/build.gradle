@@ -83,4 +83,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
     implementation "com.github.skydoves:sandwich:1.0.6"
+
+    //PICASSO
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 }

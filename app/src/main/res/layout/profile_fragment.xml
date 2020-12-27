@@ -42,7 +42,6 @@
         app:setGone="@{vm.isLoading()}"
         android:layout_below="@id/user_profile_imageViewWithPicUser"
         android:orientation="vertical"
-        android:theme="@style/Theme.Shoper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
