@@ -1,10 +1,15 @@
 package com.ponomar.shoper.ui.profile
 
+import android.app.UiModeManager
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +22,7 @@ import com.ponomar.shoper.databinding.ProfileFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),OnSwitchModeClick {
 
     private val profileViewModel:ProfileViewModel by viewModels()
     private lateinit var binding:ProfileFragmentBinding
@@ -35,6 +40,21 @@ class ProfileFragment : Fragment() {
         binding.apply {
             lifecycleOwner = this@ProfileFragment
             vm = profileViewModel
+            onSwitchNightModeInterface = this@ProfileFragment
+
         }
+    }
+
+    override fun onSwitchModeClick(v: View) {
+        val flags:Int = requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val uiManager:UiModeManager = requireContext().getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+        if(flags == Configuration.UI_MODE_NIGHT_YES){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            Log.e("ON CLICK","1")
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+//        requireActivity().window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+//        requireActivity().recreate()
     }
 }

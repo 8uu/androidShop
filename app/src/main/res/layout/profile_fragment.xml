@@ -4,6 +4,9 @@
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.profile.ProfileViewModel" />
+        <variable
+            name="onSwitchNightModeInterface"
+            type="com.ponomar.shoper.ui.profile.OnSwitchModeClick" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -100,6 +103,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        app:setGone="@{vm.isLoading()}"
+        android:text="night"
+        android:onClick="@{(v) -> onSwitchNightModeInterface.onSwitchModeClick(v)}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
 
