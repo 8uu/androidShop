@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.ponomar.shoper.model.entities.converters.ImageConverters
+import kotlinx.android.parcel.Parcelize
 
 @Entity
 data class Product(
