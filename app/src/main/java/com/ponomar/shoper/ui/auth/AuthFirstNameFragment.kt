@@ -13,9 +13,7 @@ class AuthFirstNameFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     private lateinit var binding:FragmentAuthFirstNameBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +34,4 @@ class AuthFirstNameFragment : Fragment() {
             }
         }
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment authFirstNameFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() = AuthFirstNameFragment()
-            }
 }

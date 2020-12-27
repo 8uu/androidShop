@@ -37,6 +37,10 @@ class AuthFragmentPhone : Fragment() {
             this.authDesc.fadeIn(delay = 700)
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
 
+            authButtonGoToNextStage.setOnClickListener {
+                (it.context as FragmentCallBacks).onFragment2NextClick()
+            }
+
             authButtonGoToPreviouslyStage.setOnClickListener {
                 (it.context as FragmentCallBacks).onFragment2BackClick()
             }
