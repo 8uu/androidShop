@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentAuthFirstNameBinding
+import com.ponomar.shoper.extensions.fadeIn
 
 class AuthFirstNameFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -26,8 +27,13 @@ class AuthFirstNameFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.authButtonGoToNextStage.setOnClickListener {
-            (it.context as FragmentCallBacks).onFragment1NextClick()
+        binding.apply {
+            this.authTitle.fadeIn()
+            this.authDesc.fadeIn(delay = 500)
+            this.authBlockOfButtonsAndInputUserData.fadeIn(delay=1000)
+            authButtonGoToNextStage.setOnClickListener {
+                (it.context as FragmentCallBacks).onFragment1NextClick()
+            }
         }
     }
 

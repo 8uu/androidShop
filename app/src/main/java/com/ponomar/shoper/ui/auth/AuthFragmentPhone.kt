@@ -1,12 +1,16 @@
 package com.ponomar.shoper.ui.auth
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ponomar.shoper.R
+import androidx.fragment.app.Fragment
 import com.ponomar.shoper.databinding.FragmentAuthPhoneBinding
+import com.ponomar.shoper.extensions.fadeIn
+
 
 class AuthFragmentPhone : Fragment() {
 
@@ -26,8 +30,17 @@ class AuthFragmentPhone : Fragment() {
             (it.context as FragmentCallBacks).onFragment2NextClick()
         }
 
-        binding.authButtonGoToPreviouslyStage.setOnClickListener {
-            (it.context as FragmentCallBacks).onFragment2BackClick()
+
+
+        binding.apply {
+            this.authTitle.fadeIn(delay = 200)
+            this.authDesc.fadeIn(delay = 700)
+            this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
+
+            authButtonGoToPreviouslyStage.setOnClickListener {
+                (it.context as FragmentCallBacks).onFragment2BackClick()
+            }
+
         }
 
     }

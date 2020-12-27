@@ -16,38 +16,48 @@
 
 
     <TextView
+        android:id="@+id/auth_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Классное имя, Егор!"
         android:layout_margin="15dp"
         android:textSize="37sp"/>
     <TextView
+        android:id="@+id/auth_desc"
         android:text="Теперь нам нужен Ваш номер телефона"
         android:textSize="37sp"
         android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/auth_editTextPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/auth_blockOfButtonsAndInputUserData"
         android:layout_gravity="center"
-        android:maxLength="15"
-        android:textSize="32sp" />
-    <Button
-        android:id="@+id/auth_buttonGoToNextStage"
-        android:text="Далее"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="23sp" />
-    <Button
-        android:id="@+id/auth_buttonGoToPreviouslyStage"
-        android:text="Назад"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="23sp" />
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/auth_editTextPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:maxLength="15"
+            android:textSize="32sp" />
+        <Button
+            android:id="@+id/auth_buttonGoToNextStage"
+            android:text="Далее"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="23sp" />
+        <Button
+            android:id="@+id/auth_buttonGoToPreviouslyStage"
+            android:text="Назад"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="23sp" />
+    </LinearLayout>
 
 
 </LinearLayout>
