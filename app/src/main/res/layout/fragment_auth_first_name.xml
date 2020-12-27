@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.AuthFirstNameFragment">
+    <ProgressBar
+        android:id="@+id/auth_horizontalProgressBarStage"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="8"
+        android:progress="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_margin="10dp"
+        android:textSize="38sp"
+        android:text="Привет!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_margin="15dp"
+        android:textSize="37sp"
+        android:text="Давайте познакомимся"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_margin="12dp"
+        android:textSize="37sp"
+        android:text="Как вас зовут?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/auth_editTextFirstName"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:textSize="32sp"
+        android:maxLength="15"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/auth_buttonGoToNextStage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="23sp"
+        android:text="Далее"/>
+
+</LinearLayout>

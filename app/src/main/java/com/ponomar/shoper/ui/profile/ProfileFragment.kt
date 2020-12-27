@@ -47,10 +47,8 @@ class ProfileFragment : Fragment(),OnSwitchModeClick {
 
     override fun onSwitchModeClick(v: View) {
         val flags:Int = requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        val uiManager:UiModeManager = requireContext().getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
         if(flags == Configuration.UI_MODE_NIGHT_YES){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Log.e("ON CLICK","1")
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }

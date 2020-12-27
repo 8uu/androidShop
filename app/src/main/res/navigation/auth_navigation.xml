@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/authFirstName">
+    <fragment
+        android:id="@+id/authFirstName"
+        android:name="com.ponomar.shoper.ui.auth.AuthFirstNameFragment"
+        tools:layout="@layout/fragment_auth_first_name"
+        >
+        <action
+            android:id="@+id/action_authFirstName_to_authPhone"
+            app:destination="@id/authPhone"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/authPhone"
+        android:name="com.ponomar.shoper.ui.auth.AuthFragmentPhone"
+        tools:layout="@layout/fragment_auth_phone"/>
+
+
+</navigation>
