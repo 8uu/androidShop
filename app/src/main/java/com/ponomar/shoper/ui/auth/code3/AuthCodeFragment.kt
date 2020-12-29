@@ -67,10 +67,12 @@ class AuthCodeFragment : Fragment() {
 
         viewModel.tokenLiveData.observe(viewLifecycleOwner){
                 Toast.makeText(requireContext(),it,Toast.LENGTH_LONG).show()
+                (requireContext().getActivity() as FragmentCallBacks).saveTokenToSP(it)
                 (requireContext().getActivity() as FragmentCallBacks).onFragment3NextClick(phone)
         }
 
     }
+
 
 
 

@@ -10,6 +10,8 @@ import com.ponomar.shoper.model.entities.User
 @Dao
 interface UserDAO {
 
+    @Query("DELETE from user;")
+    suspend fun nukeTable()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user:User)

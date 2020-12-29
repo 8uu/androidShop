@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import androidx.appcompat.app.AppCompatActivity
 
+
 fun Context.getActivity(): AppCompatActivity? {
     return when (this) {
         is AppCompatActivity -> this
@@ -11,3 +12,5 @@ fun Context.getActivity(): AppCompatActivity? {
         else -> null
     }
 }
+
+

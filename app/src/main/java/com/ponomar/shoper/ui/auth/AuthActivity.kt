@@ -1,30 +1,36 @@
 package com.ponomar.shoper.ui.auth
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ponomar.shoper.R
-import com.ponomar.shoper.databinding.FragmentAuthFirstNameBinding
-import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.extensions.Auth.Companion.isAuthTokenAvailable
+import com.ponomar.shoper.extensions.Auth.Companion.saveAuthToken
+import com.ponomar.shoper.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AuthActivity : AppCompatActivity(),FragmentCallBacks {
+
+    companion object{
+        fun startActivity(context: Context){
+            val intent = Intent(context, AuthActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            context.startActivity(intent)
+        }
+    }
+
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
-        navController = findNavController(R.id.auth_host_fragment)
-//        val appBarConfiguration = AppBarConfiguration(setOf(
-//            R.id.authFirstName,R.id.authPhone))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+        if(isAuthTokenAvailable()) MainActivity.startActivity(this)
+        else {
+            setContentView(R.layout.activity_auth)
+            navController = findNavController(R.id.auth_host_fragment)
+        }
     }
 
     override fun onFragment1NextClick(firstName: String) {
@@ -47,7 +53,7 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     }
 
     override fun onFragment4NextClick() {
-
+        MainActivity.startActivity(this)
     }
 
     override fun onFragment2BackClick() {
@@ -61,4 +67,12 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     override fun onFragment4BackClick() {
         navController.popBackStack()
     }
+
+    override fun saveTokenToSP(token: String) {
+        this.saveAuthToken(token)
+    }
+
+
+
+
 }

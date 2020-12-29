@@ -9,4 +9,6 @@ interface FragmentCallBacks {
     fun onFragment2BackClick()
     fun onFragment3BackClick()
     fun onFragment4BackClick()
+
+    fun saveTokenToSP(token:String)
 }
