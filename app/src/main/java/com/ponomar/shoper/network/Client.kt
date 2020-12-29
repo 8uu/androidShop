@@ -1,6 +1,8 @@
 package com.ponomar.shoper.network
 
 import com.ponomar.shoper.model.CodeResponse
+import com.ponomar.shoper.model.TokenResponse
+import com.ponomar.shoper.model.body.CodeBody
 import com.ponomar.shoper.model.body.PhoneBody
 import com.ponomar.shoper.model.entities.User
 import com.skydoves.sandwich.ApiResponse
@@ -20,6 +22,11 @@ class Client @Inject constructor(
         return authService.sendUserDataToGenerateCode(body)
     }
 
-    suspend fun verifyCode(code:Int,phone:String,firstName:String) = authService.sendUserCodeToVerify(code,phone,firstName)
+    suspend fun verifyCode(code:Int,phone:String,firstName:String):ApiResponse<TokenResponse>{
+        val body = CodeBody(code,phone,firstName)
+        return authService.sendUserCodeToVerify(body)
+    }
+
+
 
 }

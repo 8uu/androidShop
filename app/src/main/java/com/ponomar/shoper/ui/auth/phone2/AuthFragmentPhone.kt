@@ -66,7 +66,7 @@ class AuthFragmentPhone : Fragment() {
             }
 
             //TODO:Костыль, не работает once
-            viewModel.codeLiveData.observeOnce(this@AuthFragmentPhone){
+            viewModel.codeLiveData.observe(viewLifecycleOwner){
                 Log.e("code",it.toString())
                 if(it!=-1) {
                     Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()

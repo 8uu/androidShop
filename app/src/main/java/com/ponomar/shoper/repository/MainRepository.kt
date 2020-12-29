@@ -95,13 +95,13 @@ class MainRepository @Inject constructor(
         client.verifyCode(code, phone, firstName)
                 .suspendOnSuccess {
                     if(data != null) {
-                        if (data!!.status != 11) {
+                        if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
-                        }else emit(data!!.token)
+                        }else emit(data!!.token!!)
                     }else onError("ERROR")
                     onSuccess()
-                }
+                }.onError { onError(message()) }
+                .onException { onError(message()) }
+                .onFailure { onSuccess() }}
     }
 
-
-}

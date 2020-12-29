@@ -66,8 +66,7 @@
             android:layout_gravity="center"
             android:textSize="23sp" />
         <ProgressBar
-            android:visibility="gone"
-            setGoneWithFade="@{vm.isLoading()}"
+            setGoneWithFade="@{!vm.isLoading()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
