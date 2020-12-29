@@ -16,7 +16,7 @@ class AuthCodeViewModel @ViewModelInject constructor(
     private val _fetchingLiveDataUserData:MutableLiveData<HashMap<String, Any>> = MutableLiveData()
 
     val toastLiveData: LiveData<String> = _toastMutableLiveData
-    var tokenLiveData:LiveData<String>
+    val tokenLiveData:LiveData<String>
 
 
     val isLoading:ObservableBoolean = ObservableBoolean(false)
@@ -31,7 +31,6 @@ class AuthCodeViewModel @ViewModelInject constructor(
                         code = it["code"] as Int,
                         onSuccess = {
                             isLoading.set(false)
-                            tokenLiveData = MutableLiveData("removeObserver")
                                     },
                         onError = { _toastMutableLiveData.value = it }
                 ).asLiveData()

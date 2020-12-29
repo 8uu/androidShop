@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.databinding.FragmentAuthPhoneBinding
 import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
@@ -42,6 +44,8 @@ class AuthFragmentPhone : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        viewModel.initLiveData()
+
         binding.apply {
             lifecycleOwner = this@AuthFragmentPhone
             vm = viewModel
@@ -66,12 +70,10 @@ class AuthFragmentPhone : Fragment() {
             }
 
             //TODO:Костыль, не работает once
-            viewModel.codeLiveData.observe(viewLifecycleOwner){
+            viewModel.codeLiveData.observeOnce(viewLifecycleOwner){
                 Log.e("code",it.toString())
-                if(it!=-1) {
-                    Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
-                    (requireContext().getActivity() as FragmentCallBacks).onFragment2NextClick(firstName, phone)
-                }
+                Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
+                (requireContext().getActivity() as FragmentCallBacks).onFragment2NextClick(firstName, phone)
             }
 
         }

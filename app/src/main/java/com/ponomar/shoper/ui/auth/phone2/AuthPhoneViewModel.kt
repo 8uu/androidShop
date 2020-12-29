@@ -15,23 +15,28 @@ class AuthPhoneViewModel @ViewModelInject constructor(
         private val repository: MainRepository
 ):LiveCoroutinesViewModel() {
     private val _toastMutableLiveData: MutableLiveData<String> = MutableLiveData()
-    private val _fetchingLiveDataPhone: MutableLiveData<String> = MutableLiveData()
+    private lateinit var _fetchingLiveDataPhone: MutableLiveData<String>
 
     val toastLiveData: LiveData<String> = _toastMutableLiveData
-    var codeLiveData: LiveData<Int>
+    lateinit var codeLiveData: LiveData<Int>
 
 
     val isLoading: ObservableBoolean = ObservableBoolean(false)
-    init{
+
+
+
+    fun initLiveData(){
+        _fetchingLiveDataPhone = MutableLiveData() //TODO:Костыль
         codeLiveData = _fetchingLiveDataPhone.switchMap {
+            Log.e("code","launch")
             launchOnViewModelScope {
                 isLoading.set(true)
                 repository.sendUserDataToGenerateAuthCode(
                         it,
                         onSuccess = {
                             isLoading.set(false)
-                            codeLiveData = MutableLiveData(-1)//TODO:Костыль
-                                    },
+                            codeLiveData = MutableLiveData()
+                        },
                         onError = {
                             _toastMutableLiveData.value = it
                         }

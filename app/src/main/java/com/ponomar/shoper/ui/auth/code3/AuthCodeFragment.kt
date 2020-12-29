@@ -66,10 +66,8 @@ class AuthCodeFragment : Fragment() {
         }
 
         viewModel.tokenLiveData.observe(viewLifecycleOwner){
-            if(it != "removeObserver") {
                 Toast.makeText(requireContext(),it,Toast.LENGTH_LONG).show()
                 (requireContext().getActivity() as FragmentCallBacks).onFragment3NextClick(phone)
-            }
         }
 
     }
