@@ -26,7 +26,10 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(isAuthTokenAvailable()) MainActivity.startActivity(this)
+        if(isAuthTokenAvailable()) {
+            MainActivity.startActivity(this)
+            finish()
+        }
         else {
             setContentView(R.layout.activity_auth)
             navController = findNavController(R.id.auth_host_fragment)

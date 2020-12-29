@@ -19,10 +19,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.ponomar.shoper.R
 import com.ponomar.shoper.base.DataBindingActivity
 import com.ponomar.shoper.databinding.ProfileFragmentBinding
+import com.ponomar.shoper.extensions.Auth.Companion.forgetAuthToken
+import com.ponomar.shoper.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(),OnSwitchModeClick {
+class ProfileFragment : Fragment(),OnSwitchModeClick,OnLogoutClick {
 
     private val profileViewModel:ProfileViewModel by viewModels()
     private lateinit var binding:ProfileFragmentBinding
@@ -41,6 +43,7 @@ class ProfileFragment : Fragment(),OnSwitchModeClick {
             lifecycleOwner = this@ProfileFragment
             vm = profileViewModel
             onSwitchNightModeInterface = this@ProfileFragment
+            onLogoutClickInterface = this@ProfileFragment
 
         }
     }
@@ -54,5 +57,11 @@ class ProfileFragment : Fragment(),OnSwitchModeClick {
         }
 //        requireActivity().window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
 //        requireActivity().recreate()
+    }
+
+    override fun onLogoutClick(v: View) {
+        requireActivity().forgetAuthToken()
+        Log.e("ASD","1")
+        AuthActivity.startActivity(requireContext())
     }
 }

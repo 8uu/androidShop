@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     companion object{
         fun startActivity(context:Context){
             val intent = Intent(context,MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             context.startActivity(intent)
         }
     }
