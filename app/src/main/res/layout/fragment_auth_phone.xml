@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.ponomar.shoper.ui.auth.phone2.AuthPhoneViewModel" />
+    </data>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.AuthFragmentPhone">
+    toast="@{vm.toastLiveData}"
+    tools:context=".ui.auth.phone2.AuthFragmentPhone">
 
     <ProgressBar
         android:id="@+id/auth_horizontalProgressBarStage"
@@ -19,7 +27,6 @@
         android:id="@+id/auth_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Классное имя, Егор!"
         android:layout_margin="15dp"
         android:textSize="37sp"/>
     <TextView
@@ -41,6 +48,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_gravity="center"
+            android:inputType="numberDecimal|phone"
             android:maxLength="15"
             android:textSize="32sp" />
         <Button
@@ -57,7 +65,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="23sp" />
+        <ProgressBar
+            setGoneWithFade="@{!vm.isLoading()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 
 </LinearLayout>
+</layout>

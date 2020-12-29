@@ -1,23 +1,23 @@
-package com.ponomar.shoper.ui.auth
+package com.ponomar.shoper.ui.auth.email4
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ponomar.shoper.R
-import com.ponomar.shoper.databinding.FragmentAuthCodeBinding
+import com.ponomar.shoper.databinding.FragmentAuthEmailBinding
 import com.ponomar.shoper.extensions.fadeIn
+import com.ponomar.shoper.ui.auth.FragmentCallBacks
 
-class AuthCodeFragment : Fragment() {
+class AuthEmailFragment : Fragment() {
 
-    private lateinit var binding:FragmentAuthCodeBinding
+    private lateinit var binding:FragmentAuthEmailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAuthCodeBinding.inflate(inflater)
+        binding = FragmentAuthEmailBinding.inflate(inflater)
         return binding.root
     }
 
@@ -29,11 +29,13 @@ class AuthCodeFragment : Fragment() {
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
 
             this.authButtonGoToNextStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment3NextClick()
+                (it.context as FragmentCallBacks).onFragment4NextClick()
             }
-
+            this.authButtonSkipThisStage.setOnClickListener {
+                (it.context as FragmentCallBacks).onFragment4NextClick()
+            }
             this.authButtonGoToPreviouslyStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment3BackClick()
+                (it.context as FragmentCallBacks).onFragment4BackClick()
             }
         }
     }

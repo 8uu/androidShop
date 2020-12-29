@@ -12,7 +12,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentAuthFirstNameBinding
+import com.ponomar.shoper.model.entities.User
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +27,23 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onFragment1NextClick() {
-        navController.navigate(R.id.action_authFirstName_to_authPhone)
+    override fun onFragment1NextClick(firstName: String) {
+        val bundle = Bundle()
+        bundle.putString("firstName",firstName)
+        navController.navigate(R.id.action_authFirstName_to_authPhone,bundle)
     }
 
-    override fun onFragment2NextClick() {
-        navController.navigate(R.id.action_authPhone_to_authCode)
+    override fun onFragment2NextClick(firstName: String,phone:String) {
+        val bundle = Bundle()
+        bundle.putString("firstName",firstName)
+        bundle.putString("phone",phone)
+        navController.navigate(R.id.action_authPhone_to_authCode,bundle)
     }
 
-    override fun onFragment3NextClick() {
-        navController.navigate(R.id.action_authCode_to_authEmail)
+    override fun onFragment3NextClick(phone:String) {
+        val bundle = Bundle()
+        bundle.putString("phone",phone)
+        navController.navigate(R.id.action_authCode_to_authEmail,bundle)
     }
 
     override fun onFragment4NextClick() {

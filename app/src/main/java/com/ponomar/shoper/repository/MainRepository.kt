@@ -64,5 +64,44 @@ class MainRepository @Inject constructor(
                     onSuccess()}
     }
 
+    suspend fun sendUserDataToGenerateAuthCode(
+            phone:String,
+            onSuccess: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow {
+        client.sendUserDataToGenerateCode(phone)
+                .suspendOnSuccess {
+                    if(data != null) {
+                        if (data!!.status != 11) {
+                            onError("ERROR.STATUS:${data!!.status}")
+                        }else {
+                            emit(data!!.code)
+                        }
+                    }else onError("ERROR")
+                    onSuccess()
+                }.onError { onError(message())  }
+                .onException { onError(message()) }
+                .onFailure { onSuccess() }
+
+    }
+    //TODO:SAME FUNCTION LAMBDA REPEAT BLOCK
+    suspend fun verifyCode(
+            phone:String,
+            firstName:String,
+            code:Int,
+            onSuccess: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow {
+        client.verifyCode(code, phone, firstName)
+                .suspendOnSuccess {
+                    if(data != null) {
+                        if (data!!.status != 11) {
+                            onError("ERROR.STATUS:${data!!.status}")
+                        }else emit(data!!.token)
+                    }else onError("ERROR")
+                    onSuccess()
+                }
+    }
+
 
 }

@@ -1,13 +1,15 @@
-package com.ponomar.shoper.ui.auth
+package com.ponomar.shoper.ui.auth.firstName1
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ponomar.shoper.R
+import android.widget.Toast
 import com.ponomar.shoper.databinding.FragmentAuthFirstNameBinding
 import com.ponomar.shoper.extensions.fadeIn
+import com.ponomar.shoper.ui.auth.FragmentCallBacks
 
 class AuthFirstNameFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -30,7 +32,13 @@ class AuthFirstNameFragment : Fragment() {
             this.authDesc.fadeIn(delay = 500)
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay=1000)
             authButtonGoToNextStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment1NextClick()
+                val firstName = authEditTextFirstName.text.toString()
+                if(firstName.isNotEmpty()) (it.context as FragmentCallBacks).onFragment1NextClick(firstName)
+                else{
+                    val toast = Toast.makeText(root.context,"Пустое поле",Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.BOTTOM,0,100)
+                    toast.show()
+                }
             }
         }
     }

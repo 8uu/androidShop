@@ -6,7 +6,7 @@
     app:startDestination="@id/authFirstName">
     <fragment
         android:id="@+id/authFirstName"
-        android:name="com.ponomar.shoper.ui.auth.AuthFirstNameFragment"
+        android:name="com.ponomar.shoper.ui.auth.firstName1.AuthFirstNameFragment"
         tools:layout="@layout/fragment_auth_first_name"
         >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/authPhone"
-        android:name="com.ponomar.shoper.ui.auth.AuthFragmentPhone"
+        android:name="com.ponomar.shoper.ui.auth.phone2.AuthFragmentPhone"
         tools:layout="@layout/fragment_auth_phone">
         <action
             android:id="@+id/action_authPhone_to_authCode"
@@ -29,11 +29,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="firstName"
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/authCode"
-        android:name="com.ponomar.shoper.ui.auth.AuthCodeFragment"
+        android:name="com.ponomar.shoper.ui.auth.code3.AuthCodeFragment"
         tools:layout="@layout/fragment_auth_code">
         <action
             android:id="@+id/action_authCode_to_authEmail"
@@ -42,12 +45,22 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="firstName"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/authEmail"
-        android:name="com.ponomar.shoper.ui.auth.AuthEmailFragment"
-        tools:layout="@layout/fragment_auth_email"/>
+        android:name="com.ponomar.shoper.ui.auth.email4.AuthEmailFragment"
+        tools:layout="@layout/fragment_auth_email">
+        <argument
+            android:name="phone"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

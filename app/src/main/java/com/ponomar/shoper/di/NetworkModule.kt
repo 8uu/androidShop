@@ -2,10 +2,7 @@ package com.ponomar.shoper.di
 
 import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.User
-import com.ponomar.shoper.network.AddressService
-import com.ponomar.shoper.network.Client
-import com.ponomar.shoper.network.ProductService
-import com.ponomar.shoper.network.UserService
+import com.ponomar.shoper.network.*
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -55,11 +52,16 @@ object NetworkModule{
     @Singleton
     fun provideAddressService(retrofit: Retrofit):AddressService = retrofit.create(AddressService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideAuthService(retrofit: Retrofit):AuthService = retrofit.create(AuthService::class.java)
+
 
     @Provides
     @Singleton
     fun provideClient(userService: UserService,
                       addressService: AddressService,
-                      productService: ProductService):Client = Client(userService,addressService, productService)
+                      productService: ProductService,
+                      authService: AuthService):Client = Client(userService,addressService, productService,authService)
 
 }

@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ponomar.shoper.extensions.gone
+import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.ProductAdapter
@@ -18,6 +19,11 @@ import com.ponomar.shoper.ui.adapter.ProductAdapter
 @BindingAdapter("setGone")
 fun bindGone(view: View,ifGone:Boolean){
     view.gone(ifGone)
+}
+
+@BindingAdapter("setGoneWithFade")
+fun bindFadeGone(view:View,ifGone: Boolean){
+    view.goneWithFade(ifGone)
 }
 
 

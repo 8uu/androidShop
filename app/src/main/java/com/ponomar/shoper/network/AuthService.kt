@@ -1,0 +1,18 @@
+package com.ponomar.shoper.network
+
+import com.ponomar.shoper.model.CodeResponse
+import com.ponomar.shoper.model.TokenResponse
+import com.ponomar.shoper.model.body.PhoneBody
+import com.skydoves.sandwich.ApiResponse
+import retrofit2.http.*
+
+interface AuthService {
+
+    @POST("/auth/code")
+    suspend fun sendUserDataToGenerateCode(@Body phoneBody:PhoneBody):ApiResponse<CodeResponse>
+
+    @POST("/auth/code/verify")
+    suspend fun sendUserCodeToVerify(@Field("code") code:Int,
+                                     @Field("phone") phone: String,
+                                     @Field("fname") fname:String):ApiResponse<TokenResponse>
+}
