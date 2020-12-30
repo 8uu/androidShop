@@ -87,4 +87,7 @@ dependencies {
 
     //PICASSO
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //PHONE MASK
+    implementation "ru.tinkoff.decoro:decoro:1.2.0"
 }

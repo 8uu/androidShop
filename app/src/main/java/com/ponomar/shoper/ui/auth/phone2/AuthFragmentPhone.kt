@@ -15,6 +15,7 @@ import com.ponomar.shoper.databinding.FragmentAuthPhoneBinding
 import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.extensions.observeOnce
+import com.ponomar.shoper.extensions.setMask
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +55,8 @@ class AuthFragmentPhone : Fragment() {
             this.authTitle.fadeIn(delay = 200)
             this.authDesc.fadeIn(delay = 700)
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
+            this.authEditTextPhone.setMask()
+
             authButtonGoToNextStage.setOnClickListener {
                 phone = authEditTextPhone.text.toString()
                 if(phone.isNotEmpty()) {

@@ -48,6 +48,7 @@ class AuthCodeFragment : Fragment() {
             this.authDesc.fadeIn(delay = 700)
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
 
+
             this.authButtonGoToNextStage.setOnClickListener {
                 val codeStr:String = authEditTextCode.text.toString()
                 if(codeStr.isNotEmpty())

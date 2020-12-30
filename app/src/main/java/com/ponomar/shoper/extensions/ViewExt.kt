@@ -2,8 +2,10 @@ package com.ponomar.shoper.extensions
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.ViewCompat
 import com.ponomar.shoper.R
+import com.ponomar.shoper.util.MaskFormat
 import com.squareup.picasso.Picasso
 
 
@@ -44,3 +46,8 @@ fun View.fadeOut(duration: Long = 500,delay: Long = 0,setGone: Boolean = true){
         this.withEndAction { this@fadeOut.gone(setGone) }
     }
 }
+
+fun TextView.setMask(mask:String=MaskFormat.PHONE_MASK){
+    MaskFormat.installOn(this,mask)
+}
+

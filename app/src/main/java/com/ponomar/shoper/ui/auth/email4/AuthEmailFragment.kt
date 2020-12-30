@@ -44,10 +44,10 @@ class AuthEmailFragment : Fragment() {
                 else Toast.makeText(requireContext(),"Пустое поле",Toast.LENGTH_LONG).show()
             }
             this.authButtonSkipThisStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment4NextClick()
+                (requireContext().getActivity() as FragmentCallBacks).onFragment4NextClick()
             }
             this.authButtonGoToPreviouslyStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment4BackClick()
+                (requireContext().getActivity() as FragmentCallBacks).onFragment4BackClick()
             }
         }
 
