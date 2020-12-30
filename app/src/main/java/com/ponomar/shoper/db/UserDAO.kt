@@ -1,9 +1,6 @@
 package com.ponomar.shoper.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.ponomar.shoper.model.entities.User
 
 
@@ -19,4 +16,7 @@ interface UserDAO {
 
     @Query("SELECT * FROM user LIMIT 1;")
     suspend fun getUser():User?
+
+    @Query("UPDATE user set email = :email where id = :uid;")
+    suspend fun updateEmail(uid:Int,email:String)
 }

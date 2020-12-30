@@ -5,12 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.ponomar.shoper.databinding.FragmentAuthEmailBinding
+import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
 import com.ponomar.shoper.extensions.fadeIn
+import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthEmailFragment : Fragment() {
 
+    private val viewModel:AuthEmailViewModel by viewModels()
     private lateinit var binding:FragmentAuthEmailBinding
 
     override fun onCreateView(
@@ -24,12 +31,17 @@ class AuthEmailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.apply {
+            vm = viewModel
+            lifecycleOwner = this@AuthEmailFragment
+
             this.authTitle.fadeIn(delay = 200)
             this.authDesc.fadeIn(delay = 700)
             this.authBlockOfButtonsAndInputUserData.fadeIn(delay = 1200)
 
             this.authButtonGoToNextStage.setOnClickListener {
-                (it.context as FragmentCallBacks).onFragment4NextClick()
+                val email:String = this.authEditTextEmail.text.toString()
+                if(email.isNotEmpty()) viewModel.updateEmailOfUser(_token = requireActivity().getAuthToken()!!,_email = email)
+                else Toast.makeText(requireContext(),"Пустое поле",Toast.LENGTH_LONG).show()
             }
             this.authButtonSkipThisStage.setOnClickListener {
                 (it.context as FragmentCallBacks).onFragment4NextClick()
@@ -37,6 +49,10 @@ class AuthEmailFragment : Fragment() {
             this.authButtonGoToPreviouslyStage.setOnClickListener {
                 (it.context as FragmentCallBacks).onFragment4BackClick()
             }
+        }
+
+        viewModel.statusLiveData.observe(viewLifecycleOwner){
+            if(it == 0) (requireContext().getActivity() as FragmentCallBacks).onFragment4NextClick()
         }
     }
 

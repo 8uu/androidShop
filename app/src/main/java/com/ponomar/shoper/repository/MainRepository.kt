@@ -2,6 +2,7 @@ package com.ponomar.shoper.repository
 
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.model.StatusResponse
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
@@ -15,23 +16,29 @@ class MainRepository @Inject constructor(
 ){
 
 
-
-
-    suspend fun initF():User {
-        val user = User(8,"Test 4122","1337",null)
-        appDB.getUserDao().insert(user)
-        return user
-    }
-
     suspend fun fetchUserInfo(
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
+            token: String,
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
     ) = flow {
         val user = appDB.getUserDao().getUser()
         if(user == null){
-
+            client.fetchUserData(token)
+                    .suspendOnSuccess {
+                        if(data!= null){
+                            if(data!!.status == 0){
+                                appDB.getUserDao().nukeTable()
+                                appDB.getUserDao().insert(data!!.data!!)
+                                emit(data!!.data!!)
+                            }else{
+                                onError("STATUS:${data!!.status}")
+                            }
+                        }else onError("NULL DATA")
+                        onComplete()
+                    }.onError { onError(message()) }
+                    .onException { onError(message()) }
         }else {
-            onSuccess()
+            onComplete()
             emit(user)
         }
     }
@@ -84,6 +91,8 @@ class MainRepository @Inject constructor(
                 .onFailure { onSuccess() }
 
     }
+
+
     //TODO:SAME FUNCTION LAMBDA REPEAT BLOCK
     suspend fun verifyCode(
             phone:String,
@@ -97,11 +106,39 @@ class MainRepository @Inject constructor(
                     if(data != null) {
                         if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
-                        }else emit(data!!.token!!)
+                        }else {
+                            appDB.getUserDao().nukeTable()
+//                            appDB.getUserDao().apply {
+//                                nukeTable()
+//                                insert(User(data!!.uid!!,firstName,phone,null))
+//                            }
+                            emit(data!!.token!!)
+                        }
                     }else onError("ERROR")
                     onSuccess()
                 }.onError { onError(message()) }
                 .onException { onError(message()) }
                 .onFailure { onSuccess() }}
+
+
+    suspend fun updateUserEmail(email:String,
+                                token:String,
+                                onComplete: () -> Unit,
+                                onError: (String) -> Unit)= flow {
+            client.updateUserEmail(token, email)
+                    .suspendOnSuccess {
+                        if(data != null){
+                            if(data!!.status == 0) {
+//                                appDB.getUserDao().updateEmail(data!!.uid!!,email)
+                                emit(data!!.status)
+                            }
+                            else{
+                                onError("STATUS:${data!!.status}")
+                            }
+                        }else onError("ERROR")
+                        onComplete()
+                    }.onError { onError(message()) }
+                    .onException { onError(message()) }
     }
 
+    }

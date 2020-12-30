@@ -18,7 +18,7 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     companion object{
         fun startActivity(context: Context){
             val intent = Intent(context, AuthActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK) //TODO:LEARN FLAGS
             context.startActivity(intent)
         }
     }
@@ -57,6 +57,7 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
 
     override fun onFragment4NextClick() {
         MainActivity.startActivity(this)
+        finish()
     }
 
     override fun onFragment2BackClick() {

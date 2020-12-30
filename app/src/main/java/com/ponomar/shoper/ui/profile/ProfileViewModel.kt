@@ -19,20 +19,29 @@ class ProfileViewModel @ViewModelInject constructor(
 ):LiveCoroutinesViewModel() {
 
     private val mutableToastLiveData:MutableLiveData<String> = MutableLiveData()
+    private val mutableTokenLiveData:MutableLiveData<String> = MutableLiveData()
 
     val isLoading: ObservableBoolean = ObservableBoolean(false)
     val toastLiveData:LiveData<String> = mutableToastLiveData
     val userData: LiveData<User>
 
         init {
-            userData = launchOnViewModelScope {
-                isLoading.set(true)
-                repository.fetchUserInfo(
-                        onSuccess = { isLoading.set(false)},
-                        onError = { mutableToastLiveData.value = "ERROR" }
-                ).asLiveData()
+
+            userData = mutableTokenLiveData.switchMap {
+                launchOnViewModelScope {
+                    isLoading.set(true)
+                    repository.fetchUserInfo(
+                            it,
+                            onComplete = { isLoading.set(false) },
+                            onError = { mutableToastLiveData.value = "ERROR" }
+                    ).asLiveData()
+                }
             }
 
         }
+
+    fun updateUserInfo(token:String){
+        mutableTokenLiveData.value = token
+    }
 
 }

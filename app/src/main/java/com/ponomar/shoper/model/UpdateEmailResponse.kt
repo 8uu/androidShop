@@ -1,7 +1,6 @@
 package com.ponomar.shoper.model
 
-data class TokenResponse(
+data class UpdateEmailResponse(
         val status:Int,
-        val token:String?,
         val uid:Int?
 )

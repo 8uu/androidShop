@@ -2,12 +2,14 @@ package com.ponomar.shoper.extensions
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import java.lang.Exception
 
 class Auth {
     companion object{
 
         fun Activity.saveAuthToken(token:String):Boolean{
+            Log.e("TOKEN",token)
             return try {
                 val sp = this.getActivity()!!.getSharedPreferences(KEYS.SP_NAME, Context.MODE_PRIVATE)
                 sp.edit().putString(KEYS.AUTH_TOKEN, token).apply()
