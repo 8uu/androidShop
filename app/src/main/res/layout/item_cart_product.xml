@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="product"
+            type="com.ponomar.shoper.model.entities.Product" />
+        <variable
+            name="cart"
+            type="com.ponomar.shoper.model.entities.Cart" />
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/product_item_pic_container"
+            app:cardCornerRadius="20dp"
+            android:elevation="20dp"
+            android:layout_margin="10dp"
+            android:layout_width="135dp"
+            android:layout_height="135dp">
+            <ImageView
+                app:imageUrl="@{product.images.get(0)}"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+            <TextView
+                android:text="@{product.title}"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
+                <ImageView
+                    android:src="@drawable/ic_plus"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:text="@{}"
+                    android:gravity="center"
+                    android:textSize="28sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:src="@drawable/ic_minus"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
+</layout>
