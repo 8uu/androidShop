@@ -115,7 +115,8 @@ class MainRepository @Inject constructor(
                         if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
                         }else {
-                            appDB.getUserDao().nukeTable()
+                            appDB.getUserDao().nukeTable() //TODO:REFACTOR CHECKING USER AUTH ALREADY
+                            appDB.getCartDao().nukeTable()
 //                            appDB.getUserDao().apply {
 //                                nukeTable()
 //                                insert(User(data!!.uid!!,firstName,phone,null))
@@ -147,6 +148,15 @@ class MainRepository @Inject constructor(
                         onComplete()
                     }.onError { onError(message()) }
                     .onException { onError(message()) }
+    }
+
+
+    suspend fun fetchCart(
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow {
+        val data = appDB.getCartDao().getCart()
+        emit(data)
     }
 
     }

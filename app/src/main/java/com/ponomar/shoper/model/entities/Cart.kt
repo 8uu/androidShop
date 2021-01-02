@@ -16,7 +16,6 @@ import androidx.room.PrimaryKey
 )]
 )
 data class Cart(
-    @PrimaryKey(autoGenerate = true) val id:Int,
-    val pid:Int,
-    val quantity:Int
+        @PrimaryKey val pid:Int,
+        val quantity:Int
     )

@@ -27,7 +27,7 @@ class CartFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
         binding.apply {
             lifecycleOwner = this@CartFragment
-            vm = cartViewModel
+            vm = cartViewModel.apply { fetchCartData() }
         }
         return binding.root
     }

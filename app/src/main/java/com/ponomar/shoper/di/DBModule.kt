@@ -36,5 +36,9 @@ object DBModule {
     @Singleton
     fun provideProductDao(appDB: AppDB) = appDB.getProductDao()
 
+    @Provides
+    @Singleton
+    fun provideCartDao(appDB: AppDB) = appDB.getCartDao()
+
 
 }
