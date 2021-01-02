@@ -47,28 +47,36 @@ class MainRepository @Inject constructor(
             onSuccess: () -> Unit,
             onError: (String) -> Unit
     ) = flow {
-        val response = client.fetchProductsList()
-        response.suspendOnSuccess {
-            when {
-                data == null -> {
-                    onError("Null data")
+        val dataFromDB = appDB.getProductDao().getProducts()
+        if(dataFromDB.isEmpty()) {
+            val response = client.fetchProductsList()
+            response.suspendOnSuccess {
+                when {
+                    data == null -> {
+                        onError("Null data")
+                    }
+                    data!!.status != 0 -> {
+                        onError("STATUS:${data!!.status}")
+                    }
+                    else -> {
+                        appDB.getProductDao().insertAll(data!!.data!!)
+                        emit(data!!.data!!)
+                    }
                 }
-                data!!.status != 0 -> {
-                    onError("STATUS:${data!!.status}")
-                }
-                else -> {
-                    emit(data!!.data!!)
-                }
+                onSuccess()
             }
+                    .onError {
+                        onError(message())
+                        onSuccess()
+                    }
+                    .onException {
+                        onError(message())
+                        onSuccess()
+                    }
+        }else{
+            emit(dataFromDB)
             onSuccess()
         }
-                .onError {
-                    onError(message())
-                    onSuccess()
-                }
-                .onException {
-                    onError(message())
-                    onSuccess()}
     }
 
     suspend fun sendUserDataToGenerateAuthCode(
