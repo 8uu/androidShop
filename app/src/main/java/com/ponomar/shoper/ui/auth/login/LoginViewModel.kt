@@ -15,9 +15,11 @@ class LoginViewModel @ViewModelInject constructor(
 ) : LiveCoroutinesViewModel() {
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()
     private val _phoneMutableLiveData:MutableLiveData<String> = MutableLiveData()
+    private val _userCodeMutableLiveData:MutableLiveData<Int> = MutableLiveData()
     val toastLiveData:LiveData<String> = _toastMutableLiveData
     val isLoading = ObservableBoolean(false)
     val codeLiveData:LiveData<Int>
+    val tokenLiveData:LiveData<String>
 
 
     init {
@@ -31,11 +33,26 @@ class LoginViewModel @ViewModelInject constructor(
                 ).asLiveData()
             }
         }
+        tokenLiveData = _userCodeMutableLiveData.switchMap {
+            isLoading.set(true)
+            launchOnViewModelScope {
+                repository.verifyCodeWhenUserTryToLogin(
+                        code = it,
+                        phone = _phoneMutableLiveData.value!!,
+                        onComplete = {isLoading.set(false)},
+                        onError = {_toastMutableLiveData.value = it}
+                ).asLiveData()
+            }
+        }
     }
 
 
 
     fun sendUserPhone(phone:String){
         _phoneMutableLiveData.value = phone
+    }
+
+    fun sendUserCode(code:Int){
+        _userCodeMutableLiveData.value = code
     }
 }

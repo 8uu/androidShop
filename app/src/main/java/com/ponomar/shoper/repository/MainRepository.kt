@@ -159,4 +159,23 @@ class MainRepository @Inject constructor(
         emit(data)
     }
 
+    suspend fun verifyCodeWhenUserTryToLogin(
+            code:Int,
+            phone: String,
+            onComplete: () -> Unit,
+            onError: (String) -> Unit) = flow {
+                client.verifyCode(code, phone)
+                        .suspendOnSuccess {
+                            if(data!!.status != 30){
+                                onError("ERROR")
+                            }else{
+                                appDB.getCartDao().nukeTable()
+                                appDB.getUserDao().nukeTable()
+                                emit(data!!.token!!)
+                            }
+                        }.onException { onError(message()) }
+                        .onError { onError(message()) }
+                        .onFailure { onComplete() }
+            }
+
     }

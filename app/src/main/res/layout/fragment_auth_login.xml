@@ -8,10 +8,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     toast="@{vm.toastLiveData}"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <ImageButton
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/auth_loginBackToPreviouslyStage"
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_back"
+        android:scaleType="fitXY"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
     <LinearLayout
         android:layout_centerInParent="true"
         android:orientation="vertical"
@@ -19,6 +23,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/auth_loginPhoneBlock"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -31,7 +36,7 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"/>
                 <LinearLayout
-                    android:id="@+id/auth_buttonSendUserPhone"
+                    android:id="@+id/auth_buttonLoginSendUserPhone"
                     android:orientation="horizontal"
                     android:layout_margin="5dp"
                     android:layout_gravity="center"
@@ -53,10 +58,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/auth_loginCodeBlock"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_editTextCode"
                 android:hint="Код"
                 android:layout_gravity="center"
                 android:layout_width="80dp"
