@@ -2,16 +2,15 @@ package com.ponomar.shoper.binding
 
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
+import com.ponomar.shoper.extensions.setMask
+import com.ponomar.shoper.model.SQLoutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.ProductAdapter
 
@@ -47,8 +46,21 @@ fun bindProductsAdapter(recyclerView: RecyclerView,products:List<Product>?){
     (recyclerView.adapter as? ProductAdapter)?.addProducts(products)
 }
 
+@BindingAdapter("adapterCartList")
+fun bindCartAdapter(recyclerView: RecyclerView,productsInCart:List<CartInnerProduct>?){
+    if(productsInCart != null){
+
+    }
+}
+
 
 @BindingAdapter("imageUrl")
 fun bindImageUrlToImageView(imageView: ImageView,imageUrl:String){
     imageView.loadImageByImageUrl(imageUrl)
+}
+
+
+@BindingAdapter("mask")
+fun bindMaskToEditText(editText: EditText,mask:String){
+    editText.setMask(mask)
 }

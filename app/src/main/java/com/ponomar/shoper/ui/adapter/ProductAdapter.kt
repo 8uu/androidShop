@@ -51,13 +51,5 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    private fun unwrap(_context: Context): AppCompatActivity {
-        var context: Context = _context
-        while (context !is AppCompatActivity && context is ContextWrapper) {
-            context = (context).baseContext
-        }
-        return context as AppCompatActivity
-    }
-
     class VHolder(val binding: ItemProductBinding):RecyclerView.ViewHolder(binding.root)
 }

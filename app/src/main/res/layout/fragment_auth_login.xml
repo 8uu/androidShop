@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.ponomar.shoper.ui.auth.login.LoginViewModel" />
+    </data>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    toast="@{vm.toastLiveData}"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageButton
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_editTextPhone"
+                    android:hint="Телефон"
+                    android:text="+7"
+                    android:textSize="25sp"
+                    mask="+7 (___)-___-__-__"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:id="@+id/auth_buttonSendUserPhone"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_outline"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp">
+                    <ImageView
+                        setGone="@{vm.isLoading()}"
+                        android:src="@drawable/ic_send"
+                        android:padding="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                    <ProgressBar
+                        setGone="@{!vm.isLoading()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:hint="Код"
+                android:layout_gravity="center"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/auth_buttonSendUserCode"
+                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_outline"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+                <ImageView
+                    setGone="@{vm.isLoading()}"
+                    android:src="@drawable/ic_send"
+                    android:padding="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <ProgressBar
+                    setGone="@{!vm.isLoading()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+</layout>

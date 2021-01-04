@@ -2,17 +2,16 @@ package com.ponomar.shoper.ui.auth.phone2
 
 import android.util.Log
 import androidx.databinding.ObservableBoolean
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.repository.MainRepository
 
 
 class AuthPhoneViewModel @ViewModelInject constructor(
-        private val repository: MainRepository
+        private val repository: MainRepository,
+        @Assisted private val savedStateHandle: SavedStateHandle
 ):LiveCoroutinesViewModel() {
     private val _toastMutableLiveData: MutableLiveData<String> = MutableLiveData()
     private lateinit var _fetchingLiveDataPhone: MutableLiveData<String>
