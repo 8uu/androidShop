@@ -60,7 +60,7 @@ fun bindImageUrlToImageView(imageView: ImageView,imageUrl:String){
 }
 
 
-@BindingAdapter("mask")
+@BindingAdapter("maskEditText")
 fun bindMaskToEditText(editText: EditText,mask:String){
     editText.setMask(mask)
 }

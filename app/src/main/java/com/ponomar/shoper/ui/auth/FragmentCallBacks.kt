@@ -1,6 +1,8 @@
 package com.ponomar.shoper.ui.auth
 
 interface FragmentCallBacks {
+    fun onRegisterBeginClick()
+
     fun onFragment1NextClick(firstName:String) //TODO:maybe refactor
     fun onFragment2NextClick(firstName: String,phone:String)
     fun onFragment3NextClick(phone:String)

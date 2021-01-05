@@ -87,7 +87,7 @@ class MainRepository @Inject constructor(
         client.sendUserDataToGenerateCode(phone)
                 .suspendOnSuccess {
                     if(data != null) {
-                        if (data!!.status != 11) {
+                        if (data!!.status != 0) {
                             onError("ERROR.STATUS:${data!!.status}")
                         }else {
                             emit(data!!.code)
@@ -99,6 +99,29 @@ class MainRepository @Inject constructor(
                 .onFailure { onSuccess() }
 
     }
+
+    suspend fun sendUserDataToGenerateAuthCodeWhenUserTryToLogin(
+            phone: String,
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow{
+        client.sendUserDataToGenerateCodeWhenUserTryToLogin(phone)
+                .suspendOnSuccess {
+                    if(data!=null){
+                        when(data!!.status){
+                            61 ->{onError("Вы незарегистрированны")}
+                            11 -> {onError("Произошла ошибка на сервере")}
+                            else -> {
+                                emit(data!!.code)
+                            }
+                        }
+                        onComplete()
+                    }else {onError("Попробуйте позже")}
+                }.onError { onError(message()) }
+                .onException { onError(message()) }
+                .onFailure { onComplete() }
+    }
+
 
 
     //TODO:SAME FUNCTION LAMBDA REPEAT BLOCK
@@ -115,6 +138,7 @@ class MainRepository @Inject constructor(
                         if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
                         }else {
+                            appDB.getProductDao().nukeTable()
                             appDB.getUserDao().nukeTable() //TODO:REFACTOR CHECKING USER AUTH ALREADY
                             appDB.getCartDao().nukeTable()
 //                            appDB.getUserDao().apply {
@@ -167,8 +191,9 @@ class MainRepository @Inject constructor(
                 client.verifyCode(code, phone)
                         .suspendOnSuccess {
                             if(data!!.status != 30){
-                                onError("ERROR")
+                                onError("ERROR.STATUS:${data!!.status}")
                             }else{
+                                appDB.getProductDao().nukeTable()
                                 appDB.getCartDao().nukeTable()
                                 appDB.getUserDao().nukeTable()
                                 emit(data!!.token!!)

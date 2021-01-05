@@ -12,10 +12,13 @@ interface AuthService {
     @POST("/auth/code")
     suspend fun sendUserDataToGenerateCode(@Body phoneBody:PhoneBody):ApiResponse<CodeResponse>
 
+    @POST("/auth/login/code")
+    suspend fun sendUserDataToGenerateCodeWhenUserTryToLogin(@Body phoneBody: PhoneBody):ApiResponse<CodeResponse>
+
     @POST("/auth/code/verify")
     suspend fun sendUserCodeToVerify(@Body codeBody: CodeBody):ApiResponse<TokenResponse>
 
     //TODO:REFACTOR|
-    @POST("/auth/code/verify/login")
+    @POST("/auth/login/code/verify")
     suspend fun sendUserCodeToVerifyWhenUserTryToLogin(@Body codeBody: CodeBody):ApiResponse<TokenResponse>
 }

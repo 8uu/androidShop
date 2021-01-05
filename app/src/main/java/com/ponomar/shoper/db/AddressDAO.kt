@@ -11,11 +11,11 @@ import com.ponomar.shoper.model.entities.Address
 interface AddressDAO{
 
     @Insert
-    fun insert(address:Address)
+    suspend fun insert(address:Address)
 
     @Delete
-    fun delete(address: Address)
+    suspend fun delete(address: Address)
 
     @Query("SELECT * FROM address;")
-    fun getAddresses():List<Address>
+    suspend fun getAddresses():List<Address>
 }

@@ -22,13 +22,14 @@ class LoginViewModel @ViewModelInject constructor(
     val tokenLiveData:LiveData<String>
 
 
+
     init {
         codeLiveData = _phoneMutableLiveData.switchMap {
             isLoading.set(true)
             launchOnViewModelScope {
-                repository.sendUserDataToGenerateAuthCode(
+                repository.sendUserDataToGenerateAuthCodeWhenUserTryToLogin(
                     it,
-                    onSuccess = {isLoading.set(false)},
+                    onComplete = {isLoading.set(false)},
                     onError =  {_toastMutableLiveData.value = it}
                 ).asLiveData()
             }

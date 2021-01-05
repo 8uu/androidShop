@@ -32,7 +32,7 @@
                     android:hint="Телефон"
                     android:text="+7"
                     android:textSize="25sp"
-                    mask="+7 (___)-___-__-__"
+                    android:inputType="numberDecimal|phone"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"/>
                 <LinearLayout
@@ -90,5 +90,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/auth_loginRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"/>
 </RelativeLayout>
 </layout>

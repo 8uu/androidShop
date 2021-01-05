@@ -12,6 +12,8 @@ import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentAuthLoginBinding
 import com.ponomar.shoper.extensions.Auth.Companion.saveAuthToken
 import com.ponomar.shoper.extensions.goneWithFade
+import com.ponomar.shoper.extensions.setMask
+import com.ponomar.shoper.ui.auth.FragmentCallBacks
 import com.ponomar.shoper.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,18 +35,16 @@ class LoginFragment : Fragment() {
             lifecycleOwner = this@LoginFragment
             vm = viewModel
 
+            authEditTextPhone.setMask()
+
             authLoginBackToPreviouslyStage.setOnClickListener {
-                authLoginCodeBlock.goneWithFade(true)
-                it.goneWithFade(true)
-                authButtonLoginSendUserPhone.goneWithFade(false)
+                drawOnlyLoginBlock()
             }
 
             authButtonLoginSendUserPhone.setOnClickListener {
                 val phone:String = authEditTextPhone.text.toString()
                 if(phone.isNotEmpty()) {
-                    it.goneWithFade(true)
-                    authLoginCodeBlock.goneWithFade(false)
-                    authLoginBackToPreviouslyStage.goneWithFade(false)
+                    drawLoginAndCodeBlock()
                     viewModel.sendUserPhone(phone)
                 }else Toast.makeText(requireContext(),"Пустое поле",Toast.LENGTH_SHORT).show()
             }
@@ -52,9 +52,16 @@ class LoginFragment : Fragment() {
             authButtonSendUserCode.setOnClickListener {
                 val code:String = authEditTextCode.text.toString()
                 if(code.isNotEmpty()){
-                    //
+                    if(code.length == 4) viewModel.sendUserCode(code.toInt())
+                    else Toast.makeText(requireContext(),"Не хватает символов",Toast.LENGTH_SHORT).show() //TODO: TO VIEWMODEL?
                 }else Toast.makeText(requireContext(),"Поле для кода пустое",Toast.LENGTH_SHORT).show()
             }
+
+            authLoginRegister.setOnClickListener {
+                (requireActivity() as FragmentCallBacks).onRegisterBeginClick()
+            }
+
+
         }
 
         viewModel.codeLiveData.observe(viewLifecycleOwner){
@@ -65,6 +72,22 @@ class LoginFragment : Fragment() {
             requireActivity().saveAuthToken(it)
             MainActivity.startActivity(requireContext())
             requireActivity().finish()
+        }
+    }
+
+    private fun drawLoginAndCodeBlock(){
+        binding.apply {
+            authButtonLoginSendUserPhone.goneWithFade(true)
+            authLoginCodeBlock.goneWithFade(false)
+            authLoginBackToPreviouslyStage.goneWithFade(false)
+        }
+    }
+
+    private fun drawOnlyLoginBlock(){
+        binding.apply {
+            authLoginCodeBlock.goneWithFade(true)
+            authLoginBackToPreviouslyStage.goneWithFade(true)
+            authButtonLoginSendUserPhone.goneWithFade(false)
         }
     }
 

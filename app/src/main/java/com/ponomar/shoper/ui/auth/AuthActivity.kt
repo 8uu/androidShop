@@ -36,6 +36,10 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
         }
     }
 
+    override fun onRegisterBeginClick() {
+        navController.navigate(R.id.action_authLogin_to_authFirstName)
+    }
+
     override fun onFragment1NextClick(firstName: String) {
         val bundle = Bundle()
         bundle.putString("firstName",firstName)

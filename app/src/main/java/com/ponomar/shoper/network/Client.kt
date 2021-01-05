@@ -27,6 +27,11 @@ class Client @Inject constructor(
         return authService.sendUserDataToGenerateCode(body)
     }
 
+    suspend fun sendUserDataToGenerateCodeWhenUserTryToLogin(phone: String):ApiResponse<CodeResponse>{
+        val body = PhoneBody(phone)
+        return authService.sendUserDataToGenerateCodeWhenUserTryToLogin(body)
+    }
+
     suspend fun verifyCode(code:Int,phone:String,firstName:String):ApiResponse<TokenResponse>{
         val body = CodeBody(code,phone,firstName)
         return authService.sendUserCodeToVerify(body)

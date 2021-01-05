@@ -9,21 +9,21 @@ import com.ponomar.shoper.model.entities.Cart
 interface CartDAO {
 
     @Query("DELETE FROM cart;")
-    fun nukeTable()
+    suspend fun nukeTable()
 
     @Query("SELECT * from product inner join cart where product.id = cart.pid;")
-    fun getCart():List<CartInnerProduct>
+    suspend fun getCart():List<CartInnerProduct>
 
     @Insert
-    fun insert(cart:Cart)
+    suspend fun insert(cart:Cart)
 
     @Update
-    fun update(cart: Cart)
+    suspend fun update(cart: Cart)
 
     @Query("UPDATE cart set quantity = quantity + 1 where pid = :pid;")
-    fun incQuantity(pid:Int):Int
+    suspend fun incQuantity(pid:Int):Int
 
     @Query("UPDATE cart set quantity = quantity - 1 where pid = :pid;")
-    fun decQuantity(pid:Int):Int
+    suspend fun decQuantity(pid:Int):Int
 
 }
