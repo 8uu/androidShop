@@ -3,6 +3,7 @@ package com.ponomar.shoper.repository
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
 import com.ponomar.shoper.model.StatusResponse
+import com.ponomar.shoper.model.entities.Cart
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
@@ -180,8 +181,12 @@ class MainRepository @Inject constructor(
             onError: (String) -> Unit
     ) = flow {
         val data = appDB.getCartDao().getCart()
+        if(data.isEmpty()) onError("Пустая корзина")
+        Log.e("data",data.toString())
+        onComplete()
         emit(data)
     }
+
 
     suspend fun verifyCodeWhenUserTryToLogin(
             code:Int,
@@ -203,4 +208,22 @@ class MainRepository @Inject constructor(
                         .onFailure { onComplete() }
             }
 
+    suspend fun decQuantityOfItemClick(
+            pid:Int,
+            onComplete: () -> Unit
+        ) = flow<Int> {
+        emit(appDB.getCartDao().decQuantity(pid))
+        onComplete()
+        }
+
+    suspend fun incQuantityOfItemClick(
+            pid:Int,
+            onComplete: () -> Unit
+    ) = flow<Int>{
+        emit(appDB.getCartDao().incQuantity(pid))
+        onComplete()
     }
+
+
+    }
+

@@ -5,7 +5,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.model.SQLoutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.repository.MainRepository
 
 class CartViewModel @ViewModelInject constructor(
@@ -14,22 +14,53 @@ class CartViewModel @ViewModelInject constructor(
 ) : LiveCoroutinesViewModel() {
 
     private val _toastMutable:MutableLiveData<String> = MutableLiveData()
+    private val _fetchingIncStatus:MutableLiveData<Int> = MutableLiveData()
+    private val _fetchingDecStatus:MutableLiveData<Int> = MutableLiveData()
 
-
-
+    val decStatusLiveData:LiveData<Int>
+    val incStatusLiveData:LiveData<Int>
     val isLoading:ObservableBoolean = ObservableBoolean(false)
     val toastLiveData:LiveData<String> = _toastMutable
-    lateinit var cartLiveData: LiveData<List<CartInnerProduct>>
+    lateinit var cartInnerLiveData: LiveData<List<CartInnerProduct>>
+
+    init {
+        incStatusLiveData = _fetchingIncStatus.switchMap {
+            launchOnViewModelScope {
+                repository.incQuantityOfItemClick(
+                        it,
+                        onComplete = {}
+                ).asLiveData()
+            }
+        }
+
+            decStatusLiveData = _fetchingDecStatus.switchMap {
+                launchOnViewModelScope {
+                    repository.decQuantityOfItemClick(
+                            it,
+                            onComplete = {}
+                    ).asLiveData()
+                }
+            }
+    }
 
 
     //TODO:FIX EQUALS
     fun fetchCartData(){
-        cartLiveData = launchOnViewModelScope {
+        cartInnerLiveData = launchOnViewModelScope {
             isLoading.set(true)
-            repository.fetchCart(
+            val data = repository.fetchCart(
                     onComplete = {isLoading.set(false)},
                     onError = {_toastMutable.value = it}
-            ).asLiveData()
+            )
+            data.asLiveData()
         }
+    }
+
+    fun onMinusItemClick(pid:Int){
+        _fetchingDecStatus.value = pid
+    }
+
+    fun onPlusItemClick(pid:Int){
+        _fetchingIncStatus.value = pid
     }
 }

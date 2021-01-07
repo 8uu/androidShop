@@ -17,5 +17,5 @@ import androidx.room.PrimaryKey
 )
 data class Cart(
         @PrimaryKey val pid:Int,
-        val quantity:Int
+        var quantity:Int
     )

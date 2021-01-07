@@ -1,4 +1,4 @@
-package com.ponomar.shoper.model.SQLoutput
+package com.ponomar.shoper.model.sqlOutput
 
 import androidx.room.Embedded
 import com.ponomar.shoper.model.entities.Cart

@@ -40,7 +40,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
         val item = items[position]
         holder.binding.apply {
             product = item
-            executePendingBindings()
+            executePendingBindings()//TODO:WHAT
             root.setOnClickListener {
                 val detailFragment = ProductDetailFragment(item)
                 detailFragment.show(it.context.getActivity()!!.supportFragmentManager, null)

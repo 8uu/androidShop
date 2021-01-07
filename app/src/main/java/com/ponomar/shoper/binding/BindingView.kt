@@ -1,6 +1,5 @@
 package com.ponomar.shoper.binding
 
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.databinding.BindingAdapter
@@ -10,8 +9,9 @@ import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
 import com.ponomar.shoper.extensions.setMask
-import com.ponomar.shoper.model.SQLoutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
+import com.ponomar.shoper.ui.adapter.CartAdapter
 import com.ponomar.shoper.ui.adapter.ProductAdapter
 
 
@@ -47,10 +47,8 @@ fun bindProductsAdapter(recyclerView: RecyclerView,products:List<Product>?){
 }
 
 @BindingAdapter("adapterCartList")
-fun bindCartAdapter(recyclerView: RecyclerView,productsInCart:List<CartInnerProduct>?){
-    if(productsInCart != null){
-
-    }
+fun bindCartAdapter(recyclerView: RecyclerView, productsInCartInner:List<CartInnerProduct>?){
+    if(productsInCartInner != null) (recyclerView.adapter as? CartAdapter)?.addItems(productsInCartInner)
 }
 
 

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="product"
-            type="com.ponomar.shoper.model.entities.Product" />
-        <variable
-            name="cart"
-            type="com.ponomar.shoper.model.entities.Cart" />
+            name="itemInCart"
+            type="com.ponomar.shoper.model.sqlOutput.CartInnerProduct" />
     </data>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,7 +25,7 @@
             android:layout_width="135dp"
             android:layout_height="135dp">
             <ImageView
-                app:imageUrl="@{product.images.get(0)}"
+                imageUrl="@{itemInCart.product.images.get(0)}"
                 android:background="@color/white"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
@@ -42,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent">
             <TextView
-                android:text="@{product.title}"
+                android:text="@{itemInCart.product.title}"
                 android:textSize="17sp"
                 android:textAlignment="center"
                 android:padding="10dp"
@@ -51,36 +48,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
     </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_centerInParent="true"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
                 <ImageView
+                    android:id="@+id/cart_item_pic_plus"
                     android:src="@drawable/ic_plus"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"/>
                 <TextView
-                    android:text="@{}"
+                    android:id="@+id/cart_item_quantity"
+                    android:text="@{itemInCart.cartInfo.quantity + `шт`}"
                     android:gravity="center"
                     android:textSize="28sp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"/>
                 <ImageView
+                    android:id="@+id/cart_item_pic_minus"
                     android:src="@drawable/ic_minus"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"/>
         </LinearLayout>
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <TextView
+                    android:text="1234р"
+                    android:gravity="center"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
 </layout>

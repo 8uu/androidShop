@@ -4,15 +4,21 @@
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.cart.CartViewModel" />
+        <variable
+            name="adapter"
+            type="com.ponomar.shoper.ui.adapter.CartAdapter" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    toast="@{vm.toastLiveData}"
     tools:context=".ui.cart.CartFragment">
     <androidx.recyclerview.widget.RecyclerView
-        setGoneWithFade="@{vm.isLoading()}"
+        adapter="@{adapter}"
+        adapterCartList="@{vm.cartInnerLiveData}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

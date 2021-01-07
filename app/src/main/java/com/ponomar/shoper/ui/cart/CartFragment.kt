@@ -12,7 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentCartBinding
+import com.ponomar.shoper.ui.adapter.CartAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private val cartViewModel: CartViewModel by viewModels()
@@ -28,6 +31,7 @@ class CartFragment : Fragment() {
         binding.apply {
             lifecycleOwner = this@CartFragment
             vm = cartViewModel.apply { fetchCartData() }
+            adapter = CartAdapter(cartViewModel)
         }
         return binding.root
     }
