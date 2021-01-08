@@ -14,6 +14,9 @@ interface CartDAO {
     @Query("SELECT * from product inner join cart where product.id = cart.pid;")
     suspend fun getCart():List<CartInnerProduct>
 
+    @Query("SELECT * from cart;")
+    suspend fun getCartInfo():List<Cart>
+
     @Insert
     suspend fun insert(cart:Cart)
 

@@ -12,15 +12,16 @@ import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ItemProductBinding
 import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.model.entities.Product
+import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.ui.detail.ProductDetailFragment
 
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
 
-    private val items:MutableList<Product> = mutableListOf()
+    private val items:MutableList<CartInnerProduct> = mutableListOf()
 
 
-    fun addProducts(_items: List<Product>){
+    fun addProducts(_items: List<CartInnerProduct>){
         items.addAll(_items)
         notifyDataSetChanged()
     }
@@ -39,7 +40,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
     override fun onBindViewHolder(holder: VHolder, position: Int) {
         val item = items[position]
         holder.binding.apply {
-            product = item
+            product = item.product
             executePendingBindings()//TODO:WHAT
             root.setOnClickListener {
                 val detailFragment = ProductDetailFragment(item)

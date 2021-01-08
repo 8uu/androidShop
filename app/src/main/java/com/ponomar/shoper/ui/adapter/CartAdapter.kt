@@ -24,7 +24,7 @@ class CartAdapter constructor(private val cartViewModel:CartViewModel)
         for(i in 0..items.size){
             val item = items[i]
             if(item.product.id == pid) {
-                if (item.cartInfo.quantity == 1) {
+                if (item.cartInfo!!.quantity == 1) {
                     items.removeAt(i)
                     notifyItemRemoved(i)
                 } else {
@@ -40,7 +40,7 @@ class CartAdapter constructor(private val cartViewModel:CartViewModel)
         for(i in 0..items.size){
             val item = items[i]
             if(item.product.id == pid) {
-                item.cartInfo.quantity++
+                item.cartInfo!!.quantity++
                 notifyItemChanged(i)
                 break
             }

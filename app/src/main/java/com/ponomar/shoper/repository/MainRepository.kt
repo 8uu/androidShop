@@ -2,9 +2,11 @@ package com.ponomar.shoper.repository
 
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.extensions.convertProductListAndCartInfoListToCartInnerProductList
 import com.ponomar.shoper.model.StatusResponse
 import com.ponomar.shoper.model.entities.Cart
 import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
 import kotlinx.coroutines.flow.flow
@@ -61,7 +63,8 @@ class MainRepository @Inject constructor(
                     }
                     else -> {
                         appDB.getProductDao().insertAll(data!!.data!!)
-                        emit(data!!.data!!)
+                        val cartData = appDB.getCartDao().getCartInfo()
+                        emit(convertProductListAndCartInfoListToCartInnerProductList(data!!.data!!,cartData))
                     }
                 }
                 onSuccess()
@@ -75,7 +78,8 @@ class MainRepository @Inject constructor(
                         onSuccess()
                     }
         }else{
-            emit(dataFromDB)
+            val dataCart = appDB.getCartDao().getCartInfo()
+            emit(convertProductListAndCartInfoListToCartInnerProductList(dataFromDB,dataCart))
             onSuccess()
         }
     }

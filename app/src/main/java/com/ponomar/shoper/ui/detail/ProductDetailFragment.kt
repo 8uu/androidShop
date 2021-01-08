@@ -9,18 +9,21 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentDetailProductBinding
+import com.ponomar.shoper.extensions.gone
+import com.ponomar.shoper.model.entities.Cart
 import com.ponomar.shoper.model.entities.Product
+import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_detail_product.*
 
 @AndroidEntryPoint
-class ProductDetailFragment(private val _product:Product) : BottomSheetDialogFragment() {
+class ProductDetailFragment(private val _productInfo:CartInnerProduct) : BottomSheetDialogFragment() {
 
-    companion object {
-        fun newInstance(_product:Product) = ProductDetailFragment(_product)
-    }
 
     private lateinit var binding:FragmentDetailProductBinding
     private val viewModel: ProductDetailViewModel by viewModels()
+    private var product = _productInfo.product
+    private var cartInfo = _productInfo.cartInfo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +33,45 @@ class ProductDetailFragment(private val _product:Product) : BottomSheetDialogFra
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.apply {
             lifecycleOwner = this@ProductDetailFragment
-            product = _product
+            product = _productInfo.product
+
+            fragmentDetailButtonAddInCart.setOnClickListener {
+                fragmentDetailContainerWithButton.gone(true)
+                fragmentDetailContainerWithCounter.gone(false)
+                cartInfo = Cart(product.id,1)
+                updateQuantity()
+            }
         }
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.incStatusLiveData.observe(viewLifecycleOwner){
+
+            ++cartInfo!!.quantity
+            updateQuantity()
+
+        }
+
+        viewModel.decStatusLiveData.observe(viewLifecycleOwner){
+            if(--cartInfo!!.quantity == 0){
+                binding.fragmentDetailContainerWithButton.gone(false)
+                binding.fragmentDetailContainerWithCounter.gone(true)
+                cartInfo = null
+            }
+            updateQuantity()
+        }
+    }
+
+    private fun updateQuantity(){
+        binding.fragmentDetailQuantity.text = cartInfo!!.quantity.toString()
+    }
+
+
 
 }

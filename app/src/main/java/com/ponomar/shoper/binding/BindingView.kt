@@ -41,7 +41,7 @@ fun bindAdapter(recyclerView: RecyclerView,adapter: RecyclerView.Adapter<*>){
 
 
 @BindingAdapter("adapterProductsList")
-fun bindProductsAdapter(recyclerView: RecyclerView,products:List<Product>?){
+fun bindProductsAdapter(recyclerView: RecyclerView,products:List<CartInnerProduct>?){
     if(products != null)
     (recyclerView.adapter as? ProductAdapter)?.addProducts(products)
 }
