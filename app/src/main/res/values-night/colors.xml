@@ -2,5 +2,7 @@
 <resources>
 
 
+
+    <color name="backgroundItemProduct">#494747</color>
     <color name="itemIconTint">#FFFFFF</color>
 </resources>

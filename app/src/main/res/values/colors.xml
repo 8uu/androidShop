@@ -12,4 +12,5 @@
     <color name="itemIconTint">#000000</color>
 
     <color name="backgroundRoundLayout">#EC7B57</color>
+    <color name="backgroundItemProduct">#FFFFFF</color>
 </resources>

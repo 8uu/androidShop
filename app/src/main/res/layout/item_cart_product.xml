@@ -8,6 +8,7 @@
 
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:background="@drawable/round_layout"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:baselineAligned="false">
@@ -16,14 +17,15 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
             android:id="@+id/product_item_pic_container"
             app:cardCornerRadius="20dp"
             android:elevation="20dp"
             android:layout_margin="10dp"
-            android:layout_width="135dp"
-            android:layout_height="135dp">
+            android:layout_width="115dp"
+            android:layout_height="115dp">
             <ImageView
                 imageUrl="@{itemInCart.product.images.get(0)}"
                 android:background="@color/white"
@@ -60,29 +62,27 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
                 <ImageView
                     android:id="@+id/cart_item_pic_plus"
                     android:src="@drawable/ic_plus"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
                 <TextView
                     android:id="@+id/cart_item_quantity"
-                    android:text="@{itemInCart.cartInfo.quantity + `шт`}"
+                    android:text="3шт"
                     android:gravity="center"
-                    android:textSize="28sp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"/>
+                    android:textSize="23sp"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"/>
                 <ImageView
                     android:id="@+id/cart_item_pic_minus"
                     android:src="@drawable/ic_minus"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
@@ -92,7 +92,7 @@
                 <TextView
                     android:text="1234р"
                     android:gravity="center"
-                    android:textSize="28sp"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
         </LinearLayout>
