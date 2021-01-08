@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private val cartViewModel: CartViewModel by viewModels()
+    private lateinit var cartAdapter: CartAdapter
     private lateinit var binding:FragmentCartBinding
 
 
@@ -28,11 +29,24 @@ class CartFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
+        cartAdapter = CartAdapter(cartViewModel)
         binding.apply {
             lifecycleOwner = this@CartFragment
             vm = cartViewModel.apply { fetchCartData() }
-            adapter = CartAdapter(cartViewModel)
+            adapter = cartAdapter
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        cartViewModel.decStatusLiveData.observe(viewLifecycleOwner){
+            cartAdapter.onMinusClick(it)
+        }
+
+        cartViewModel.incStatusLiveData.observe(viewLifecycleOwner){
+            cartAdapter.onPlusClick(it)
+        }
     }
 }

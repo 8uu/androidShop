@@ -20,6 +20,33 @@ class CartAdapter constructor(private val cartViewModel:CartViewModel)
         notifyDataSetChanged()
     }
 
+    fun onMinusClick(pid:Int){
+        for(i in 0..items.size){
+            val item = items[i]
+            if(item.product.id == pid) {
+                if (item.cartInfo.quantity == 1) {
+                    items.removeAt(i)
+                    notifyItemRemoved(i)
+                } else {
+                    --item.cartInfo.quantity
+                    notifyItemChanged(i)
+                }
+                break
+            }
+        }
+    }
+
+    fun onPlusClick(pid:Int){
+        for(i in 0..items.size){
+            val item = items[i]
+            if(item.product.id == pid) {
+                item.cartInfo.quantity++
+                notifyItemChanged(i)
+                break
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding:ItemCartProductBinding = DataBindingUtil.inflate(

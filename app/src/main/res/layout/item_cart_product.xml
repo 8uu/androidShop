@@ -42,7 +42,7 @@
         android:layout_height="match_parent">
             <TextView
                 android:text="@{itemInCart.product.title}"
-                android:textSize="17sp"
+                android:textSize="21sp"
                 android:textAlignment="center"
                 android:padding="10dp"
                 android:gravity="center"
@@ -73,7 +73,7 @@
                     android:layout_height="30dp"/>
                 <TextView
                     android:id="@+id/cart_item_quantity"
-                    android:text="3шт"
+                    android:text="@{itemInCart.cartInfo.quantity + `шт`}"
                     android:gravity="center"
                     android:textSize="23sp"
                     android:layout_width="60dp"
