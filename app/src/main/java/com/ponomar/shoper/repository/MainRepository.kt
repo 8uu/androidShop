@@ -224,6 +224,7 @@ class MainRepository @Inject constructor(
             pid:Int,
             onComplete: () -> Unit
     ) = flow<Int>{
+        Log.e("asd","inc")
         emit(appDB.getCartDao().incQuantity(pid))
         onComplete()
     }

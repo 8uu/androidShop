@@ -23,8 +23,22 @@ interface CartDAO {
     @Update
     suspend fun update(cart: Cart)
 
-    @Query("INSERT OR REPLACE into cart(`pid`,`quantity`) VALUES(:pid,coalesce((select quantity from cart where pid = :pid)+1,1))")
-    suspend fun incQuantity(pid:Int):Int =  pid
+    @Deprecated(message = "Doesn't work query(", replaceWith = ReplaceWith("incQuantity"))
+    @Query("INSERT OR REPLACE into cart(`pid`,`quantity`) VALUES(:pid,coalesce((select quantity from cart where pid = :pid)+1,1));")
+    suspend fun incQuantityQuery(pid:Int):Int =  pid
+
+    @Query("SELECT quantity from cart where pid = :pid;")
+    suspend fun getQuantityInCart(pid: Int):Int?
+
+
+
+    @Transaction
+    suspend fun incQuantity(pid:Int):Int{
+        val quantity = getQuantityInCart(pid)
+        if(quantity == null) insert(Cart(pid,1))
+        else incQuantityRaw(pid)
+        return pid
+    }
 
     @Transaction
     suspend fun decQuantity(pid:Int):Int{
@@ -36,6 +50,9 @@ interface CartDAO {
 
     @Query("UPDATE cart set quantity = quantity - 1 where pid = :pid;")
     suspend fun decQuantityRaw(pid:Int):Int
+
+    @Query("UPDATE cart set quantity = quantity + 1 where pid = :pid;")
+    suspend fun incQuantityRaw(pid:Int):Int
 
     @Query("DELETE FROM cart where quantity = 0;")
     suspend fun clearEmptyRowsInCart()

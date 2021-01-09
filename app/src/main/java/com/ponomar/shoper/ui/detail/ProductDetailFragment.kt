@@ -1,6 +1,7 @@
 package com.ponomar.shoper.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,29 +43,45 @@ class ProductDetailFragment(private val _productInfo:CartInnerProduct) : BottomS
             fragmentDetailButtonAddInCart.setOnClickListener {
                 fragmentDetailContainerWithButton.gone(true)
                 fragmentDetailContainerWithCounter.gone(false)
-                cartInfo = Cart(product.id,1)
+                cartInfo = Cart(_productInfo.product.id,0)
+                viewModel.plusQuantityInCart(_productInfo.product.id)
                 updateQuantity()
             }
+
+            fragmentDetailButtonPlus.setOnClickListener {
+                viewModel.plusQuantityInCart(_productInfo.product.id)
+            }
+
+            fragmentDetailButtonMinus.setOnClickListener {
+                viewModel.minusQuantityInCart(_productInfo.product.id)
+            }
+
+            if(cartInfo != null) {
+                fragmentDetailContainerWithButton.gone(true)
+                fragmentDetailContainerWithCounter.gone(false)
+                updateQuantity()
+            }
+
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.incStatusLiveData.observe(viewLifecycleOwner){
 
+        viewModel.incStatusLiveData.observe(viewLifecycleOwner){
+            Log.e("pid+",it.toString())
             ++cartInfo!!.quantity
             updateQuantity()
-
         }
 
         viewModel.decStatusLiveData.observe(viewLifecycleOwner){
+            Log.e("pid",it.toString())
             if(--cartInfo!!.quantity == 0){
                 binding.fragmentDetailContainerWithButton.gone(false)
                 binding.fragmentDetailContainerWithCounter.gone(true)
                 cartInfo = null
-            }
-            updateQuantity()
+            }else updateQuantity()
         }
     }
 

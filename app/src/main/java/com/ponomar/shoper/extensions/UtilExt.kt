@@ -1,5 +1,6 @@
 package com.ponomar.shoper.extensions
 
+import android.util.Log
 import com.ponomar.shoper.model.entities.Cart
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
@@ -15,5 +16,6 @@ fun convertProductListAndCartInfoListToCartInnerProductList(products:List<Produc
         }
         listWithFinalData.add(CartInnerProduct(product,null))
     }
+    Log.e("lst",listWithFinalData.toString())
     return listWithFinalData
 }
