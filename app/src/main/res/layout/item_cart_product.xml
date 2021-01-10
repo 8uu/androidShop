@@ -46,7 +46,7 @@
         android:layout_height="match_parent">
             <TextView
                 android:text="@{itemInCart.product.title}"
-                android:textSize="21sp"
+                android:textSize="19sp"
                 android:textAlignment="center"
                 android:padding="10dp"
                 android:gravity="center"
