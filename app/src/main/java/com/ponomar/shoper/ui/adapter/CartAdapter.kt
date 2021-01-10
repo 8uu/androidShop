@@ -1,5 +1,6 @@
 package com.ponomar.shoper.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,34 +10,40 @@ import com.ponomar.shoper.databinding.ItemCartProductBinding
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.ui.cart.CartViewModel
 
+
 //TODO:VIEWMODEL?????
 
-class CartAdapter constructor(private val cartViewModel:CartViewModel)
+class CartAdapter constructor(private val cartViewModel: CartViewModel)
     :RecyclerView.Adapter<CartAdapter.VHolder>() {
     private val items:MutableList<CartInnerProduct> = mutableListOf()
 
-    fun addItems(_items:List<CartInnerProduct>){
+    fun addItems(_items: List<CartInnerProduct>){
+        items.clear()
         items.addAll(_items)
         notifyDataSetChanged()
     }
 
-    fun onMinusClick(pid:Int){
-        for(i in 0..items.size){
-            val item = items[i]
-            if(item.product.id == pid) {
-                if (item.cartInfo!!.quantity == 1) {
-                    items.removeAt(i)
-                    notifyItemRemoved(i)
-                } else {
-                    --item.cartInfo.quantity
-                    notifyItemChanged(i)
+    fun onMinusClick(pid: Int){
+        try {
+            for (i in 0..items.size) {
+                val item = items[i]
+                if (item.product.id == pid) {
+                    if (item.cartInfo!!.quantity == 1) {
+                        items.removeAt(i)
+                        notifyItemRemoved(i)
+                    } else {
+                        --item.cartInfo!!.quantity
+                        notifyItemChanged(i)
+                    }
+                    break
                 }
-                break
             }
+        }catch (e:IndexOutOfBoundsException){
+            Log.e("ERROR","INDEX") //TODO:FIX
         }
     }
 
-    fun onPlusClick(pid:Int){
+    fun onPlusClick(pid: Int){
         for(i in 0..items.size){
             val item = items[i]
             if(item.product.id == pid) {
@@ -75,7 +82,8 @@ class CartAdapter constructor(private val cartViewModel:CartViewModel)
         }
     }
 
+
     override fun getItemCount(): Int = items.size
 
-    class VHolder(val binding:ItemCartProductBinding):RecyclerView.ViewHolder(binding.root)
+    class VHolder(val binding: ItemCartProductBinding):RecyclerView.ViewHolder(binding.root)
 }

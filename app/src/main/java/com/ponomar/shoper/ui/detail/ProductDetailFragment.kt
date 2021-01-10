@@ -18,12 +18,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
 @AndroidEntryPoint
-class ProductDetailFragment(private val _productInfo:CartInnerProduct) : BottomSheetDialogFragment() {
+class ProductDetailFragment(
+        _productInfo:CartInnerProduct,
+        private val onChangeCartInfo:(Cart?) -> Unit
+) : BottomSheetDialogFragment() {
 
 
     private lateinit var binding:FragmentDetailProductBinding
     private val viewModel: ProductDetailViewModel by viewModels()
-    private var product = _productInfo.product
+    private var _product = _productInfo.product
     private var cartInfo = _productInfo.cartInfo
 
     override fun onCreateView(
@@ -38,22 +41,23 @@ class ProductDetailFragment(private val _productInfo:CartInnerProduct) : BottomS
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             lifecycleOwner = this@ProductDetailFragment
-            product = _productInfo.product
+            product = _product
 
             fragmentDetailButtonAddInCart.setOnClickListener {
                 fragmentDetailContainerWithButton.gone(true)
                 fragmentDetailContainerWithCounter.gone(false)
-                cartInfo = Cart(_productInfo.product.id,0)
-                viewModel.plusQuantityInCart(_productInfo.product.id)
+                cartInfo = Cart(_product.id,0)
+                onChangeCartInfo(cartInfo)
+                viewModel.plusQuantityInCart(_product.id)
                 updateQuantity()
             }
 
             fragmentDetailButtonPlus.setOnClickListener {
-                viewModel.plusQuantityInCart(_productInfo.product.id)
+                viewModel.plusQuantityInCart(_product.id)
             }
 
             fragmentDetailButtonMinus.setOnClickListener {
-                viewModel.minusQuantityInCart(_productInfo.product.id)
+                viewModel.minusQuantityInCart(_product.id)
             }
 
             if(cartInfo != null) {
@@ -80,7 +84,8 @@ class ProductDetailFragment(private val _productInfo:CartInnerProduct) : BottomS
             if(--cartInfo!!.quantity == 0){
                 binding.fragmentDetailContainerWithButton.gone(false)
                 binding.fragmentDetailContainerWithCounter.gone(true)
-                cartInfo = null
+                onChangeCartInfo(null)
+                Log.e("cart",cartInfo.toString())
             }else updateQuantity()
         }
     }

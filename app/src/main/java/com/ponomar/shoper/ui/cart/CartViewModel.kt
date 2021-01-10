@@ -25,19 +25,21 @@ class CartViewModel @ViewModelInject constructor(
 
     init {
         incStatusLiveData = _fetchingIncStatus.switchMap {
+            isLoading.set(true)
             launchOnViewModelScope {
                 repository.incQuantityOfItemClick(
                         it,
-                        onComplete = {}
+                        onComplete = {isLoading.set(false)}
                 ).asLiveData()
             }
         }
 
             decStatusLiveData = _fetchingDecStatus.switchMap {
+                isLoading.set(true)
                 launchOnViewModelScope {
                     repository.decQuantityOfItemClick(
                             it,
-                            onComplete = {}
+                            onComplete = {isLoading.set(false)}
                     ).asLiveData()
                 }
             }

@@ -6,5 +6,5 @@ import com.ponomar.shoper.model.entities.Product
 
 data class CartInnerProduct(
         @Embedded val product:Product,
-        @Embedded val cartInfo:Cart?
+        @Embedded var cartInfo:Cart?
 )

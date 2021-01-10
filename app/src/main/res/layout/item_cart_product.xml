@@ -4,6 +4,9 @@
         <variable
             name="itemInCart"
             type="com.ponomar.shoper.model.sqlOutput.CartInnerProduct" />
+        <variable
+            name="vm"
+            type="com.ponomar.shoper.ui.cart.CartViewModel" />
     </data>
 
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -68,6 +71,7 @@
             >
                 <ImageView
                     android:id="@+id/cart_item_pic_plus"
+                    android:clickable="@{!vm.isLoading()}"
                     android:src="@drawable/ic_plus"
                     android:layout_width="30dp"
                     android:layout_height="30dp"/>
@@ -80,6 +84,7 @@
                     android:layout_height="30dp"/>
                 <ImageView
                     android:id="@+id/cart_item_pic_minus"
+                    android:clickable="@{!vm.isLoading()}"
                     android:src="@drawable/ic_minus"
                     android:layout_width="30dp"
                     android:layout_height="30dp"/>

@@ -3,6 +3,7 @@ package com.ponomar.shoper.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -43,11 +44,29 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
             product = item.product
             executePendingBindings()//TODO:WHAT
             root.setOnClickListener {
-                val detailFragment = ProductDetailFragment(item)
+                val detailFragment = ProductDetailFragment(
+                        item,
+                        onChangeCartInfo = {item.cartInfo = it} //TODO:FIX
+                )
                 detailFragment.show(it.context.getActivity()!!.supportFragmentManager, null)
             }
         }
 
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                Log.e("ITEMS",items.toString())
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.e("ITEMS",items.toString())
+            }
+        })
     }
 
     override fun getItemCount(): Int = items.size

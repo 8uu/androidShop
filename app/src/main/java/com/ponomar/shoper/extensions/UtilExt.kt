@@ -16,6 +16,5 @@ fun convertProductListAndCartInfoListToCartInnerProductList(products:List<Produc
         }
         listWithFinalData.add(CartInnerProduct(product,null))
     }
-    Log.e("lst",listWithFinalData.toString())
     return listWithFinalData
 }

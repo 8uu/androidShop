@@ -1,6 +1,5 @@
 package com.ponomar.shoper.ui.detail
 
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
