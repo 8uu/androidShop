@@ -54,21 +54,6 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
 
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                Log.e("ITEMS",items.toString())
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                Log.e("ITEMS",items.toString())
-            }
-        })
-    }
-
     override fun getItemCount(): Int = items.size
 
     class VHolder(val binding: ItemProductBinding):RecyclerView.ViewHolder(binding.root)
