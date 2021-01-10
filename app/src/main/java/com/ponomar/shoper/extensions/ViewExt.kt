@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ponomar.shoper.R
 import com.ponomar.shoper.util.MaskFormat
 import com.squareup.picasso.Picasso

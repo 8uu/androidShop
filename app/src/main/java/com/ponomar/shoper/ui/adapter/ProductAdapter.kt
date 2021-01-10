@@ -27,6 +27,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
         notifyDataSetChanged()
     }
 
+    fun clearProducts(){
+        items.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding:ItemProductBinding = DataBindingUtil.inflate(

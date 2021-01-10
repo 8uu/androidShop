@@ -1,6 +1,7 @@
 package com.ponomar.shoper.ui.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +16,14 @@ import com.ponomar.shoper.base.DataBindingActivity
 import com.ponomar.shoper.databinding.FragmentMenuBinding
 import com.ponomar.shoper.ui.adapter.ProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_menu.*
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
 
     private val menuViewModel: MenuViewModel by viewModels()
     private lateinit var binding:FragmentMenuBinding
+    private lateinit var _adapter:ProductAdapter
 
 
     override fun onCreateView(
@@ -34,10 +37,16 @@ class MenuFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        _adapter = ProductAdapter()
         binding.apply {
             lifecycleOwner = this@MenuFragment
-            adapter = ProductAdapter()
+            adapter = _adapter
             vm = menuViewModel.apply { updateListOfProducts(0) }
+
+            swipeRefreshLayout.setOnRefreshListener {
+                _adapter.clearProducts()
+                menuViewModel.updateListOfProducts(0)
+            }
         }
     }
 }

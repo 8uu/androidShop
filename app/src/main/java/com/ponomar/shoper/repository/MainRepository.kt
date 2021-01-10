@@ -50,8 +50,8 @@ class MainRepository @Inject constructor(
             onSuccess: () -> Unit,
             onError: (String) -> Unit
     ) = flow {
-        val dataFromDB = appDB.getProductDao().getProducts()
-        if(dataFromDB.isEmpty()) {
+//        val dataFromDB = appDB.getProductDao().getProducts()
+//        if(dataFromDB.isEmpty()) {
             val response = client.fetchProductsList()
             response.suspendOnSuccess {
                 when {
@@ -77,11 +77,11 @@ class MainRepository @Inject constructor(
                         onError(message())
                         onSuccess()
                     }
-        }else{
-            val dataCart = appDB.getCartDao().getCartInfo()
-            emit(convertProductListAndCartInfoListToCartInnerProductList(dataFromDB,dataCart))
-            onSuccess()
-        }
+//        }else{
+//            val dataCart = appDB.getCartDao().getCartInfo()
+//            emit(convertProductListAndCartInfoListToCartInnerProductList(dataFromDB,dataCart))
+//            onSuccess()
+//        }
     }
 
     suspend fun sendUserDataToGenerateAuthCode(

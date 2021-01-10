@@ -5,6 +5,7 @@ import android.widget.*
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
@@ -61,4 +62,9 @@ fun bindImageUrlToImageView(imageView: ImageView,imageUrl:String){
 @BindingAdapter("maskEditText")
 fun bindMaskToEditText(editText: EditText,mask:String){
     editText.setMask(mask)
+}
+
+@BindingAdapter("isRefreshing")
+fun bindOnRefreshToSwipeRefreshLayout(swipeRefreshLayout: SwipeRefreshLayout,isRefreshing:Boolean){
+    swipeRefreshLayout.isRefreshing = isRefreshing
 }

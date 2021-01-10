@@ -14,6 +14,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.menu.MenuFragment">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        isRefreshing="@{vm.isLoading()}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         app:setGone="@{vm.isLoading()}"
@@ -22,12 +27,14 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <ProgressBar
-        app:setGone="@{!vm.isLoading()}"
-        android:layout_centerInParent="true"
-        app:toast="@{vm.toastLiveData}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--    <ProgressBar-->
+<!--        app:setGone="@{!vm.isLoading()}"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        app:toast="@{vm.toastLiveData}"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
     
 </RelativeLayout>
 </layout>
