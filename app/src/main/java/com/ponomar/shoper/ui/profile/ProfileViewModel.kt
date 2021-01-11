@@ -20,6 +20,7 @@ class ProfileViewModel @ViewModelInject constructor(
 
     private val mutableToastLiveData:MutableLiveData<String> = MutableLiveData()
     private val mutableTokenLiveData:MutableLiveData<String> = MutableLiveData()
+    private var isForceUpdateNeed = false
 
     val isLoading: ObservableBoolean = ObservableBoolean(false)
     val toastLiveData:LiveData<String> = mutableToastLiveData
@@ -32,8 +33,12 @@ class ProfileViewModel @ViewModelInject constructor(
                     isLoading.set(true)
                     repository.fetchUserInfo(
                             it,
-                            onComplete = { isLoading.set(false) },
-                            onError = { mutableToastLiveData.value = "ERROR" }
+                            onComplete = {
+                                isLoading.set(false)
+                                isForceUpdateNeed = false
+                                         },
+                            onError = { mutableToastLiveData.value = it },
+                            isForceUpdate = isForceUpdateNeed
                     ).asLiveData()
                 }
             }
@@ -41,6 +46,11 @@ class ProfileViewModel @ViewModelInject constructor(
         }
 
     fun updateUserInfo(token:String){
+        mutableTokenLiveData.value = token
+    }
+
+    fun forceUpdateUserInfo(token: String){
+        isForceUpdateNeed = true
         mutableTokenLiveData.value = token
     }
 

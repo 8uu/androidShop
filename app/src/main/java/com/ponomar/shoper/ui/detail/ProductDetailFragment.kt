@@ -12,15 +12,15 @@ import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentDetailProductBinding
 import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.model.entities.Cart
-import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
+
 @AndroidEntryPoint
 class ProductDetailFragment(
-        _productInfo:CartInnerProduct,
-        private val onChangeCartInfo:(Cart?) -> Unit
+        _productInfo: CartInnerProduct,
+        private val onChangeCartInfo: (Cart?) -> Unit
 ) : BottomSheetDialogFragment() {
 
 
@@ -30,10 +30,10 @@ class ProductDetailFragment(
     private var cartInfo = _productInfo.cartInfo
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail_product,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_product, container, false)
         return binding.root
     }
 
@@ -46,7 +46,7 @@ class ProductDetailFragment(
             fragmentDetailButtonAddInCart.setOnClickListener {
                 fragmentDetailContainerWithButton.gone(true)
                 fragmentDetailContainerWithCounter.gone(false)
-                cartInfo = Cart(_product.id,0)
+                cartInfo = Cart(_product.id, 0)
                 onChangeCartInfo(cartInfo)
                 viewModel.plusQuantityInCart(_product.id)
                 updateQuantity()
@@ -74,18 +74,18 @@ class ProductDetailFragment(
 
 
         viewModel.incStatusLiveData.observe(viewLifecycleOwner){
-            Log.e("pid+",it.toString())
+            Log.e("pid+", it.toString())
             ++cartInfo!!.quantity
             updateQuantity()
         }
 
         viewModel.decStatusLiveData.observe(viewLifecycleOwner){
-            Log.e("pid",it.toString())
+            Log.e("pid", it.toString())
             if(--cartInfo!!.quantity == 0){
                 binding.fragmentDetailContainerWithButton.gone(false)
                 binding.fragmentDetailContainerWithCounter.gone(true)
                 onChangeCartInfo(null)
-                Log.e("cart",cartInfo.toString())
+                Log.e("cart", cartInfo.toString())
             }else updateQuantity()
         }
     }

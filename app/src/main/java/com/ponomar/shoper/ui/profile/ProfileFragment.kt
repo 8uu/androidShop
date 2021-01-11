@@ -39,6 +39,10 @@ class ProfileFragment : Fragment(),OnSwitchModeClick,OnLogoutClick {
             onSwitchNightModeInterface = this@ProfileFragment
             onLogoutClickInterface = this@ProfileFragment
 
+            swipeRefreshLayout.setOnRefreshListener {
+                profileViewModel.forceUpdateUserInfo(requireActivity().getAuthToken()!!)
+            }
+
         }
         profileViewModel.updateUserInfo(requireActivity().getAuthToken()!!)
     }

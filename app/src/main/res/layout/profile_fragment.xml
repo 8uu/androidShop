@@ -13,6 +13,7 @@
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    toast="@{vm.toastLiveData}"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/user_profile_blockOfButtonsWithExternalInformation"
@@ -30,76 +31,83 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/user_profile_imageViewWithPicUser"
+<!--    <ProgressBar-->
+<!--        app:setGone="@{!vm.isLoading()}"-->
+<!--        app:toast="@{vm.toastLiveData}"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_below="@id/user_profile_imageViewWithPicUser"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        isRefreshing="@{vm.isLoading()}"
         android:layout_below="@id/user_profile_blockOfButtonsWithExternalInformation"
-        android:src="@drawable/ic_user_profile_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <ProgressBar
-        app:setGone="@{!vm.isLoading()}"
-        app:toast="@{vm.toastLiveData}"
-        android:layout_margin="10dp"
-        android:layout_below="@id/user_profile_imageViewWithPicUser"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        app:setGone="@{vm.isLoading()}"
-        android:layout_below="@id/user_profile_imageViewWithPicUser"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:padding="10dp"
-            android:text="Информация"
-            android:textSize="28sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <LinearLayout
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
+            app:setGone="@{vm.isLoading()}"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_weight="0.5"
-                android:textSize="21sp"
-                android:gravity="center|bottom"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Ваше имя:"/>
-            <TextView
-                android:layout_weight="1"
-                android:textSize="24sp"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@{vm.userData.firstName}"/>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_weight="0.5"
-                android:textSize="21sp"
-                android:gravity="center|bottom"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Ваш номер:"/>
-            <TextView
-                android:layout_weight="1"
-                android:textSize="24sp"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@{vm.userData.phone}"/>
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/user_profile_imageViewWithPicUser"
+                android:src="@drawable/ic_user_profile_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+            <TextView
+                android:padding="10dp"
+                android:text="Информация"
+                android:textSize="28sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="0.5"
+                    android:textSize="21sp"
+                    android:gravity="center|bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Ваше имя:"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@{vm.userData.firstName}"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="0.5"
+                    android:textSize="21sp"
+                    android:gravity="center|bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Ваш номер:"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@{vm.userData.phone}"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <Button
         app:setGone="@{vm.isLoading()}"
         android:onClick="@{(v) -> onLogoutClickInterface.onLogoutClick(v)}"

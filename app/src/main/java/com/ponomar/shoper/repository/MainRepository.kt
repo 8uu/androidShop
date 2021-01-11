@@ -22,28 +22,53 @@ class MainRepository @Inject constructor(
     suspend fun fetchUserInfo(
             token: String,
             onComplete: () -> Unit,
-            onError: (String) -> Unit
+            onError: (String) -> Unit,
+            isForceUpdate:Boolean  = false
     ) = flow {
-        val user = appDB.getUserDao().getUser()
-        if(user == null){
+        if(!isForceUpdate) {
+            val user = appDB.getUserDao().getUser()
+            if (user == null) {
+                client.fetchUserData(token)
+                        .suspendOnSuccess {
+                            if (data != null) {
+                                if (data!!.status == 0) {
+                                    appDB.getUserDao().nukeTable()
+                                    appDB.getUserDao().insert(data!!.data!!)
+                                    emit(data!!.data!!)
+                                } else {
+                                    onError("STATUS:${data!!.status}")
+                                }
+                            } else onError("NULL DATA")
+                            onComplete()
+                        }.onError { onError(message()) }
+                        .onException { onError(message()) }
+            } else {
+                onComplete()
+                emit(user)
+            }
+        }else{
             client.fetchUserData(token)
                     .suspendOnSuccess {
-                        if(data!= null){
-                            if(data!!.status == 0){
+                        if (data != null) {
+                            if (data!!.status == 0) {
                                 appDB.getUserDao().nukeTable()
                                 appDB.getUserDao().insert(data!!.data!!)
                                 emit(data!!.data!!)
-                            }else{
+                            } else {
                                 onError("STATUS:${data!!.status}")
                             }
-                        }else onError("NULL DATA")
+                        } else onError("NULL DATA")
                         onComplete()
                     }.onError { onError(message()) }
                     .onException { onError(message()) }
-        }else {
-            onComplete()
-            emit(user)
         }
+    }
+
+    suspend fun clearUserInfo(
+            onComplete: () -> Unit
+    ) = flow{ //TODO:FIX FLOW TO unit
+        appDB.getUserDao().nukeTable()
+        emit(true)
     }
 
     suspend fun fetchListOfProducts(
@@ -62,7 +87,7 @@ class MainRepository @Inject constructor(
                         onError("STATUS:${data!!.status}")
                     }
                     else -> {
-                        appDB.getProductDao().insertAll(data!!.data!!)
+//                        appDB.getProductDao().insertAll(data!!.data!!)
                         val cartData = appDB.getCartDao().getCartInfo()
                         emit(convertProductListAndCartInfoListToCartInnerProductList(data!!.data!!,cartData))
                     }
