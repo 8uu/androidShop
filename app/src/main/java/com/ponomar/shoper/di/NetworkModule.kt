@@ -56,12 +56,17 @@ object NetworkModule{
     @Singleton
     fun provideAuthService(retrofit: Retrofit):AuthService = retrofit.create(AuthService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideOrderService(retrofit: Retrofit):OrderService = retrofit.create(OrderService::class.java)
+
 
     @Provides
     @Singleton
     fun provideClient(userService: UserService,
-                      addressService: AddressService,
                       productService: ProductService,
-                      authService: AuthService):Client = Client(userService,addressService, productService,authService)
+                      authService: AuthService,
+                      orderService: OrderService
+                      ):Client = Client(userService, productService,authService,orderService)
 
 }

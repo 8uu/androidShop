@@ -32,15 +32,19 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_menu, R.id.navigation_cart, R.id.navigation_profile,R.id.navigation_news,R.id.navigation_order_history))
+            R.id.navigation_menu,
+            R.id.navigation_cart,
+            R.id.navigation_profile,
+            R.id.navigation_news,
+            R.id.navigation_order_history,
+            R.id.navigation_order
+        ))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
 
     override fun recreate() {
-//        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-//        super.recreate()
         val bundle = Bundle()
         onSaveInstanceState(bundle)
         val intent = Intent(this, javaClass)

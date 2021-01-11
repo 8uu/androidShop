@@ -15,7 +15,15 @@
         android:id="@+id/navigation_cart"
         android:name="com.ponomar.shoper.ui.cart.CartFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_navigation_cart_to_navigation_order"
+            app:destination="@id/navigation_order"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -49,4 +57,10 @@
         android:name="com.ponomar.shoper.ui.order_history.OrderHistoryFragment"
         tools:layout="@layout/order_history_fragment"
         android:label="История заказов"/>
+
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.ponomar.shoper.ui.order.OrderFragment"
+        tools:layout="@layout/order_fragment"
+        android:label="Оформление"/>
 </navigation>

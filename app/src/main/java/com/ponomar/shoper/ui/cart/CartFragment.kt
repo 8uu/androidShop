@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentCartBinding
 import com.ponomar.shoper.ui.adapter.CartAdapter
@@ -34,6 +35,9 @@ class CartFragment : Fragment() {
             lifecycleOwner = this@CartFragment
             vm = cartViewModel.apply { fetchCartData() }
             adapter = cartAdapter
+            fragmentCartButtonMakeOrder.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_cart_to_navigation_order)
+            }//TODO:MAYBE CHECK EMPTY CART HERE
         }
         return binding.root
     }

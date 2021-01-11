@@ -4,12 +4,16 @@ import android.util.Log
 import com.ponomar.shoper.db.AppDB
 import com.ponomar.shoper.extensions.convertProductListAndCartInfoListToCartInnerProductList
 import com.ponomar.shoper.model.StatusResponse
+import com.ponomar.shoper.model.body.OrderBody
+import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.Cart
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 
@@ -252,6 +256,27 @@ class MainRepository @Inject constructor(
         Log.e("asd","inc")
         emit(appDB.getCartDao().incQuantity(pid))
         onComplete()
+    }
+
+
+    suspend fun makeOrderRequest(
+        token:String,
+        address: Address,
+        onComplete: () -> Unit,
+        onError: (String) -> Unit
+        ) = flow<Int>{
+            val cart = appDB.getCartDao().getCartInfo()
+            client.requestOrder(
+                token,
+                address,
+                cart
+            ).suspendOnSuccess {
+                val status = data!!.status
+                if(status == 0) appDB.getCartDao().nukeTable()
+                emit(status)
+                onComplete()
+            }.onError { onError(message()) }
+                .onException { onError(message()) }
     }
 
 
