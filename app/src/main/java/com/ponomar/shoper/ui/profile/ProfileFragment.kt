@@ -46,6 +46,9 @@ class ProfileFragment : Fragment(),OnSwitchModeClick,OnLogoutClick {
             userProfileButtonGoToLeftFragment.setOnClickListener {
                 findNavController().navigate(R.id.action_navigation_profile_to_navigation_address)
             }
+            userProfileButtonGoToRightFragment.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_profile_to_navigation_order_history)
+            }
         }
         profileViewModel.updateUserInfo(requireActivity().getAuthToken()!!)
     }

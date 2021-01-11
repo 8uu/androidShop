@@ -22,12 +22,13 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/user_profile_buttonGoToLeftFragment"
-            android:text="Addresses"
+            android:text="Новости"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <Button
-            android:text="Orders"
+            android:id="@+id/user_profile_buttonGoToRightFragment"
+            android:text="История заказов"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
