@@ -87,7 +87,7 @@ class MainRepository @Inject constructor(
                         onError("STATUS:${data!!.status}")
                     }
                     else -> {
-//                        appDB.getProductDao().insertAll(data!!.data!!)
+                        appDB.getProductDao().insertAll(data!!.data!!)
                         val cartData = appDB.getCartDao().getCartInfo()
                         emit(convertProductListAndCartInfoListToCartInnerProductList(data!!.data!!,cartData))
                     }
