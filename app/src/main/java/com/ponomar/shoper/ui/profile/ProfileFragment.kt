@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ProfileFragmentBinding
 import com.ponomar.shoper.extensions.Auth.Companion.forgetAuthToken
@@ -42,7 +43,9 @@ class ProfileFragment : Fragment(),OnSwitchModeClick,OnLogoutClick {
             swipeRefreshLayout.setOnRefreshListener {
                 profileViewModel.forceUpdateUserInfo(requireActivity().getAuthToken()!!)
             }
-
+            userProfileButtonGoToLeftFragment.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_profile_to_navigation_address)
+            }
         }
         profileViewModel.updateUserInfo(requireActivity().getAuthToken()!!)
     }

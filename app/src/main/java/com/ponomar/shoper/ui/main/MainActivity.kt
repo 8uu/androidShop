@@ -30,10 +30,9 @@ class MainActivity : AppCompatActivity() {
         if(!isAuthTokenAvailable())  AuthActivity.startActivity(this)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_menu, R.id.navigation_cart, R.id.navigation_profile))
+                R.id.navigation_menu, R.id.navigation_cart, R.id.navigation_profile,R.id.navigation_news))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
