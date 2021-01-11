@@ -18,11 +18,11 @@
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="40dp"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
         android:layout_height="300dp">
         <ImageView
             app:imageUrl="@{product.images[0]}"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
