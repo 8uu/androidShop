@@ -5,4 +5,5 @@
 
     <color name="backgroundItemProduct">#494747</color>
     <color name="itemIconTint">#FFFFFF</color>
+    <color name="backgroundTagView">#A39C9C</color>
 </resources>

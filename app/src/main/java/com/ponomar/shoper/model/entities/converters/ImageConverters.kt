@@ -4,6 +4,8 @@ import androidx.room.TypeConverter
 import java.util.*
 import java.util.stream.Collectors
 
+
+//TODO: RENAME
 class ImageConverters {
 
 

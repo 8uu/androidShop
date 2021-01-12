@@ -13,5 +13,6 @@ data class Product(
     val desc:String,
     val cost:Float,
     val weight:Int,
-    val images:List<String>
+    val images:List<String>,
+    val tags:List<String>
 )

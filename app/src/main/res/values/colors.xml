@@ -13,4 +13,5 @@
 
     <color name="backgroundRoundLayout">#EC7B57</color>
     <color name="backgroundItemProduct">#FFFFFF</color>
+    <color name="backgroundTagView">#F3EEEE</color>
 </resources>

@@ -21,7 +21,7 @@ class NewsFragment : Fragment() {
     private lateinit var binding:NewsFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.news_fragment, container, false)
         val adapterNews = NewsAdapter()
         val gridLayoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
