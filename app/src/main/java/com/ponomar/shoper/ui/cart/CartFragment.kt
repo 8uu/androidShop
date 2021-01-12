@@ -23,7 +23,7 @@ class CartFragment : Fragment() {
     private lateinit var cartAdapter: CartAdapter
     private lateinit var binding:FragmentCartBinding
 
-
+//TODO:FIX CART UPDATE AND CLEAN UP!!!!!!!!!!!!
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

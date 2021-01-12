@@ -12,7 +12,8 @@ class Client @Inject constructor(
     private val userService: UserService,
     private val productService: ProductService,
     private val authService:AuthService,
-    private val orderService: OrderService) {
+    private val orderService: OrderService,
+    private val newsService: NewsService) {
 
 
     suspend fun fetchProductsList() = productService.fetchProducts()
@@ -51,6 +52,8 @@ class Client @Inject constructor(
         val body = OrderBody(token,address,cart)
         return orderService.requestOrder(body)
     }
+
+    suspend fun fetchNews():ApiResponse<NewsResponse> = newsService.fetchNews()
 
 
 

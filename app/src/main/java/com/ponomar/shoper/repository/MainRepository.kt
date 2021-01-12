@@ -7,6 +7,7 @@ import com.ponomar.shoper.model.StatusResponse
 import com.ponomar.shoper.model.body.OrderBody
 import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.Cart
+import com.ponomar.shoper.model.entities.News
 import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.network.Client
@@ -276,6 +277,22 @@ class MainRepository @Inject constructor(
                 emit(status)
                 onComplete()
             }.onError { onError(message()) }
+                .onException { onError(message()) }
+    }
+
+    suspend fun fetchNews(
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow{
+        client.fetchNews().suspendOnSuccess {
+            Log.e("datanews",data!!.toString())
+            if(data != null){
+                if(data!!.status == 0){
+                    emit(data!!.news)
+                }else onError("Новостей нет")
+            }else onError("NULL DATA")
+            onComplete()
+        }.onError { onError(message()) }
                 .onException { onError(message()) }
     }
 

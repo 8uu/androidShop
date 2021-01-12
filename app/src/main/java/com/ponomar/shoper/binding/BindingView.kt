@@ -10,9 +10,11 @@ import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
 import com.ponomar.shoper.extensions.setMask
+import com.ponomar.shoper.model.entities.News
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.CartAdapter
+import com.ponomar.shoper.ui.adapter.NewsAdapter
 import com.ponomar.shoper.ui.adapter.ProductAdapter
 
 
@@ -36,8 +38,8 @@ fun toast(view:View,text:LiveData<String>){
 @BindingAdapter("adapter")
 fun bindAdapter(recyclerView: RecyclerView,adapter: RecyclerView.Adapter<*>){
     recyclerView.adapter = adapter
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setItemViewCacheSize(20);
+    recyclerView.setHasFixedSize(true)
+    recyclerView.setItemViewCacheSize(20)
 }
 
 
@@ -50,6 +52,11 @@ fun bindProductsAdapter(recyclerView: RecyclerView,products:List<CartInnerProduc
 @BindingAdapter("adapterCartList")
 fun bindCartAdapter(recyclerView: RecyclerView, productsInCartInner:List<CartInnerProduct>?){
     if(productsInCartInner != null) (recyclerView.adapter as? CartAdapter)?.addItems(productsInCartInner)
+}
+
+@BindingAdapter("adapterNewsList")
+fun bindNewsAdapter(recyclerView: RecyclerView,newsList:List<News>?){
+    if(newsList != null) (recyclerView.adapter as? NewsAdapter)?.addItems(newsList)
 }
 
 

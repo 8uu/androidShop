@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.news.NewsViewModel" />
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.GridLayoutManager" />
+        <variable
+            name="adapter"
+            type="com.ponomar.shoper.ui.adapter.NewsAdapter" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,16 +18,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.news.NewsFragment">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            isRefreshing="@{vm.isLoading()}"
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                adapter="@{adapter}"
+                adapterNewsList="@{vm.newsLiveData}"
+                app:layoutManager="@{layoutManager}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
