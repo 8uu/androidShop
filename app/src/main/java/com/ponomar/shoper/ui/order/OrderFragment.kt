@@ -43,7 +43,7 @@ class OrderFragment : Fragment() {
         viewModel.statusResponseLiveData.observe(viewLifecycleOwner){
             if(it == 0){
                 Toast.makeText(requireContext(),"С Вами свяжется наш оператор",Toast.LENGTH_LONG).show()
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.navigation_menu)
             }else{
                 Toast.makeText(requireContext(),"Что-то не то",Toast.LENGTH_LONG).show()
             }

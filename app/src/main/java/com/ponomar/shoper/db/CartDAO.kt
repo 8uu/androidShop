@@ -10,8 +10,7 @@ import com.ponomar.shoper.model.entities.Cart
 interface CartDAO {
 
     @Query("DELETE FROM cart;")
-    suspend fun nukeTable(){
-        Log.e("NUKE","CART") }
+    suspend fun nukeTable()
 
     @Query("SELECT * from product inner join cart where product.id = cart.pid;")
     suspend fun getCart():List<CartInnerProduct>
