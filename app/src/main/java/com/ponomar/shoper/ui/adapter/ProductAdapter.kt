@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ItemProductBinding
 import com.ponomar.shoper.extensions.getActivity

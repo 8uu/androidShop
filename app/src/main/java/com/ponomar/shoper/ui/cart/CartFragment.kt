@@ -54,7 +54,7 @@ class CartFragment : Fragment() {
         }
 
         cartViewModel.cartInnerLiveData.observe(viewLifecycleOwner){
-            binding.fragmentCartButtonMakeOrder.isClickable = false
+            if(it.isEmpty()) binding.fragmentCartButtonMakeOrder.isClickable = false
         }
     }
 }
