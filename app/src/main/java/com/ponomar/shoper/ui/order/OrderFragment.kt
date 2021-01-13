@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.OrderFragmentBinding
 import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
+import com.ponomar.shoper.extensions.hideKeyBoard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,6 +44,7 @@ class OrderFragment : Fragment() {
         viewModel.statusResponseLiveData.observe(viewLifecycleOwner){
             if(it == 0){
                 Toast.makeText(requireContext(),"С Вами свяжется наш оператор",Toast.LENGTH_LONG).show()
+                requireActivity().hideKeyBoard()
                 findNavController().navigate(R.id.navigation_menu)
             }else{
                 Toast.makeText(requireContext(),"Что-то не то",Toast.LENGTH_LONG).show()
