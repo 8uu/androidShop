@@ -43,11 +43,7 @@ class CartViewModel @ViewModelInject constructor(
                     ).asLiveData()
                 }
             }
-    }
 
-
-    //TODO:FIX EQUALS
-    fun fetchCartData(){
         cartInnerLiveData = launchOnViewModelScope {
             isLoading.set(true)
             val data = repository.fetchCart(
@@ -57,6 +53,19 @@ class CartViewModel @ViewModelInject constructor(
             data.asLiveData()
         }
     }
+
+
+    //TODO:FIX EQUALS
+//    fun fetchCartData(){
+//        cartInnerLiveData = launchOnViewModelScope {
+//            isLoading.set(true)
+//            val data = repository.fetchCart(
+//                    onComplete = {isLoading.set(false)},
+//                    onError = {_toastMutable.value = it}
+//            )
+//            data.asLiveData()
+//        }
+//    }
 
     fun onMinusItemClick(pid:Int){
         _fetchingDecStatus.value = pid

@@ -66,6 +66,7 @@
                 android:id="@+id/auth_editTextCode"
                 android:hint="Код"
                 android:layout_gravity="center"
+                android:inputType="numberDecimal|phone"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <LinearLayout

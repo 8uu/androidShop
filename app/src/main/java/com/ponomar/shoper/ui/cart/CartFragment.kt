@@ -33,7 +33,7 @@ class CartFragment : Fragment() {
         cartAdapter = CartAdapter(cartViewModel)
         binding.apply {
             lifecycleOwner = this@CartFragment
-            vm = cartViewModel.apply { fetchCartData() }
+            vm = cartViewModel
             adapter = cartAdapter
             fragmentCartButtonMakeOrder.setOnClickListener {
                 findNavController().navigate(R.id.action_navigation_cart_to_navigation_order)
@@ -51,6 +51,10 @@ class CartFragment : Fragment() {
 
         cartViewModel.incStatusLiveData.observe(viewLifecycleOwner){
             cartAdapter.onPlusClick(it)
+        }
+
+        cartViewModel.cartInnerLiveData.observe(viewLifecycleOwner){
+            binding.fragmentCartButtonMakeOrder.isClickable = false
         }
     }
 }
