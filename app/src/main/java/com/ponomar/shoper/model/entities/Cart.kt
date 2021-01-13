@@ -6,7 +6,7 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
 
-@Entity(foreignKeys = [ForeignKey(
+@Entity(foreignKeys = [ForeignKey( //TODO: fix parent and child on delete cascade
     entity = Product::class,
     parentColumns = arrayOf("id"),
     childColumns = arrayOf("pid"),

@@ -1,5 +1,6 @@
 package com.ponomar.shoper.db
 
+import android.util.Log
 import androidx.room.*
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Cart
@@ -9,7 +10,8 @@ import com.ponomar.shoper.model.entities.Cart
 interface CartDAO {
 
     @Query("DELETE FROM cart;")
-    suspend fun nukeTable()
+    suspend fun nukeTable(){
+        Log.e("NUKE","CART") }
 
     @Query("SELECT * from product inner join cart where product.id = cart.pid;")
     suspend fun getCart():List<CartInnerProduct>

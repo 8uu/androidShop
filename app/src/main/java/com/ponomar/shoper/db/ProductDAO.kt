@@ -7,7 +7,7 @@ import com.ponomar.shoper.model.entities.Product
 @Dao
 interface ProductDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(product: Product)
 
     @Delete
@@ -16,7 +16,7 @@ interface ProductDAO {
     @Query("SELECT * FROM product;")
     suspend fun getProducts():List<Product>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(products:List<Product>)
 
     @Query("DELETE FROM product;")

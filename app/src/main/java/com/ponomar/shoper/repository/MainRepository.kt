@@ -94,6 +94,7 @@ class MainRepository @Inject constructor(
                     else -> {
                         appDB.getProductDao().insertAll(data!!.data!!)
                         val cartData = appDB.getCartDao().getCartInfo()
+                        Log.e("cart",cartData.toString())
                         emit(convertProductListAndCartInfoListToCartInnerProductList(data!!.data!!,cartData))
                     }
                 }

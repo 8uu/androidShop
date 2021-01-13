@@ -85,7 +85,7 @@ fun bindOnRefreshToSwipeRefreshLayout(swipeRefreshLayout: SwipeRefreshLayout,isR
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("tagList")
 fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List<String>){
-    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews()
+    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews() //TODO: WHY
     val context = horizontalScrollView.context
     val containerForTags = LinearLayout(context)
     containerForTags.orientation = LinearLayout.HORIZONTAL
