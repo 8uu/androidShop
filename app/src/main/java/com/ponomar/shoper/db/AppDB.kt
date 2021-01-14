@@ -10,7 +10,7 @@ import com.ponomar.shoper.model.entities.User
 import com.ponomar.shoper.model.entities.converters.ImageConverters
 
 
-@Database(entities = [Address::class, Product::class, User::class,Cart::class],version = 1,exportSchema = true)
+@Database(entities = [Address::class, Product::class, User::class,Cart::class],version = 1,exportSchema = false)
 @TypeConverters(value = [ImageConverters::class])
 abstract class AppDB:RoomDatabase() {
 

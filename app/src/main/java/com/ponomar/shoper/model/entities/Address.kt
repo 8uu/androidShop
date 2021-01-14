@@ -4,11 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity
+@Entity(primaryKeys = ["district","street","house","flat"])
 data class Address(
-    @PrimaryKey val id:Int,
     val district:String,
     val street:String,
     val house:String,
     val flat:Int
-)
+){
+    override fun toString(): String {
+        return "$district район, $street, д. $house, $flat"
+    }
+}

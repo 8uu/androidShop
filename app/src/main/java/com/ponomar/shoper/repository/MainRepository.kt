@@ -268,6 +268,8 @@ class MainRepository @Inject constructor(
         onError: (String) -> Unit
         ) = flow<Int>{
             val cart = appDB.getCartDao().getCartInfo()
+            appDB.getAddressDao().insert(address)
+            Log.e("addr",appDB.getAddressDao().getAddresses().toString())
             client.requestOrder(
                 token,
                 address,
@@ -295,6 +297,15 @@ class MainRepository @Inject constructor(
             onComplete()
         }.onError { onError(message()) }
                 .onException { onError(message()) }
+    }
+
+    suspend fun fetchAddresses(
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow{
+        val addresses = appDB.getAddressDao().getAddresses()
+        emit(addresses)
+        onComplete()
     }
 
 

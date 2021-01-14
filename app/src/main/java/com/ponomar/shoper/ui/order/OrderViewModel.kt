@@ -1,5 +1,6 @@
 package com.ponomar.shoper.ui.order
 
+import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -17,8 +18,10 @@ class OrderViewModel @ViewModelInject constructor(
     private val _orderRequestLiveData:MutableLiveData<Pair<String,Address>> = MutableLiveData()
 
     val isLoading:ObservableBoolean = ObservableBoolean(false)
+    val isLoadingAddresses:ObservableBoolean = ObservableBoolean(false)
     val toastLiveData: LiveData<String> = _toastMutableLiveData
     val statusResponseLiveData:LiveData<Int>
+    val addressesLiveData:LiveData<List<Address>>
 
 
     init {
@@ -32,9 +35,18 @@ class OrderViewModel @ViewModelInject constructor(
                 ).asLiveData()
             }
         }
+
+        addressesLiveData = launchOnViewModelScope {
+            isLoadingAddresses.set(true)
+            repository.fetchAddresses(
+                    onComplete = {isLoadingAddresses.set(false)},
+                    onError = {_toastMutableLiveData.value = it}
+            ).asLiveData()
+        }
     }
 
     fun makeOrderRequest(district:String,street:String,house:String,flat:Int,token:String){
-        _orderRequestLiveData.value = Pair(token, Address(0,district,street,house,flat))
+        _orderRequestLiveData.value = Pair(token, Address(district,street,house,flat))
     }
+
 }

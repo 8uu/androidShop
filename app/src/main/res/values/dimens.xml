@@ -6,4 +6,7 @@
 
     <dimen name="tag_view_padding">6dp</dimen>
     <dimen name="tag_view_margin_end">5dp</dimen>
+
+    <dimen name="address_cell_padding">6dp</dimen>
+    <dimen name="address_cell_margin_end">5dp</dimen>
 </resources>

@@ -16,12 +16,15 @@ import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
 import com.ponomar.shoper.extensions.setMask
+import com.ponomar.shoper.generated.callback.OnClickListener
+import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.News
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.CartAdapter
 import com.ponomar.shoper.ui.adapter.NewsAdapter
 import com.ponomar.shoper.ui.adapter.ProductAdapter
+import com.ponomar.shoper.ui.order.OnAddressClick
 
 
 @BindingAdapter("setGone")
@@ -84,7 +87,8 @@ fun bindOnRefreshToSwipeRefreshLayout(swipeRefreshLayout: SwipeRefreshLayout,isR
 
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("tagList")
-fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List<String>){
+fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List<String>?){
+    if(tags == null) return
     if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews() //TODO: WHY
     val context = horizontalScrollView.context
     val containerForTags = LinearLayout(context)
@@ -98,6 +102,29 @@ fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List
         tagView.text = tag
         tagView.setPadding(context.resources.getDimensionPixelSize(R.dimen.tag_view_padding))
         tagView.layoutParams = layoutParams
+        containerForTags.addView(tagView)
+    }
+    horizontalScrollView.addView(containerForTags)
+}
+
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("addressList","addressOnClick")
+fun bindAddressesListToScrollView(horizontalScrollView: HorizontalScrollView,addresses:List<Address>?,addressOnClick:OnAddressClick){
+    if(addresses == null) return
+    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews() //TODO: WHY
+    val context = horizontalScrollView.context
+    val containerForTags = LinearLayout(context)
+    containerForTags.orientation = LinearLayout.HORIZONTAL
+    containerForTags.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+    for(address in addresses){
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.marginEnd = context.resources.getDimensionPixelSize(R.dimen.address_cell_margin_end)
+        val tagView = TextView(context)
+        tagView.background = context.getDrawable(R.drawable.round_tag)
+        tagView.text = address.toString()
+        tagView.setPadding(context.resources.getDimensionPixelSize(R.dimen.address_cell_padding))
+        tagView.layoutParams = layoutParams
+        tagView.setOnClickListener{addressOnClick.onAddressClick(address)}
         containerForTags.addView(tagView)
     }
     horizontalScrollView.addView(containerForTags)

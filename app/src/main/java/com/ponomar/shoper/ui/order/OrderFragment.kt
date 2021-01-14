@@ -13,15 +13,16 @@ import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.OrderFragmentBinding
 import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
 import com.ponomar.shoper.extensions.hideKeyBoard
+import com.ponomar.shoper.model.entities.Address
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderFragment : Fragment() {
+class OrderFragment : Fragment(),OnAddressClick {
     private val viewModel:OrderViewModel by viewModels()
     private lateinit var binding:OrderFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.order_fragment,container,false)
         binding.apply {
             vm = viewModel
@@ -35,6 +36,7 @@ class OrderFragment : Fragment() {
                     requireActivity().getAuthToken()!!
                 )
             }
+            onAddressClick = this@OrderFragment
         }
         return binding.root
     }
@@ -48,6 +50,17 @@ class OrderFragment : Fragment() {
                 findNavController().navigate(R.id.navigation_menu)
             }else{
                 Toast.makeText(requireContext(),"Что-то не то",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun onAddressClick(address: Address) {
+        binding.apply {
+            address.apply {
+                fragmentOrderTextViewAddressDistrict.setText(district)
+                fragmentOrderTextViewAddressStreet.setText(street)
+                fragmentOrderTextViewAddressHouse.setText(house)
+                fragmentOrderTextViewAddressFlat.setText(flat.toString())
             }
         }
     }
