@@ -55,6 +55,11 @@ class Client @Inject constructor(
 
     suspend fun fetchNews():ApiResponse<NewsResponse> = newsService.fetchNews()
 
+    suspend fun fetchHistoryOfOrder(token:String):ApiResponse<OrderResponse>{
+        val body = TokenBody(token)
+        return orderService.fetchOrders(body)
+    }
+
 
 
 

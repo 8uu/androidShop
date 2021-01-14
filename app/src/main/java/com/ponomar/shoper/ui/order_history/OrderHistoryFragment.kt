@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.OrderHistoryFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrderHistoryFragment : Fragment() {
 
 

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.order_history.OrderHistoryViewModel" />
+        <variable
+            name="adapter"
+            type="com.ponomar.shoper.ui.adapter.OrderAdapter" />
     </data>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.order_history.OrderHistoryFragment">
-
-        <TextView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            isRefreshing="@{vm.isLoading()}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
-
-    </FrameLayout>
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                adapter="@{adapter}"
+                adapterOrderList="@{vm.orderLiveData}"
+                tools:listitem="@layout/item_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 </layout>

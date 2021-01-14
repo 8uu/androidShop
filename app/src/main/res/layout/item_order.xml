@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="order"
+            type="com.ponomar.shoper.model.entities.Order" />
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:padding="8dp"
+    android:background="@drawable/round_layout"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="170dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:text="@{`Заказ №`+order.id}"
+        />
+    <TextView
+        android:layout_marginTop="7dp"
+        android:text="@{order.date}"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="7dp"
+        android:text="@{`Товаров: 123 шт`}"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="7dp"
+        android:text="@{order.address.toString()}"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="23sp"
+        android:text="@{`Итого: `+ `1234` + `р`}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+</layout>

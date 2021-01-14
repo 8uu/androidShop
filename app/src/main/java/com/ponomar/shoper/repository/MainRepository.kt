@@ -308,6 +308,24 @@ class MainRepository @Inject constructor(
         onComplete()
     }
 
+    suspend fun fetchHistoryOfOrder(
+            token:String,
+            onComplete: () -> Unit,
+            onError: (String) -> Unit
+    ) = flow{
+        client.fetchHistoryOfOrder(token)
+                .suspendOnSuccess {
+                    if(data != null){
+                        if(data!!.status == 3){
+                            onError("У вас нет заказов")
+                        }else{
+                            emit(data!!.data)
+                        }
+                    }
+                }.onError { onError(message()) }
+                .onException { onError(message()) }
+    }
+
 
     }
 

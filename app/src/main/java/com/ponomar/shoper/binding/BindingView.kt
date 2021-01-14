@@ -19,10 +19,12 @@ import com.ponomar.shoper.extensions.setMask
 import com.ponomar.shoper.generated.callback.OnClickListener
 import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.News
+import com.ponomar.shoper.model.entities.Order
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.CartAdapter
 import com.ponomar.shoper.ui.adapter.NewsAdapter
+import com.ponomar.shoper.ui.adapter.OrderAdapter
 import com.ponomar.shoper.ui.adapter.ProductAdapter
 import com.ponomar.shoper.ui.order.OnAddressClick
 
@@ -66,6 +68,11 @@ fun bindCartAdapter(recyclerView: RecyclerView, productsInCartInner:List<CartInn
 @BindingAdapter("adapterNewsList")
 fun bindNewsAdapter(recyclerView: RecyclerView,newsList:List<News>?){
     if(newsList != null) (recyclerView.adapter as? NewsAdapter)?.addItems(newsList)
+}
+
+@BindingAdapter("adapterOrderList")
+fun bindOrderAdapter(recyclerView: RecyclerView,orderList:List<Order>?){
+    if(orderList != null) (recyclerView.adapter as? OrderAdapter)?.addItems(orderList)
 }
 
 
