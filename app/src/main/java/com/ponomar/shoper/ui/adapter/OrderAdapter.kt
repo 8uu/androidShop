@@ -1,6 +1,5 @@
 package com.ponomar.shoper.ui.adapter
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil

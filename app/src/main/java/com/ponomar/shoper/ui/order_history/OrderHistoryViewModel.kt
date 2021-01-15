@@ -13,6 +13,7 @@ class OrderHistoryViewModel @ViewModelInject constructor(
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()
     private val _fetchingOrderHistoryByToken:MutableLiveData<String> = MutableLiveData()
 
+    val toastLiveData:LiveData<String> = _toastMutableLiveData
     val isLoading:ObservableBoolean = ObservableBoolean(false)
     val orderLiveData: LiveData<List<Order>>
 

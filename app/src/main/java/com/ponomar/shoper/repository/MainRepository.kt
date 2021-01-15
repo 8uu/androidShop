@@ -269,7 +269,6 @@ class MainRepository @Inject constructor(
         ) = flow<Int>{
             val cart = appDB.getCartDao().getCartInfo()
             appDB.getAddressDao().insert(address)
-            Log.e("addr",appDB.getAddressDao().getAddresses().toString())
             client.requestOrder(
                 token,
                 address,
@@ -322,8 +321,13 @@ class MainRepository @Inject constructor(
                             emit(data!!.data)
                         }
                     }
-                }.onError { onError(message()) }
-                .onException { onError(message()) }
+                    onComplete()
+                }.onError {
+                    onError(message())
+                }
+                .onException {
+                    onError(message())
+                }
     }
 
 

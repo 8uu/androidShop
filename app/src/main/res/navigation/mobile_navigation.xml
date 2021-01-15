@@ -56,11 +56,25 @@
         android:id="@+id/navigation_order_history"
         android:name="com.ponomar.shoper.ui.order_history.OrderHistoryFragment"
         tools:layout="@layout/order_history_fragment"
-        android:label="История заказов"/>
+        android:label="История заказов">
+        <action
+            android:id="@+id/action_navigation_order_history_to_navigation_order_detail"
+            app:destination="@id/navigation_order_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_order"
         android:name="com.ponomar.shoper.ui.order.OrderFragment"
         tools:layout="@layout/order_fragment"
         android:label="Оформление"/>
+
+    <fragment
+        android:id="@+id/navigation_order_detail"
+        android:name="com.ponomar.shoper.ui.order_detail.OrderDetailFragment"
+        android:label="Детали заказа"
+        tools:layout="@layout/order_detail_fragment" />
 </navigation>

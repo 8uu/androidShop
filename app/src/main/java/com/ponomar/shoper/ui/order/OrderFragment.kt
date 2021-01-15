@@ -14,6 +14,7 @@ import com.ponomar.shoper.databinding.OrderFragmentBinding
 import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
 import com.ponomar.shoper.extensions.hideKeyBoard
 import com.ponomar.shoper.model.entities.Address
+import com.ponomar.shoper.ui.adapter.OrderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

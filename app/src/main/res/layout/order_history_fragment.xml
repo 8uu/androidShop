@@ -12,8 +12,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.order_history.OrderHistoryFragment">
+        tools:context=".ui.order_history.OrderHistoryFragment"
+        toast="@{vm.toastLiveData}">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             isRefreshing="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
