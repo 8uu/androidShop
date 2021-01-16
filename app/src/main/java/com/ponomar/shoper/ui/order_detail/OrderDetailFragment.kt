@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.OrderDetailFragmentBinding
 import com.ponomar.shoper.model.entities.Order
 import com.ponomar.shoper.ui.adapter.OrderProductAdapter
+import com.ponomar.shoper.util.OnSwipeTouchListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -13,6 +13,7 @@ import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.extensions.observeOnce
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
+import com.ponomar.shoper.util.OnSwipeTouchListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,6 +64,13 @@ class AuthCodeFragment : Fragment() {
             this.authButtonGoToPreviouslyStage.setOnClickListener {
                 (it.context.getActivity() as FragmentCallBacks).onFragment3BackClick()
             }
+
+            root.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    (requireContext().getActivity() as FragmentCallBacks).onFragment3BackClick()
+                }
+            })
 
         }
 

@@ -2,25 +2,22 @@ package com.ponomar.shoper.ui.auth.phone2
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.databinding.FragmentAuthPhoneBinding
 import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.extensions.observeOnce
 import com.ponomar.shoper.extensions.setMask
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
+import com.ponomar.shoper.util.OnSwipeTouchListener
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class AuthFragmentPhone : Fragment() {
+class AuthFragmentPhone : Fragment(){
 
     private val viewModel:AuthPhoneViewModel by viewModels()
     private lateinit var binding:FragmentAuthPhoneBinding
@@ -35,8 +32,8 @@ class AuthFragmentPhone : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentAuthPhoneBinding.inflate(inflater)
         return binding.root
@@ -63,8 +60,8 @@ class AuthFragmentPhone : Fragment() {
                         viewModel.sendUserPhoneToGenerateCode(phone)
                 }
                 else{
-                    val toast = Toast.makeText(root.context,"Пустое поле",Toast.LENGTH_LONG)
-                    toast.setGravity(Gravity.BOTTOM,0,100)
+                    val toast = Toast.makeText(root.context, "Пустое поле", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.BOTTOM, 0, 100)
                     toast.show()
                 }
             }
@@ -72,9 +69,16 @@ class AuthFragmentPhone : Fragment() {
                 (it.context.getActivity() as FragmentCallBacks).onFragment2BackClick()
             }
 
+            root.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    (requireContext().getActivity() as FragmentCallBacks).onFragment2BackClick()
+                }
+            })
+
             //TODO:Костыль, не работает once
             viewModel.codeLiveData.observeOnce(viewLifecycleOwner){
-                Log.e("code",it.toString())
+                Log.e("code", it.toString())
                 Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
                 (requireContext().getActivity() as FragmentCallBacks).onFragment2NextClick(firstName, phone)
             }

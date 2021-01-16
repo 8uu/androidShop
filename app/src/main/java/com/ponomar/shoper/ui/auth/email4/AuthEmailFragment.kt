@@ -12,6 +12,7 @@ import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
 import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
+import com.ponomar.shoper.util.OnSwipeTouchListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,6 +50,13 @@ class AuthEmailFragment : Fragment() {
             this.authButtonGoToPreviouslyStage.setOnClickListener {
                 (requireContext().getActivity() as FragmentCallBacks).onFragment4BackClick()
             }
+
+            root.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    (requireContext().getActivity() as FragmentCallBacks).onFragment4BackClick()
+                }
+            })
         }
 
         viewModel.statusLiveData.observe(viewLifecycleOwner){
