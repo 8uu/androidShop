@@ -8,7 +8,7 @@ import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ItemOrderBinding
 import com.ponomar.shoper.model.entities.Order
 
-class OrderAdapter:RecyclerView.Adapter<OrderAdapter.VHolder>() {
+class OrderAdapter(private val onOrderClick:(Order) -> Unit):RecyclerView.Adapter<OrderAdapter.VHolder>() {
     private val orders:ArrayList<Order> = arrayListOf()
 
     class VHolder(val binding:ItemOrderBinding):RecyclerView.ViewHolder(binding.root)
@@ -33,6 +33,9 @@ class OrderAdapter:RecyclerView.Adapter<OrderAdapter.VHolder>() {
         val orderItem = orders[position]
         holder.binding.apply {
             order = orderItem
+            root.setOnClickListener {
+                onOrderClick(orderItem)
+            }
         }
     }
 

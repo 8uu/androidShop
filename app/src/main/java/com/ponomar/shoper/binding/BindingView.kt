@@ -1,6 +1,7 @@
 package com.ponomar.shoper.binding
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
@@ -22,10 +23,7 @@ import com.ponomar.shoper.model.entities.News
 import com.ponomar.shoper.model.entities.Order
 import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.model.entities.Product
-import com.ponomar.shoper.ui.adapter.CartAdapter
-import com.ponomar.shoper.ui.adapter.NewsAdapter
-import com.ponomar.shoper.ui.adapter.OrderAdapter
-import com.ponomar.shoper.ui.adapter.ProductAdapter
+import com.ponomar.shoper.ui.adapter.*
 import com.ponomar.shoper.ui.order.OnAddressClick
 
 
@@ -73,6 +71,11 @@ fun bindNewsAdapter(recyclerView: RecyclerView,newsList:List<News>?){
 @BindingAdapter("adapterOrderList")
 fun bindOrderAdapter(recyclerView: RecyclerView,orderList:List<Order>?){
     if(orderList != null) (recyclerView.adapter as? OrderAdapter)?.addItems(orderList)
+}
+
+@BindingAdapter("adapterOrderProductsList")
+fun bindOrderProductsAdapter(recyclerView: RecyclerView,orderProducts:List<Product>){
+    (recyclerView.adapter as OrderProductAdapter).addItems(orderProducts)
 }
 
 

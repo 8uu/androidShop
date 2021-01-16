@@ -76,5 +76,9 @@
         android:id="@+id/navigation_order_detail"
         android:name="com.ponomar.shoper.ui.order_detail.OrderDetailFragment"
         android:label="Детали заказа"
-        tools:layout="@layout/order_detail_fragment" />
+        tools:layout="@layout/order_detail_fragment" >
+        <argument
+            android:name="order"
+            app:argType="com.ponomar.shoper.model.entities.Order" />
+    </fragment>
 </navigation>

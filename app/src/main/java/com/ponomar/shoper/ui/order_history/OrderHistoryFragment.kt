@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.OrderHistoryFragmentBinding
 import com.ponomar.shoper.extensions.Auth.Companion.getAuthToken
@@ -26,7 +27,13 @@ class OrderHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.order_history_fragment,container,false)
-        orderAdapter = OrderAdapter()
+        orderAdapter = OrderAdapter(
+                onOrderClick = {
+                    val bundle = Bundle()
+                    bundle.putParcelable("order",it)
+                    findNavController().navigate(R.id.action_navigation_order_history_to_navigation_order_detail,bundle)
+                }
+        )
         binding.apply {
             vm = viewModel.apply { fetchHistoryOfOrder(requireActivity().getAuthToken()!!) }
             adapter = orderAdapter

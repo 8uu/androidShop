@@ -9,4 +9,10 @@ data class Order(
         val address:Address,
         val date:String,
         val products:List<Product>
-): Parcelable
+): Parcelable{
+    fun calculateTotalCost():Int{
+        var totalCost = 0
+        for(product in products) totalCost += product.cost.toInt() * product.count!!
+        return totalCost
+    }
+}

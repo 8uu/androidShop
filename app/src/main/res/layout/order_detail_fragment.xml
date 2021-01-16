@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.order_detail.OrderDetailViewModel" />
+        <variable
+            name="userOrder"
+            type="com.ponomar.shoper.model.entities.Order" />
+        <variable
+            name="adapter"
+            type="com.ponomar.shoper.ui.adapter.OrderProductAdapter" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.order_detail.OrderDetailFragment">
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        isRefreshing="@{vm.isLoading()}"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@{`Заказ №` + userOrder.id}"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="15dp"
+                android:text="@{`Заказ был сделан `+ userOrder.date}"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                adapter="@{adapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_margin="10dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:padding="10dp"
+                android:textSize="21sp"
+                android:textAlignment="textEnd"
+                android:text="@{`Итого: ` + userOrder.calculateTotalCost() + `р`}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
 </layout>
