@@ -29,6 +29,7 @@ class OrderDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.order_detail_fragment,container,false)
         orderProductAdapter = OrderProductAdapter(order.products)
         binding.apply {
+            lifecycleOwner = this@OrderDetailFragment
             adapter = orderProductAdapter
             vm = viewModel
             userOrder = order

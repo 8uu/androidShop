@@ -1,6 +1,8 @@
 package com.ponomar.shoper.ui.order_history
 
+import android.util.Log
 import androidx.databinding.ObservableBoolean
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
@@ -8,7 +10,8 @@ import com.ponomar.shoper.model.entities.Order
 import com.ponomar.shoper.repository.MainRepository
 
 class OrderHistoryViewModel @ViewModelInject constructor(
-        private val repository: MainRepository
+        private val repository: MainRepository,
+        @Assisted savedStateHandle: SavedStateHandle
 ) : LiveCoroutinesViewModel() {
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()
     private val _fetchingOrderHistoryByToken:MutableLiveData<String> = MutableLiveData()
@@ -18,7 +21,9 @@ class OrderHistoryViewModel @ViewModelInject constructor(
     val orderLiveData: LiveData<List<Order>>
 
     init {
+        Log.e("INIT","VIEW MODEL")
         orderLiveData = _fetchingOrderHistoryByToken.switchMap {
+            Log.e("start","fetch")
             launchOnViewModelScope {
                 isLoading.set(true)
                 repository.fetchHistoryOfOrder(
@@ -32,6 +37,11 @@ class OrderHistoryViewModel @ViewModelInject constructor(
 
 
     fun fetchHistoryOfOrder(token:String){
+        Log.e("token",token)
         _fetchingOrderHistoryByToken.value = token
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

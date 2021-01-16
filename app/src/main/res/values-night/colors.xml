@@ -6,4 +6,6 @@
     <color name="backgroundItemProduct">#494747</color>
     <color name="itemIconTint">#FFFFFF</color>
     <color name="backgroundTagView">#A39C9C</color>
+    <color name="backgroundRecyclerViewOrderProduct">#3A3A3A</color>
+    <color name="backgroundRecyclerViewOrderProductStroke">#292828</color>
 </resources>

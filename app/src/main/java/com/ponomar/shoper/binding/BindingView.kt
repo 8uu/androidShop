@@ -10,6 +10,7 @@ import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ponomar.shoper.R
@@ -70,7 +71,10 @@ fun bindNewsAdapter(recyclerView: RecyclerView,newsList:List<News>?){
 
 @BindingAdapter("adapterOrderList")
 fun bindOrderAdapter(recyclerView: RecyclerView,orderList:List<Order>?){
-    if(orderList != null) (recyclerView.adapter as? OrderAdapter)?.addItems(orderList)
+    if(orderList != null) {
+            (recyclerView.adapter as? OrderAdapter)?.addItems(orderList)
+            Log.e("ordersList",orderList.toString())
+    }
 }
 
 @BindingAdapter("adapterOrderProductsList")
@@ -138,4 +142,11 @@ fun bindAddressesListToScrollView(horizontalScrollView: HorizontalScrollView,add
         containerForTags.addView(tagView)
     }
     horizontalScrollView.addView(containerForTags)
+}
+
+@BindingAdapter("setItemDecoration")
+fun bindItemDecorationToRecyclerView(recyclerView: RecyclerView,isNeed:Boolean){
+    if(isNeed){
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context,DividerItemDecoration.VERTICAL))
+    }
 }

@@ -1,5 +1,6 @@
 package com.ponomar.shoper.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -14,6 +15,7 @@ class OrderAdapter(private val onOrderClick:(Order) -> Unit):RecyclerView.Adapte
     class VHolder(val binding:ItemOrderBinding):RecyclerView.ViewHolder(binding.root)
 
     fun addItems(newOrders:List<Order>){
+        orders.clear()//TODO:FIX AND IN CART ADAPTER TOO
         orders.addAll(newOrders)
         notifyDataSetChanged()
     }
@@ -30,6 +32,7 @@ class OrderAdapter(private val onOrderClick:(Order) -> Unit):RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {
+        Log.e("orders",orders.toString())
         val orderItem = orders[position]
         holder.binding.apply {
             order = orderItem

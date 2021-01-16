@@ -49,4 +49,14 @@ class MenuFragment : Fragment() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("STATE","on start")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("STATE","on resume")
+    }
 }

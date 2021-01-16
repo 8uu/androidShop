@@ -14,4 +14,6 @@
     <color name="backgroundRoundLayout">#EC7B57</color>
     <color name="backgroundItemProduct">#FFFFFF</color>
     <color name="backgroundTagView">#F3EEEE</color>
+    <color name="backgroundRecyclerViewOrderProduct">#FFFFFF</color>
+    <color name="backgroundRecyclerViewOrderProductStroke">#FFFFFF</color>
 </resources>
