@@ -3,18 +3,10 @@ package com.ponomar.shoper.repository
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
 import com.ponomar.shoper.extensions.convertProductListAndCartInfoListToCartInnerProductList
-import com.ponomar.shoper.model.StatusResponse
-import com.ponomar.shoper.model.body.OrderBody
 import com.ponomar.shoper.model.entities.Address
-import com.ponomar.shoper.model.entities.Cart
-import com.ponomar.shoper.model.entities.News
-import com.ponomar.shoper.model.entities.User
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 

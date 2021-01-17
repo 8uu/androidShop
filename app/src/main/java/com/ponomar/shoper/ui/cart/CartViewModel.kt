@@ -5,7 +5,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.repository.MainRepository
 
 class CartViewModel @ViewModelInject constructor(
@@ -21,7 +21,7 @@ class CartViewModel @ViewModelInject constructor(
     val incStatusLiveData:LiveData<Int>
     val isLoading:ObservableBoolean = ObservableBoolean(false)
     val toastLiveData:LiveData<String> = _toastMutable
-    lateinit var cartInnerLiveData: LiveData<List<CartInnerProduct>>
+    lateinit var embeddedLiveData: LiveData<List<EmbeddedProduct>>
 
     init {
         incStatusLiveData = _fetchingIncStatus.switchMap {
@@ -44,7 +44,7 @@ class CartViewModel @ViewModelInject constructor(
                 }
             }
 
-        cartInnerLiveData = launchOnViewModelScope {
+        embeddedLiveData = launchOnViewModelScope {
             isLoading.set(true)
             val data = repository.fetchCart(
                     onComplete = {isLoading.set(false)},
@@ -57,7 +57,7 @@ class CartViewModel @ViewModelInject constructor(
 
     //TODO:FIX EQUALS
 //    fun fetchCartData(){
-//        cartInnerLiveData = launchOnViewModelScope {
+//        embeddedLiveData = launchOnViewModelScope {
 //            isLoading.set(true)
 //            val data = repository.fetchCart(
 //                    onComplete = {isLoading.set(false)},

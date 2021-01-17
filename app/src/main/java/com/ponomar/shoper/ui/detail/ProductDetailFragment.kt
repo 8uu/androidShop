@@ -1,7 +1,6 @@
 package com.ponomar.shoper.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +14,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentDetailProductBinding
 import com.ponomar.shoper.extensions.gone
+import com.ponomar.shoper.extensions.reverseVisibility
 import com.ponomar.shoper.model.entities.Cart
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
 
 @AndroidEntryPoint
 class ProductDetailFragment(
-        _productInfo: CartInnerProduct,
+        _productInfo: EmbeddedProduct,
         private val onChangeCartInfo: (Cart?) -> Unit
 ) : BottomSheetDialogFragment() {
 
-
+    //TODO: FIX LAYOUT
     private lateinit var binding:FragmentDetailProductBinding
     private val viewModel: ProductDetailViewModel by viewModels()
     private var _product = _productInfo.product
@@ -74,6 +74,13 @@ class ProductDetailFragment(
                 viewModel.minusQuantityInCart(_product.id)
             }
 
+            fragmentDetailProductTitleSectorProductComposition.setOnClickListener {
+                val state = fragmentDetailProductSectorProductComposition.reverseVisibility()
+                val iconState = if(state == View.VISIBLE) R.drawable.ic_arrow_down
+                else R.drawable.ic_arrow_up
+                fragmentDetailProductStateOfSectorProductComposition.setImageResource(iconState)
+            }
+
             if(cartInfo != null) {
                 fragmentDetailContainerWithButton.gone(true)
                 fragmentDetailContainerWithCounter.gone(false)
@@ -88,18 +95,15 @@ class ProductDetailFragment(
 
 
         viewModel.incStatusLiveData.observe(viewLifecycleOwner){
-            Log.e("pid+", it.toString())
             ++cartInfo!!.quantity
             updateQuantity()
         }
 
         viewModel.decStatusLiveData.observe(viewLifecycleOwner){
-            Log.e("pid", it.toString())
             if(--cartInfo!!.quantity == 0){
                 binding.fragmentDetailContainerWithButton.gone(false)
                 binding.fragmentDetailContainerWithCounter.gone(true)
                 onChangeCartInfo(null)
-                Log.e("cart", cartInfo.toString())
             }else updateQuantity()
         }
     }

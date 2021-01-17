@@ -2,11 +2,8 @@ package com.ponomar.shoper.binding
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.widget.*
-import androidx.core.view.marginEnd
-import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
@@ -18,11 +15,10 @@ import com.ponomar.shoper.extensions.gone
 import com.ponomar.shoper.extensions.goneWithFade
 import com.ponomar.shoper.extensions.loadImageByImageUrl
 import com.ponomar.shoper.extensions.setMask
-import com.ponomar.shoper.generated.callback.OnClickListener
 import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.model.entities.News
 import com.ponomar.shoper.model.entities.Order
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.model.entities.Product
 import com.ponomar.shoper.ui.adapter.*
 import com.ponomar.shoper.ui.order.OnAddressClick
@@ -54,14 +50,14 @@ fun bindAdapter(recyclerView: RecyclerView,adapter: RecyclerView.Adapter<*>){
 
 
 @BindingAdapter("adapterProductsList")
-fun bindProductsAdapter(recyclerView: RecyclerView,products:List<CartInnerProduct>?){
+fun bindProductsAdapter(recyclerView: RecyclerView,products:List<EmbeddedProduct>?){
     if(products != null)
     (recyclerView.adapter as? ProductAdapter)?.addProducts(products)
 }
 
 @BindingAdapter("adapterCartList")
-fun bindCartAdapter(recyclerView: RecyclerView, productsInCartInner:List<CartInnerProduct>?){
-    if(productsInCartInner != null) (recyclerView.adapter as? CartAdapter)?.addItems(productsInCartInner)
+fun bindCartAdapter(recyclerView: RecyclerView, productsEmbedded:List<EmbeddedProduct>?){
+    if(productsEmbedded != null) (recyclerView.adapter as? CartAdapter)?.addItems(productsEmbedded)
 }
 
 @BindingAdapter("adapterNewsList")

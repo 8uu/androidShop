@@ -3,7 +3,7 @@
     <data>
         <variable
             name="itemInCart"
-            type="com.ponomar.shoper.model.sqlOutput.CartInnerProduct" />
+            type="com.ponomar.shoper.model.sqlOutput.EmbeddedProduct" />
         <variable
             name="vm"
             type="com.ponomar.shoper.ui.cart.CartViewModel" />

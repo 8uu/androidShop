@@ -52,3 +52,15 @@ fun TextView.setMask(mask:String=MaskFormat.PHONE_MASK){
     MaskFormat.installOn(this,mask)
 }
 
+fun View.reverseVisibility():Int{
+    var visibilityOfView = -1
+    if(visibility == View.VISIBLE) {
+        visibilityOfView = View.GONE
+    }
+    else if(visibility == View.GONE) {
+        visibilityOfView = View.VISIBLE
+    }
+    visibility = visibilityOfView
+    return visibilityOfView
+}
+

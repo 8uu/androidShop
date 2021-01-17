@@ -8,4 +8,7 @@
     <color name="backgroundTagView">#A39C9C</color>
     <color name="backgroundRecyclerViewOrderProduct">#3A3A3A</color>
     <color name="backgroundRecyclerViewOrderProductStroke">#292828</color>
+    <color name="backgroundSectorOfProductComposition">#3A3A3A</color>
+    <color name="backgroundTitleSectorOfProductComposition">#3A3A3A</color>
+    <color name="lightTextColor">#DCD4D4</color>
 </resources>

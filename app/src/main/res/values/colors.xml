@@ -16,4 +16,7 @@
     <color name="backgroundTagView">#F3EEEE</color>
     <color name="backgroundRecyclerViewOrderProduct">#FFFFFF</color>
     <color name="backgroundRecyclerViewOrderProductStroke">#FFFFFF</color>
+    <color name="backgroundSectorOfProductComposition">#FDFAFA</color>
+    <color name="backgroundTitleSectorOfProductComposition">#FDFAFA</color>
+    <color name="lightTextColor">#535252</color>
 </resources>

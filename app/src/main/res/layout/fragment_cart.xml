@@ -17,7 +17,7 @@
     tools:context=".ui.cart.CartFragment">
     <androidx.recyclerview.widget.RecyclerView
         adapter="@{adapter}"
-        adapterCartList="@{vm.cartInnerLiveData}"
+        adapterCartList="@{vm.embeddedLiveData}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_above="@id/fragment_cart_buttonMakeOrder"
         android:layout_width="match_parent"

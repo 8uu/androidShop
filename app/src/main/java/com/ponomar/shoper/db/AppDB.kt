@@ -3,10 +3,7 @@ package com.ponomar.shoper.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.ponomar.shoper.model.entities.Address
-import com.ponomar.shoper.model.entities.Cart
-import com.ponomar.shoper.model.entities.Product
-import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.model.entities.*
 import com.ponomar.shoper.model.entities.converters.ImageConverters
 
 

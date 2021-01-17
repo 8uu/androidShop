@@ -6,10 +6,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.db.AppDB
-import com.ponomar.shoper.model.entities.Product
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
-import com.ponomar.shoper.network.Client
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.repository.MainRepository
 
 class MenuViewModel @ViewModelInject constructor(
@@ -22,7 +19,7 @@ class MenuViewModel @ViewModelInject constructor(
 
 
     val isLoading:ObservableBoolean = ObservableBoolean(false)
-    val listOfProducts:LiveData<List<CartInnerProduct>>
+    val listOfProducts:LiveData<List<EmbeddedProduct>>
     val toastLiveData:LiveData<String> = _mutableToast
 
     init{

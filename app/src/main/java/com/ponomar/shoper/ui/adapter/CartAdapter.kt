@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ItemCartProductBinding
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.ui.cart.CartViewModel
 
 
@@ -15,9 +15,9 @@ import com.ponomar.shoper.ui.cart.CartViewModel
 
 class CartAdapter constructor(private val cartViewModel: CartViewModel)
     :RecyclerView.Adapter<CartAdapter.VHolder>() {
-    private val items:MutableList<CartInnerProduct> = mutableListOf()
+    private val items:MutableList<EmbeddedProduct> = mutableListOf()
 
-    fun addItems(_items: List<CartInnerProduct>){
+    fun addItems(_items: List<EmbeddedProduct>){
         items.clear()
         items.addAll(_items)
         notifyDataSetChanged()

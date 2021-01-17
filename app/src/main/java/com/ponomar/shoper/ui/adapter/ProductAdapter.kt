@@ -4,20 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.ItemProductBinding
 import com.ponomar.shoper.extensions.getActivity
-import com.ponomar.shoper.model.sqlOutput.CartInnerProduct
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.ui.detail.ProductDetailFragment
 
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
 
-    private val items:MutableList<CartInnerProduct> = mutableListOf()
+    private val items:MutableList<EmbeddedProduct> = mutableListOf()
 
 
-    fun addProducts(_items: List<CartInnerProduct>){
+    fun addProducts(_items: List<EmbeddedProduct>){
         items.addAll(_items)
         notifyDataSetChanged()
     }
