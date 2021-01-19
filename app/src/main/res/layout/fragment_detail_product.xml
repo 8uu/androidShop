@@ -28,6 +28,7 @@
                 android:layout_height="match_parent"/>
         </androidx.cardview.widget.CardView>
         <androidx.core.widget.NestedScrollView
+            android:animateLayoutChanges="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
@@ -54,27 +55,9 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:id="@+id/fragment_detail_product_title_sector_product_composition"
-                        android:background="@drawable/background_title_product_composition"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp">
-                        <TextView
-                            android:text="Показать состав"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="5dp"/>
-                        <ImageView
-                            android:id="@+id/fragment_detail_product_state_of_sector_product_composition"
-                            android:src="@drawable/ic_arrow_up"
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"/>
-                    </LinearLayout>
                         <LinearLayout
                             android:id="@+id/fragment_detail_product_sector_product_composition"
                             android:orientation="vertical"
-                            android:visibility="gone"
                             android:background="@color/backgroundSectorOfProductComposition"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">

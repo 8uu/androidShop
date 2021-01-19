@@ -74,12 +74,12 @@ class ProductDetailFragment(
                 viewModel.minusQuantityInCart(_product.id)
             }
 
-            fragmentDetailProductTitleSectorProductComposition.setOnClickListener {
-                val state = fragmentDetailProductSectorProductComposition.reverseVisibility()
-                val iconState = if(state == View.VISIBLE) R.drawable.ic_arrow_down
-                else R.drawable.ic_arrow_up
-                fragmentDetailProductStateOfSectorProductComposition.setImageResource(iconState)
-            }
+//            fragmentDetailProductTitleSectorProductComposition.setOnClickListener {
+//                val state = fragmentDetailProductSectorProductComposition.reverseVisibility()
+//                val iconState = if(state == View.VISIBLE) R.drawable.ic_arrow_down
+//                else R.drawable.ic_arrow_up
+//                fragmentDetailProductStateOfSectorProductComposition.setImageResource(iconState)
+//            }
 
             if(cartInfo != null) {
                 fragmentDetailContainerWithButton.gone(true)
