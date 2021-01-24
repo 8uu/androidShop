@@ -15,4 +15,10 @@ data class Order(
         for(product in products) totalCost += product.cost.toInt() * product.count!!
         return totalCost
     }
+
+    fun calculateTotalQuantityOfProduct():Int{
+        var totalQuantity = 0
+        for(product in products) totalQuantity += product.count!!
+        return totalQuantity
+    }
 }
