@@ -56,6 +56,11 @@ class AuthEmailFragment : Fragment() {
                     super.onSwipeRight()
                     (requireContext().getActivity() as FragmentCallBacks).onFragment4BackClick()
                 }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                    authButtonGoToNextStage.performClick()
+                }
             })
         }
 

@@ -8,6 +8,8 @@ interface FragmentCallBacks {
     fun onFragment3NextClick(phone:String)
     fun onFragment4NextClick()
 
+
+    fun onFragment1BackClick()
     fun onFragment2BackClick()
     fun onFragment3BackClick()
     fun onFragment4BackClick()

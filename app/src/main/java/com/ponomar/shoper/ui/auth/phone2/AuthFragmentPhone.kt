@@ -74,6 +74,11 @@ class AuthFragmentPhone : Fragment(){
                     super.onSwipeRight()
                     (requireContext().getActivity() as FragmentCallBacks).onFragment2BackClick()
                 }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                    authButtonGoToNextStage.performClick()
+                }
             })
 
             //TODO:Костыль, не работает once

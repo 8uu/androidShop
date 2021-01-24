@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ponomar.shoper.databinding.FragmentAuthFirstNameBinding
 import com.ponomar.shoper.extensions.fadeIn
+import com.ponomar.shoper.extensions.getActivity
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
+import com.ponomar.shoper.util.OnSwipeTouchListener
 
 class AuthFirstNameFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -40,6 +42,18 @@ class AuthFirstNameFragment : Fragment() {
                     toast.show()
                 }
             }
+
+            root.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    (requireContext().getActivity() as FragmentCallBacks).onFragment1BackClick()
+                }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                    authButtonGoToNextStage.performClick()
+                }
+            })
         }
     }
 }

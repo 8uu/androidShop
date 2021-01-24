@@ -70,7 +70,14 @@ class AuthCodeFragment : Fragment() {
                     super.onSwipeRight()
                     (requireContext().getActivity() as FragmentCallBacks).onFragment3BackClick()
                 }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                    authButtonGoToNextStage.performClick()
+                }
             })
+
+
 
         }
 

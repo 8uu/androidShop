@@ -39,6 +39,7 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     override fun onRegisterBeginClick() {
         navController.navigate(R.id.action_authLogin_to_authFirstName)
     }
+    
 
     override fun onFragment1NextClick(firstName: String) {
         val bundle = Bundle()
@@ -62,6 +63,10 @@ class AuthActivity : AppCompatActivity(),FragmentCallBacks {
     override fun onFragment4NextClick() {
         MainActivity.startActivity(this)
         finish()
+    }
+
+    override fun onFragment1BackClick() {
+        navController.popBackStack()
     }
 
     override fun onFragment2BackClick() {
