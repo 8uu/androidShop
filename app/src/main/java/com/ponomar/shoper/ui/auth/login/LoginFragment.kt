@@ -80,6 +80,7 @@ class LoginFragment : Fragment() {
             authButtonLoginSendUserPhone.goneWithFade(true)
             authLoginCodeBlock.goneWithFade(false)
             authLoginBackToPreviouslyStage.goneWithFade(false)
+            authEditTextCode.requestFocus()
         }
     }
 

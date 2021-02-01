@@ -18,5 +18,6 @@
     <color name="backgroundRecyclerViewOrderProductStroke">#FFFFFF</color>
     <color name="backgroundSectorOfProductComposition">#FDFAFA</color>
     <color name="backgroundTitleSectorOfProductComposition">#FDFAFA</color>
+    <color name="backgroundBottomSheetDialog">#FFFFFF</color>
     <color name="lightTextColor">#535252</color>
 </resources>
