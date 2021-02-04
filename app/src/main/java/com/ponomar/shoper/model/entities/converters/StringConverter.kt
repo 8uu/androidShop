@@ -5,12 +5,11 @@ import java.util.*
 import java.util.stream.Collectors
 
 
-//TODO: RENAME
-class ImageConverters {
+class StringConverter {
 
 
     @TypeConverter
-    fun fromImages(images:List<String>):String{
+    fun fromStrings(images:List<String>):String{
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             images.stream().collect(Collectors.joining(","))
         }else{
@@ -24,7 +23,7 @@ class ImageConverters {
     }
 
     @TypeConverter
-    fun toImages(imagesStr:String):List<String>{
+    fun toArray(imagesStr:String):List<String>{
         return imagesStr.split(',')
     }
 }

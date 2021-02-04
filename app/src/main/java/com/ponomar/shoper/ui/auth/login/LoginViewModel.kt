@@ -37,7 +37,7 @@ class LoginViewModel @ViewModelInject constructor(
         tokenLiveData = _userCodeMutableLiveData.switchMap {
             isLoading.set(true)
             launchOnViewModelScope {
-                repository.verifyCodeWhenUserTryToLogin(
+                repository.verifyCode(
                         code = it,
                         phone = _phoneMutableLiveData.value!!,
                         onComplete = {isLoading.set(false)},

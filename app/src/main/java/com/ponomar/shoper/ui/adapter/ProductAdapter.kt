@@ -42,12 +42,12 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.VHolder>() {
         holder.binding.apply {
             product = item.product
             executePendingBindings()//TODO:WHAT
-            root.setOnClickListener {
+            root.setOnClickListener { view ->
                 val detailFragment = ProductDetailFragment(
                         item,
-                        onChangeCartInfo = { item.cartInfo = it } //TODO:FIX
+                        onChangeCartInfo = { item.cartInfo = it }
                 )
-                detailFragment.show(it.context.getActivity()!!.supportFragmentManager, null)
+                detailFragment.show(view.context.getActivity()!!.supportFragmentManager, null)
             }
         }
 

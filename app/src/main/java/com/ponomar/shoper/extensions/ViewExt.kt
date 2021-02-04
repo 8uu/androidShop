@@ -2,9 +2,11 @@ package com.ponomar.shoper.extensions
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
@@ -89,4 +91,25 @@ fun View.reverseVisibility(animationIDForGone: Int = R.anim.slide_up,
 fun View.moveUpViewToHeight(height:Int){
     
 }
+
+fun View.moveViewTo(xDelta:Float,yDelta:Float,onAnimationEnd:(View) -> Unit = {}){
+    Log.e("x thisx y thisy","$xDelta ${this.x} $yDelta ${this.y}")
+    val translateAnimation = TranslateAnimation(0f, xDelta ,0f,yDelta)
+    translateAnimation.duration = 600
+    translateAnimation.setAnimationListener(object :Animation.AnimationListener{
+        override fun onAnimationStart(p0: Animation?) {
+        }
+
+        override fun onAnimationEnd(p0: Animation?) {
+            onAnimationEnd(this@moveViewTo)
+        }
+
+        override fun onAnimationRepeat(p0: Animation?) {
+        }
+
+    })
+    this.startAnimation(translateAnimation)
+}
+
+
 

@@ -11,8 +11,6 @@ import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import com.ponomar.shoper.ui.cart.CartViewModel
 
 
-//TODO:VIEWMODEL?????
-
 class CartAdapter constructor(private val cartViewModel: CartViewModel)
     :RecyclerView.Adapter<CartAdapter.VHolder>() {
     private val items:MutableList<EmbeddedProduct> = mutableListOf()
@@ -39,7 +37,7 @@ class CartAdapter constructor(private val cartViewModel: CartViewModel)
                 }
             }
         }catch (e:IndexOutOfBoundsException){
-            Log.e("ERROR","INDEX") //TODO:FIX
+            Log.e("ERROR","INDEX") //TODO:WHY
         }
     }
 

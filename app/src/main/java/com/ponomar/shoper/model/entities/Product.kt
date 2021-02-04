@@ -1,12 +1,9 @@
 package com.ponomar.shoper.model.entities
 
 import android.os.Parcelable
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import com.ponomar.shoper.model.entities.converters.ImageConverters
 import kotlinx.android.parcel.Parcelize
 
 @Entity

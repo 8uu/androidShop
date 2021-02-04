@@ -61,12 +61,6 @@ class MainRepository @Inject constructor(
         }
     }
 
-    suspend fun clearUserInfo(
-            onComplete: () -> Unit
-    ) = flow{ //TODO:FIX FLOW TO unit
-        appDB.getUserDao().nukeTable()
-        emit(true)
-    }
 
     suspend fun fetchListOfProducts(
             onSuccess: () -> Unit,
@@ -152,12 +146,11 @@ class MainRepository @Inject constructor(
 
 
 
-    //TODO:SAME FUNCTION LAMBDA REPEAT BLOCK
     suspend fun verifyCode(
             phone:String,
-            firstName:String,
+            firstName:String? = null,
             code:Int,
-            onSuccess: () -> Unit,
+            onComplete: () -> Unit,
             onError: (String) -> Unit
     ) = flow {
         client.verifyCode(code, phone, firstName)
@@ -176,10 +169,10 @@ class MainRepository @Inject constructor(
                             emit(data!!.token!!)
                         }
                     }else onError("ERROR")
-                    onSuccess()
+                    onComplete()
                 }.onError { onError(message()) }
                 .onException { onError(message()) }
-                .onFailure { onSuccess() }}
+                .onFailure { onComplete() }}
 
 
     suspend fun updateUserEmail(email:String,
@@ -215,25 +208,25 @@ class MainRepository @Inject constructor(
     }
 
 
-    suspend fun verifyCodeWhenUserTryToLogin(
-            code:Int,
-            phone: String,
-            onComplete: () -> Unit,
-            onError: (String) -> Unit) = flow {
-                client.verifyCode(code, phone)
-                        .suspendOnSuccess {
-                            if(data!!.status != 30){
-                                onError("ERROR.STATUS:${data!!.status}")
-                            }else{
-                                appDB.getProductDao().nukeTable()
-                                appDB.getCartDao().nukeTable()
-                                appDB.getUserDao().nukeTable()
-                                emit(data!!.token!!)
-                            }
-                        }.onException { onError(message()) }
-                        .onError { onError(message()) }
-                        .onFailure { onComplete() }
-            }
+//    suspend fun verifyCodeWhenUserTryToLogin(
+//            code:Int,
+//            phone: String,
+//            onComplete: () -> Unit,
+//            onError: (String) -> Unit) = flow {
+//                client.verifyCode(code, phone)
+//                        .suspendOnSuccess {
+//                            if(data!!.status != 30){
+//                                onError("ERROR.STATUS:${data!!.status}")
+//                            }else{
+//                                appDB.getProductDao().nukeTable()
+//                                appDB.getCartDao().nukeTable()
+//                                appDB.getUserDao().nukeTable()
+//                                emit(data!!.token!!)
+//                            }
+//                        }.onException { onError(message()) }
+//                        .onError { onError(message()) }
+//                        .onFailure { onComplete() }
+//            }
 
     suspend fun decQuantityOfItemClick(
             pid:Int,

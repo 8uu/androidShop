@@ -1,6 +1,7 @@
 package com.ponomar.shoper.ui.auth.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.ponomar.shoper.R
 import com.ponomar.shoper.databinding.FragmentAuthLoginBinding
+import com.ponomar.shoper.extensions.*
 import com.ponomar.shoper.extensions.Auth.Companion.saveAuthToken
-import com.ponomar.shoper.extensions.goneWithFade
-import com.ponomar.shoper.extensions.setMask
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
 import com.ponomar.shoper.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,10 +42,13 @@ class LoginFragment : Fragment() {
                 drawOnlyLoginBlock()
             }
 
+            viewModel.codeLiveData.observe(viewLifecycleOwner){
+                drawLoginAndCodeBlock()
+            }
+
             authButtonLoginSendUserPhone.setOnClickListener {
                 val phone:String = authEditTextPhone.text.toString()
                 if(phone.isNotEmpty()) {
-                    drawLoginAndCodeBlock()
                     viewModel.sendUserPhone(phone)
                 }else Toast.makeText(requireContext(),"Пустое поле",Toast.LENGTH_SHORT).show()
             }
@@ -61,7 +65,6 @@ class LoginFragment : Fragment() {
                 (requireActivity() as FragmentCallBacks).onRegisterBeginClick()
             }
 
-
         }
 
         viewModel.codeLiveData.observe(viewLifecycleOwner){
@@ -77,18 +80,31 @@ class LoginFragment : Fragment() {
 
     private fun drawLoginAndCodeBlock(){
         binding.apply {
-            authButtonLoginSendUserPhone.goneWithFade(true)
-            authLoginCodeBlock.goneWithFade(false)
-            authLoginBackToPreviouslyStage.goneWithFade(false)
+            authButtonLoginSendUserPhone.moveViewTo(authButtonSendUserCode.x - authButtonLoginSendUserPhone.x,
+                    authButtonSendUserCode.y - authButtonLoginSendUserPhone.y) {
+                it.gone(true)
+                authEditTextCodeContainer.visibility = View.VISIBLE
+                authButtonSendUserCode.visibility = View.VISIBLE
+                authEditTextCodeContainer.fadeIn(300)
+                authButtonSendUserCode.alpha = 1f
+                authLoginBackToPreviouslyStage.fadeIn(300)
+            }
             authEditTextCode.requestFocus()
         }
     }
 
     private fun drawOnlyLoginBlock(){
         binding.apply {
-            authLoginCodeBlock.goneWithFade(true)
-            authLoginBackToPreviouslyStage.goneWithFade(true)
-            authButtonLoginSendUserPhone.goneWithFade(false)
+            authEditTextCodeContainer.fadeOut(600)
+            authLoginBackToPreviouslyStage.fadeOut(300)
+            authButtonSendUserCode.moveViewTo(-authButtonSendUserCode.x + authButtonLoginSendUserPhone.x,
+                    -authButtonSendUserCode.y + authButtonLoginSendUserPhone.y){
+                authButtonSendUserCode.alpha = 0f
+                authButtonSendUserCode.visibility = View.INVISIBLE
+                authButtonLoginSendUserPhone.gone(false)
+                authEditTextCodeContainer.visibility = View.INVISIBLE
+            }
+            authEditTextPhone.requestFocus()
         }
     }
 

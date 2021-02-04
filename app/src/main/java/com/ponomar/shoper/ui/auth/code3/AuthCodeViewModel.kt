@@ -5,7 +5,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.repository.MainRepository
-import java.util.*
 import kotlin.collections.HashMap
 
 class AuthCodeViewModel @ViewModelInject constructor(
@@ -29,7 +28,7 @@ class AuthCodeViewModel @ViewModelInject constructor(
                         phone = it["phone"] as String,
                         firstName = it["firstName"] as String,
                         code = it["code"] as Int,
-                        onSuccess = {
+                        onComplete = {
                             isLoading.set(false)
                                     },
                         onError = { _toastMutableLiveData.value = it }

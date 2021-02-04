@@ -4,11 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ponomar.shoper.model.entities.*
-import com.ponomar.shoper.model.entities.converters.ImageConverters
+import com.ponomar.shoper.model.entities.converters.StringConverter
 
 
 @Database(entities = [Address::class, Product::class, User::class,Cart::class],version = 1,exportSchema = false)
-@TypeConverters(value = [ImageConverters::class])
+@TypeConverters(value = [StringConverter::class])
 abstract class AppDB:RoomDatabase() {
 
     abstract fun getUserDao():UserDAO

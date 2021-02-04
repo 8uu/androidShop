@@ -1,5 +1,5 @@
 package com.ponomar.shoper.model.body
 
 data class TokenBody(
-        val token:String
-)
+        override val token:String
+):BaseToken()
