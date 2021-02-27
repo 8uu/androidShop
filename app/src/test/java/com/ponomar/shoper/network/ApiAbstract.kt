@@ -1,6 +1,7 @@
 package com.ponomar.shoper.network
 import com.skydoves.sandwich.coroutines.CoroutinesDataSourceCallAdapter
 import com.skydoves.sandwich.coroutines.CoroutinesDataSourceCallAdapterFactory
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.MockResponse
 import okio.buffer
@@ -46,7 +47,7 @@ abstract class ApiAbstract<T> {
         return Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutinesDataSourceCallAdapterFactory())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .build()
             .create(clazz)
     }

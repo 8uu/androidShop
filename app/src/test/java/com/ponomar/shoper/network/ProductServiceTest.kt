@@ -23,11 +23,11 @@ class ProductServiceTest:ApiAbstract<ProductService>() {
     fun fetchProductList() = runBlocking {
         enqueueResponse("/ProductResponse.json")
         val response = service.fetchProducts()
+
         val responseData = (response as ApiResponse.Success).data
         mockWebServer.takeRequest()
-
-        client.fetchProductsList()
         assertEquals(responseData!!.status,0)
-        assertEquals(responseData.data!![0].id,1)
+        assertEquals(1,responseData.data!![0].id)
     }
+
 }
