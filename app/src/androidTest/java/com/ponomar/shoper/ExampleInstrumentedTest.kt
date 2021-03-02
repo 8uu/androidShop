@@ -21,4 +21,9 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.ponomar.shoper", appContext.packageName)
     }
+
+    @Test
+    fun testTest(){
+        assertEquals(1,2)
+    }
 }
