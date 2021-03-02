@@ -30,7 +30,7 @@ class ProductRepositoryTest: ApiAbstract() {
     fun fetchProductsTest()= runBlocking {
         val mockProductResponse  = ProductResponse(0,MockUtilUnit.mockListOfProduct())
 
-        whenever(productDAO.getProducts()).thenReturn(emptyList())
+//        whenever(productDAO.getProducts()).thenReturn(emptyList())
         whenever(productService.fetchProducts()).thenReturn(ApiResponse.of { Response.success(mockProductResponse) })
         whenever(cartDAO.getCartInfo()).thenReturn(emptyList())
 
