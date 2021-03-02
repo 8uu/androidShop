@@ -2,8 +2,7 @@ package com.ponomar.shoper.di
 
 import android.app.Application
 import androidx.room.Room
-import com.ponomar.shoper.db.AppDB
-import com.ponomar.shoper.db.UserDAO
+import com.ponomar.shoper.db.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +25,7 @@ object DBModule {
 
     @Provides
     @Singleton
-    fun provideUserDao(appDB: AppDB):UserDAO = appDB.getUserDao()
+    fun provideUserDao(appDB: AppDB) = appDB.getUserDao()
 
     @Provides
     @Singleton
@@ -39,6 +38,10 @@ object DBModule {
     @Provides
     @Singleton
     fun provideCartDao(appDB: AppDB) = appDB.getCartDao()
+
+    @Provides
+    @Singleton
+    fun provideDaoHolder(userDAO: UserDAO,productDAO: ProductDAO,cartDAO: CartDAO,addressDAO: AddressDAO) = DaoHolder(addressDAO, cartDAO, productDAO, userDAO)
 
 
 }

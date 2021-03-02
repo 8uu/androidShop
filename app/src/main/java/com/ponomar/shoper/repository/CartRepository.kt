@@ -2,20 +2,21 @@ package com.ponomar.shoper.repository
 
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.network.Client
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class CartRepository @Inject constructor(
         private val client:Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ) {
 
     suspend fun fetchCart(
             onComplete: () -> Unit,
             onError: (String) -> Unit
     ) = flow {
-        val data = appDB.getCartDao().getCart()
+        val data = daoHolder.cartDAO.getCart()
         if(data.isEmpty()) onError("Пустая корзина")
         Log.e("data",data.toString())
         onComplete()
@@ -26,7 +27,7 @@ class CartRepository @Inject constructor(
             pid:Int,
             onComplete: () -> Unit
     ) = flow<Int> {
-        emit(appDB.getCartDao().decQuantity(pid))
+        emit(daoHolder.cartDAO.decQuantity(pid))
         onComplete()
     }
 
@@ -35,7 +36,7 @@ class CartRepository @Inject constructor(
             onComplete: () -> Unit
     ) = flow<Int>{
         Log.e("asd","inc")
-        emit(appDB.getCartDao().incQuantity(pid))
+        emit(daoHolder.cartDAO.incQuantity(pid))
         onComplete()
     }
 

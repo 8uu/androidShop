@@ -1,7 +1,6 @@
 package com.ponomar.shoper.repository
 
-import android.util.Log
-import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.extensions.convertProductListAndCartInfoListToCartInnerProductList
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.message
@@ -13,7 +12,7 @@ import javax.inject.Inject
 
 class ProductRepository @Inject constructor(
         private val client: Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ) {
 
     suspend fun fetchListOfProducts(
@@ -32,9 +31,9 @@ class ProductRepository @Inject constructor(
                     onError("STATUS:${data!!.status}")
                 }
                 else -> {
-                    appDB.getProductDao().insertAll(data!!.data!!)
-                    val cartData = appDB.getCartDao().getCartInfo()
-                    Log.e("cart",cartData.toString())
+
+                    daoHolder.productDAO.insertAll(data!!.data!!)
+                    val cartData = daoHolder.cartDAO.getCartInfo()
                     emit(convertProductListAndCartInfoListToCartInnerProductList(data!!.data!!,cartData))
                 }
             }

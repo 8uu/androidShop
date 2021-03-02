@@ -1,6 +1,6 @@
 package com.ponomar.shoper.repository
 
-import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.model.entities.Address
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.message
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class OrderRepository @Inject constructor(
         private val client:Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ) {
     suspend fun makeOrderRequest(
             token:String,
@@ -20,15 +20,15 @@ class OrderRepository @Inject constructor(
             onComplete: () -> Unit,
             onError: (String) -> Unit
     ) = flow<Int>{
-        val cart = appDB.getCartDao().getCartInfo()
-        appDB.getAddressDao().insert(address)
+        val cart = daoHolder.cartDAO.getCartInfo()
+        daoHolder.addressDAO.insert(address)
         client.requestOrder(
                 token,
                 address,
                 cart
         ).suspendOnSuccess {
             val status = data!!.status
-            if(status == 0) appDB.getCartDao().nukeTable()
+            if(status == 0) daoHolder.cartDAO.nukeTable()
             emit(status)
             onComplete()
         }.onError { onError(message()) }

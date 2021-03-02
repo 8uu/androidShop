@@ -2,6 +2,7 @@ package com.ponomar.shoper.repository
 
 import android.util.Log
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class AnotherThingsRepository @Inject constructor(
         private val client: Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ) {
 
     suspend fun fetchNews(
@@ -35,7 +36,7 @@ class AnotherThingsRepository @Inject constructor(
             onComplete: () -> Unit,
             onError: (String) -> Unit
     ) = flow{
-        val addresses = appDB.getAddressDao().getAddresses()
+        val addresses = daoHolder.addressDAO.getAddresses()
         emit(addresses)
         onComplete()
     }

@@ -1,6 +1,7 @@
 package com.ponomar.shoper.repository
 
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.*
 import kotlinx.coroutines.flow.flow
@@ -9,7 +10,7 @@ import kotlin.onFailure
 
 class AuthRepository @Inject constructor(
         private val client: Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ) {
     suspend fun sendUserDataToGenerateAuthCode(
             phone:String,
@@ -69,9 +70,9 @@ class AuthRepository @Inject constructor(
                         if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
                         }else {
-                            appDB.getProductDao().nukeTable()
-                            appDB.getUserDao().nukeTable() //TODO:REFACTOR CHECKING USER AUTH ALREADY
-                            appDB.getCartDao().nukeTable()
+                            daoHolder.productDAO.nukeTable()
+                            daoHolder.userDAO.nukeTable() //TODO:REFACTOR CHECKING USER AUTH ALREADY
+                            daoHolder.cartDAO.nukeTable()
 //                            appDB.getUserDao().apply {
 //                                nukeTable()
 //                                insert(User(data!!.uid!!,firstName,phone,null))

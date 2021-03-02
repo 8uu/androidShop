@@ -1,6 +1,7 @@
 package com.ponomar.shoper.repository
 
 import com.ponomar.shoper.db.AppDB
+import com.ponomar.shoper.db.DaoHolder
 import com.ponomar.shoper.network.Client
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(
         private val client:Client,
-        private val appDB: AppDB
+        private val daoHolder: DaoHolder
 ){
     suspend fun fetchUserInfo(
             token: String,
@@ -20,14 +21,14 @@ class UserRepository @Inject constructor(
             isForceUpdate:Boolean  = false
     ) = flow {
         if(!isForceUpdate) {
-            val user = appDB.getUserDao().getUser()
+            val user = daoHolder.userDAO.getUser()
             if (user == null) {
                 client.fetchUserData(token)
                         .suspendOnSuccess {
                             if (data != null) {
                                 if (data!!.status == 0) {
-                                    appDB.getUserDao().nukeTable()
-                                    appDB.getUserDao().insert(data!!.data!!)
+                                    daoHolder.userDAO.nukeTable()
+                                    daoHolder.userDAO.insert(data!!.data!!)
                                     emit(data!!.data!!)
                                 } else {
                                     onError("STATUS:${data!!.status}")
@@ -45,8 +46,8 @@ class UserRepository @Inject constructor(
                     .suspendOnSuccess {
                         if (data != null) {
                             if (data!!.status == 0) {
-                                appDB.getUserDao().nukeTable()
-                                appDB.getUserDao().insert(data!!.data!!)
+                                daoHolder.userDAO.nukeTable()
+                                daoHolder.userDAO.insert(data!!.data!!)
                                 emit(data!!.data!!)
                             } else {
                                 onError("STATUS:${data!!.status}")
