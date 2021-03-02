@@ -4,11 +4,13 @@ import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
+import com.ponomar.shoper.repository.CartRepository
 
 class ProductDetailViewModel @ViewModelInject constructor(
-    private val repository: MainRepository
+    private val repository: CartRepository
     ): LiveCoroutinesViewModel() {
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()
     private val _decFetchMutableLiveData:MutableLiveData<Int> = MutableLiveData()

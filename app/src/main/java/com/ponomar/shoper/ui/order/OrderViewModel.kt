@@ -4,12 +4,16 @@ import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.entities.Address
+import com.ponomar.shoper.repository.AnotherThingsRepository
+import com.ponomar.shoper.repository.OrderRepository
 
 class OrderViewModel @ViewModelInject constructor(
-    private val repository:MainRepository
+    private val repository:OrderRepository,
+    private val addressRepository: AnotherThingsRepository
 ) : LiveCoroutinesViewModel() {
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()
     private val _orderRequestLiveData:MutableLiveData<Pair<String,Address>> = MutableLiveData()
@@ -35,7 +39,7 @@ class OrderViewModel @ViewModelInject constructor(
 
         addressesLiveData = launchOnViewModelScope {
             isLoadingAddresses.set(true)
-            repository.fetchAddresses(
+            addressRepository.fetchAddresses(
                     onComplete = {isLoadingAddresses.set(false)},
                     onError = {_toastMutableLiveData.value = it}
             ).asLiveData()

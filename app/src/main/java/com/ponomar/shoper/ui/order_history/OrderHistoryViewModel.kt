@@ -7,9 +7,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.entities.Order
+import com.ponomar.shoper.repository.OrderRepository
 
 class OrderHistoryViewModel @ViewModelInject constructor(
-        private val repository: MainRepository,
+        private val repository: OrderRepository,
         @Assisted savedStateHandle: SavedStateHandle
 ) : LiveCoroutinesViewModel() {
     private val _toastMutableLiveData:MutableLiveData<String> = MutableLiveData()

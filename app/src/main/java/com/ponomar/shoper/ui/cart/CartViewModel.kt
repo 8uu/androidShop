@@ -6,9 +6,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
+import com.ponomar.shoper.repository.CartRepository
 
 class CartViewModel @ViewModelInject constructor(
-        private val repository: MainRepository,
+        private val repository: CartRepository,
         @Assisted private val savedStateHandle: SavedStateHandle
 ) : LiveCoroutinesViewModel() {
 

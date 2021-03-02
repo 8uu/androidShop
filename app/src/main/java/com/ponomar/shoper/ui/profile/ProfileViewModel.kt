@@ -6,9 +6,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.repository.UserRepository
 
 class ProfileViewModel @ViewModelInject constructor(
-    private val repository: MainRepository,
+    private val repository: UserRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ):LiveCoroutinesViewModel() {
 

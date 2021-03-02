@@ -4,11 +4,14 @@ import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
+import com.ponomar.shoper.repository.AuthRepository
+import com.ponomar.shoper.repository.UserRepository
 
 class AuthEmailViewModel @ViewModelInject constructor(
-        private val repository: MainRepository
+        private val repository: UserRepository
 ):LiveCoroutinesViewModel(){
     private lateinit var email:String
     private lateinit var token:String
