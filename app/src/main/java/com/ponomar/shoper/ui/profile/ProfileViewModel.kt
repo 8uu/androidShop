@@ -1,17 +1,11 @@
 package com.ponomar.shoper.ui.profile
 
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.entities.User
-import com.ponomar.shoper.repository.MainRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.launch
 
 class ProfileViewModel @ViewModelInject constructor(
     private val repository: MainRepository,

@@ -6,7 +6,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.repository.MainRepository
 
 class OrderDetailViewModel @ViewModelInject constructor(
         private val repository: MainRepository

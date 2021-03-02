@@ -7,7 +7,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
 import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
-import com.ponomar.shoper.repository.MainRepository
 
 class MenuViewModel @ViewModelInject constructor(
         private val repository: MainRepository,

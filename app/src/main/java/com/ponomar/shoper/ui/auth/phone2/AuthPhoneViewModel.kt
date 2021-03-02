@@ -6,7 +6,6 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.repository.MainRepository
 
 
 class AuthPhoneViewModel @ViewModelInject constructor(

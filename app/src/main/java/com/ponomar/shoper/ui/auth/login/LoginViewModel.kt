@@ -5,9 +5,6 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.ponomar.shoper.base.LiveCoroutinesViewModel
-import com.ponomar.shoper.model.CodeResponse
-import com.ponomar.shoper.model.StatusResponse
-import com.ponomar.shoper.repository.MainRepository
 
 class LoginViewModel @ViewModelInject constructor(
     private val repository: MainRepository,
