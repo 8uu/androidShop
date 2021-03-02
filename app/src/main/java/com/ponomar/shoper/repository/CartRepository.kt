@@ -18,7 +18,6 @@ class CartRepository @Inject constructor(
     ) = flow {
         val data = daoHolder.cartDAO.getCart()
         if(data.isEmpty()) onError("Пустая корзина")
-        Log.e("data",data.toString())
         onComplete()
         emit(data)
     }
@@ -35,7 +34,6 @@ class CartRepository @Inject constructor(
             pid:Int,
             onComplete: () -> Unit
     ) = flow<Int>{
-        Log.e("asd","inc")
         emit(daoHolder.cartDAO.incQuantity(pid))
         onComplete()
     }
