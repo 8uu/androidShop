@@ -59,8 +59,15 @@ object MockUtilUnit {
             flat = 320
     )
 
+    fun mockAddressList() = arrayListOf(mockAddress())
+
     fun mockOrder() = Order(1, mockAddress(),"01.01.21", mockListOfProduct(),1)
 
     fun mockOrderList() = arrayListOf(mockOrder())
+
+    fun mockNews() = News(1,"Title","Description","01.01.21","large","ImageURL")
+
+    fun mockNewsList() = arrayListOf(mockNews()
+    )
 
 }

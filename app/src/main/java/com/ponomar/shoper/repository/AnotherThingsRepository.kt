@@ -21,7 +21,6 @@ class AnotherThingsRepository @Inject constructor(
             onError: (String) -> Unit
     ) = flow{
         client.fetchNews().suspendOnSuccess {
-            Log.e("datanews",data!!.toString())
             if(data != null){
                 if(data!!.status == 0){
                     emit(data!!.news)
