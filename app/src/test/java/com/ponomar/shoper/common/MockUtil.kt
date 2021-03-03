@@ -1,8 +1,8 @@
 package com.ponomar.shoper.common
 
 import com.ponomar.shoper.model.ProductResponse
-import com.ponomar.shoper.model.entities.Product
-import com.ponomar.shoper.model.entities.User
+import com.ponomar.shoper.model.entities.*
+import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 
 object MockUtilUnit {
 
@@ -40,5 +40,27 @@ object MockUtilUnit {
         phone = "88005553535",
         email = "test@test.com"
     )
+
+    fun mockCartInfo() = Cart(
+            1,
+            1
+    )
+
+    fun mockCartInfoList() = arrayListOf(mockCartInfo())
+
+    fun mockEmdeddedProduct() = EmbeddedProduct(mockProduct(),null)
+
+    fun mockEmdeddedProductList() = arrayListOf(mockEmdeddedProduct())
+
+    fun mockAddress() = Address(
+            district = "VO",
+            street = "12 liniya",
+            house = "51",
+            flat = 320
+    )
+
+    fun mockOrder() = Order(1, mockAddress(),"01.01.21", mockListOfProduct(),1)
+
+    fun mockOrderList() = arrayListOf(mockOrder())
 
 }

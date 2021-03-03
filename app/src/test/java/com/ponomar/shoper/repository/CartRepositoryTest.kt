@@ -26,7 +26,7 @@ class CartRepositoryTest:ApiAbstract() {
     @ExperimentalCoroutinesApi
     @Test
     fun fetchCartTest():Unit = runBlocking{
-        whenever(cartDAO.getCart()).thenReturn(arrayListOf(EmbeddedProduct(mockProduct(),null)))
+        whenever(cartDAO.getCart()).thenReturn(arrayListOf())
         repository.fetchCart(
                 onComplete = {},
                 onError = {}
