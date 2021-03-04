@@ -48,7 +48,7 @@ object MockUtilUnit {
 
     fun mockCartInfoList() = arrayListOf(mockCartInfo())
 
-    fun mockEmdeddedProduct() = EmbeddedProduct(mockProduct(),null)
+    fun mockEmdeddedProduct() = EmbeddedProduct(mockProduct(), mockCartInfo())
 
     fun mockEmdeddedProductList() = arrayListOf(mockEmdeddedProduct())
 

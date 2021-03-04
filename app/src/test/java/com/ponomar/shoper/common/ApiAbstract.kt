@@ -1,6 +1,5 @@
-package com.ponomar.shoper.repository
+package com.ponomar.shoper.common
 
-import android.service.autofill.UserData
 import com.nhaarman.mockitokotlin2.mock
 import com.ponomar.shoper.db.*
 import com.ponomar.shoper.network.*
@@ -26,7 +25,5 @@ abstract class ApiAbstract {
         client = Client(userService, productService, authService, orderService, newsService)
         daoHolder = DaoHolder(addressDAO, cartDAO, productDAO, userDAO)
     }
-
-
 
 }
