@@ -21,9 +21,7 @@ class OrderHistoryViewModel @ViewModelInject constructor(
     val orderLiveData: LiveData<List<Order>>
 
     init {
-        Log.e("INIT","VIEW MODEL")
         orderLiveData = _fetchingOrderHistoryByToken.switchMap {
-            Log.e("start","fetch")
             launchOnViewModelScope {
                 isLoading.set(true)
                 repository.fetchHistoryOfOrder(
@@ -37,7 +35,6 @@ class OrderHistoryViewModel @ViewModelInject constructor(
 
 
     fun fetchHistoryOfOrder(token:String){
-        Log.e("token",token)
         _fetchingOrderHistoryByToken.value = token
     }
 
