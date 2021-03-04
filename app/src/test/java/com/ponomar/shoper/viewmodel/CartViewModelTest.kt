@@ -20,16 +20,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class CartViewModelTest: ApiAbstract() {
+class CartViewModelTest: ApiAbstractViewModel() {
     private lateinit var repository: CartRepository
     private lateinit var viewModel: CartViewModel
-
-    @ExperimentalCoroutinesApi
-    @get:Rule
-    val coroutineTestRule = CoroutineTestRule()
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup(){

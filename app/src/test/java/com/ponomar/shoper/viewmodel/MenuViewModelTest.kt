@@ -21,17 +21,10 @@ import org.junit.Test
 import retrofit2.Response
 import kotlin.time.ExperimentalTime
 
-class MenuViewModelTest: ApiAbstract() {
+class MenuViewModelTest: ApiAbstractViewModel() {
 
     private lateinit var viewModel: MenuViewModel
     private lateinit var repository: ProductRepository
-
-    @ExperimentalCoroutinesApi
-    @get:Rule
-    val coroutineTestRule = CoroutineTestRule()
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun initObjects(){
