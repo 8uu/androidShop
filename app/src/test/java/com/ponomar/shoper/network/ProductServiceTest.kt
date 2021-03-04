@@ -7,10 +7,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
-import org.junit.Rule
 
 @ExperimentalCoroutinesApi
-class ProductServiceTest:ApiAbstract<ProductService>() {
+class ProductServiceTest:ApiAbstractNetwork<ProductService>() {
 
     private lateinit var service: ProductService
     private val client:Client = mock()

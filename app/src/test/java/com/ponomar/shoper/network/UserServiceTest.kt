@@ -9,7 +9,7 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 
-class UserServiceTest:ApiAbstract<UserService>() {
+class UserServiceTest:ApiAbstractNetwork<UserService>() {
 
     private lateinit var service:UserService
 

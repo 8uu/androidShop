@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.atLeast
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.ponomar.shoper.common.ApiAbstract
 import com.ponomar.shoper.common.MockUtilUnit.mockProduct
 import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +16,7 @@ import org.junit.Assert.assertEquals
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
-class CartRepositoryTest:ApiAbstract() {
+class CartRepositoryTest: ApiAbstract() {
     private lateinit var repository: CartRepository
 
     @Before

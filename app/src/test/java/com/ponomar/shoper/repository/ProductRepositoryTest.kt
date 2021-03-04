@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.ponomar.shoper.common.ApiAbstract
 import com.ponomar.shoper.common.MockUtilUnit
 import com.ponomar.shoper.model.ProductResponse
 import com.skydoves.sandwich.ApiResponse

@@ -10,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
-class OrderServiceTest:ApiAbstract<OrderService>() {
+class OrderServiceTest:ApiAbstractNetwork<OrderService>() {
 
     private lateinit var service:OrderService
 

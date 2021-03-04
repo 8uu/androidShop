@@ -1,5 +1,6 @@
 package com.ponomar.shoper.network
 
+import com.ponomar.shoper.common.ApiAbstract
 import com.ponomar.shoper.model.body.CodeBody
 import com.ponomar.shoper.model.body.PhoneBody
 import com.skydoves.sandwich.ApiResponse
@@ -8,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
-class AuthServiceTest: ApiAbstract<AuthService>(){
+class AuthServiceTest: ApiAbstractNetwork<AuthService>(){
 
     private lateinit var service: AuthService
 
