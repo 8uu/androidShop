@@ -20,10 +20,16 @@ class AuthRepository @Inject constructor(
         client.sendUserDataToGenerateCode(phone)
                 .suspendOnSuccess {
                     if(data != null) {
-                        if (data!!.status != 0) {
-                            onError("ERROR.STATUS:${data!!.status}")
-                        }else {
-                            emit(data!!.code)
+                        when {
+                            data!!.status == 22 -> {
+                                onError("На этот номер уже зарегистрирован аккаунт")
+                            }
+                            data!!.status != 0 -> {
+                                onError("ERROR.STATUS:${data!!.status}")
+                            }
+                            else -> {
+                                emit(data!!.code)
+                            }
                         }
                     }else onError("ERROR")
                     onSuccess()
@@ -84,25 +90,5 @@ class AuthRepository @Inject constructor(
                 }.onError { onError(message()) }
                 .onException { onError(message()) }
                 .onFailure { onComplete() }}
-
-//    suspend fun verifyCodeWhenUserTryToLogin(
-//            code:Int,
-//            phone: String,
-//            onComplete: () -> Unit,
-//            onError: (String) -> Unit) = flow {
-//                client.verifyCode(code, phone)
-//                        .suspendOnSuccess {
-//                            if(data!!.status != 30){
-//                                onError("ERROR.STATUS:${data!!.status}")
-//                            }else{
-//                                appDB.getProductDao().nukeTable()
-//                                appDB.getCartDao().nukeTable()
-//                                appDB.getUserDao().nukeTable()
-//                                emit(data!!.token!!)
-//                            }
-//                        }.onException { onError(message()) }
-//                        .onError { onError(message()) }
-//                        .onFailure { onComplete() }
-//            }
 
 }

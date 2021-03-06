@@ -99,7 +99,7 @@ fun bindOnRefreshToSwipeRefreshLayout(swipeRefreshLayout: SwipeRefreshLayout,isR
 @BindingAdapter("tagList")
 fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List<String>?){
     if(tags == null) return
-    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews() //TODO: WHY
+    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews()
     val context = horizontalScrollView.context
     val containerForTags = LinearLayout(context)
     containerForTags.orientation = LinearLayout.HORIZONTAL
@@ -121,7 +121,7 @@ fun bindTagListToScrollView(horizontalScrollView: HorizontalScrollView,tags:List
 @BindingAdapter("addressList","addressOnClick")
 fun bindAddressesListToScrollView(horizontalScrollView: HorizontalScrollView,addresses:List<Address>?,addressOnClick:OnAddressClick){
     if(addresses == null) return
-    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews() //TODO: WHY
+    if(horizontalScrollView.childCount != 0) horizontalScrollView.removeAllViews()
     val context = horizontalScrollView.context
     val containerForTags = LinearLayout(context)
     containerForTags.orientation = LinearLayout.HORIZONTAL

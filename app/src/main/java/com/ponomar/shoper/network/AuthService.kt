@@ -17,8 +17,4 @@ interface AuthService {
 
     @POST("/auth/code/verify")
     suspend fun sendUserCodeToVerify(@Body codeBody: CodeBody):ApiResponse<TokenResponse>
-
-    //TODO:REFACTOR|
-    @POST("/auth/login/code/verify")
-    suspend fun sendUserCodeToVerifyWhenUserTryToLogin(@Body codeBody: CodeBody):ApiResponse<TokenResponse>
 }
