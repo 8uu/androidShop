@@ -76,13 +76,11 @@ class AuthRepository @Inject constructor(
                         if (data!!.status != 30) {
                             onError("ERROR.STATUS:${data!!.status}")
                         }else {
+                            val userFromDao = daoHolder.userDAO.getUserById(data!!.uid!!)
+                            if(userFromDao == null) daoHolder.userDAO.nukeTable()
+                            else daoHolder.userDAO.nukeTableExceptById(userFromDao.id)
                             daoHolder.productDAO.nukeTable()
-                            daoHolder.userDAO.nukeTable() //TODO:REFACTOR CHECKING USER AUTH ALREADY
                             daoHolder.cartDAO.nukeTable()
-//                            appDB.getUserDao().apply {
-//                                nukeTable()
-//                                insert(User(data!!.uid!!,firstName,phone,null))
-//                            }
                             emit(data!!.token!!)
                         }
                     }else onError("ERROR")
