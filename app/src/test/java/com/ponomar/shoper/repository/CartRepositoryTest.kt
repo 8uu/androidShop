@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.ponomar.shoper.common.ApiAbstract
+import com.ponomar.shoper.common.MockUtilUnit.mockEmdeddedProductList
 import com.ponomar.shoper.common.MockUtilUnit.mockProduct
 import com.ponomar.shoper.model.sqlOutput.EmbeddedProduct
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,7 +28,7 @@ class CartRepositoryTest: ApiAbstract() {
     @ExperimentalCoroutinesApi
     @Test
     fun fetchCartTest():Unit = runBlocking{
-        whenever(cartDAO.getCart()).thenReturn(arrayListOf())
+        whenever(cartDAO.getCart()).thenReturn(mockEmdeddedProductList())
         repository.fetchCart(
                 onComplete = {},
                 onError = {}
@@ -42,7 +43,7 @@ class CartRepositoryTest: ApiAbstract() {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun decQuantityOfItemClickTest():Unit = runBlocking{
+    fun incAndDecQuantityOfItemClickTest():Unit = runBlocking{
         whenever(cartDAO.decQuantity(1)).thenReturn(1)
         whenever(cartDAO.incQuantity(1)).thenReturn(2)
 
