@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import com.ponomar.shoper.databinding.FragmentAuthCodeBinding
 import com.ponomar.shoper.extensions.fadeIn
 import com.ponomar.shoper.extensions.getActivity
-import com.ponomar.shoper.extensions.observeOnce
 import com.ponomar.shoper.ui.auth.FragmentCallBacks
 import com.ponomar.shoper.util.OnSwipeTouchListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +52,7 @@ class AuthCodeFragment : Fragment() {
             this.authButtonGoToNextStage.setOnClickListener {
                 val codeStr:String = authEditTextCode.text.toString()
                 if(codeStr.isNotEmpty())
-                viewModel.sendUserPhoneToGenerateCode(phone,firstName,codeStr.toInt())
+                viewModel.sendUserCodeToVerify(phone,firstName,codeStr.toInt())
                 else{
                     val toast = Toast.makeText(requireContext(),"Пустое поле",Toast.LENGTH_LONG)
                     toast.setGravity(Gravity.BOTTOM,0,100)

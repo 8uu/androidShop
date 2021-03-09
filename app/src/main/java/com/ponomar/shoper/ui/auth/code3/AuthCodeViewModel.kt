@@ -38,7 +38,7 @@ class AuthCodeViewModel @ViewModelInject constructor(
 
     }
 
-    fun sendUserPhoneToGenerateCode(phone:String,firstName:String,code:Int){
+    fun sendUserCodeToVerify(phone:String, firstName:String, code:Int){
         val container:HashMap<String,Any> = hashMapOf(Pair("phone",phone),Pair("firstName",firstName),Pair("code",code))
         _fetchingLiveDataUserData.value = container
     }
